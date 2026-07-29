@@ -1,0 +1,52 @@
+{
+  "id": "music",
+  "name": "Music",
+  "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_Music",
+  "instanceOf": ["Q482994", "Q169930", "Q134556"],
+  "queryTypes": [
+    {
+      "id": "music-missing-publication-date",
+      "name": "music-missing-publication-date-label",
+      "missingPid": "P577",
+      "contributionSummary": "music-missing-publication-date-contribution-summary",
+      "contributionDetails": "music-missing-publication-date-contribution-details",
+      "example": { "subject": "Thriller", "property": "publication date (P577)", "value": "30 November 1982", "qid": "Q44320" },
+      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P175", "scopePid": "P495", "scopePidAlt": "P27" } }
+    },
+    {
+      "id": "music-missing-record-label",
+      "name": "music-missing-record-label-label",
+      "missingPid": "P264",
+      "contributionSummary": "music-missing-record-label-contribution-summary",
+      "contributionDetails": "music-missing-record-label-contribution-details",
+      "example": { "subject": "Abbey Road", "property": "record label (P264)", "value": "Apple Records", "qid": "Q173643" },
+      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P175", "scopePid": "P495", "scopePidAlt": "P27" } }
+    },
+    {
+      "id": "music-missing-language",
+      "name": "music-missing-language-label",
+      "missingPid": "P407",
+      "contributionSummary": "music-missing-language-contribution-summary",
+      "contributionDetails": "music-missing-language-contribution-details",
+      "example": { "subject": "The Dark Side of the Moon", "property": "language of work or name (P407)", "value": "English", "qid": "Q150901" },
+      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P175", "scopePid": "P495", "scopePidAlt": "P27" } }
+    },
+    {
+      "id": "music-missing-title",
+      "name": "music-missing-title-label",
+      "missingPid": "P1476",
+      "contributionSummary": "music-missing-title-contribution-summary",
+      "contributionDetails": "music-missing-title-contribution-details",
+      "example": { "subject": "Q193373", "property": "title (P1476)", "value": "Like a Rolling Stone", "qid": "Q214430" },
+      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P175", "scopePid": "P495", "scopePidAlt": "P27" } }
+    },
+    {
+      "id": "music-missing-performer",
+      "name": "music-missing-performer-label",
+      "missingPid": "P175",
+      "contributionSummary": "music-missing-performer-contribution-summary",
+      "contributionDetails": "music-missing-performer-contribution-details",
+      "example": { "subject": "Bohemian Rhapsody", "property": "performer (P175)", "value": "Queen", "qid": "Q187745" }
+    }
+  ]
+}

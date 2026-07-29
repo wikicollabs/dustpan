@@ -1,0 +1,7 @@
+{
+  "geographicScope": {
+    "label": "search-geographic-label",
+    "source": "wikidata-query",
+    "sparqlTemplate": "?value wdt:P31 wd:Q6256 ."
+  }
+}

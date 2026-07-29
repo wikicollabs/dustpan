@@ -1,0 +1,80 @@
+{
+  "id": "podcasts",
+  "name": "Podcasts",
+  "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_Podcasts",
+  "instanceOf": ["Q24634210"],
+  "queryTypes": [
+    {
+      "id": "podcasts-missing-language",
+      "name": "podcasts-missing-language-label",
+      "missingPid": "P407",
+      "contributionSummary": "podcasts-missing-language-contribution-summary",
+      "contributionDetails": "podcasts-missing-language-contribution-details",
+      "example": { "subject": "Serial", "property": "language of work or name (P407)", "value": "English", "qid": "Q18357077" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-genre",
+      "name": "podcasts-missing-genre-label",
+      "missingPid": "P136",
+      "contributionSummary": "podcasts-missing-genre-contribution-summary",
+      "contributionDetails": "podcasts-missing-genre-contribution-details",
+      "example": { "subject": "My Favorite Murder", "property": "genre (P136)", "value": "true crime", "qid": "Q28008564" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-publication-date",
+      "name": "podcasts-missing-publication-date-label",
+      "missingPid": "P577",
+      "contributionSummary": "podcasts-missing-publication-date-contribution-summary",
+      "contributionDetails": "podcasts-missing-publication-date-contribution-details",
+      "example": { "subject": "The Daily", "property": "publication date (P577)", "value": "5 February 2017", "qid": "Q48741148" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-presenter",
+      "name": "podcasts-missing-presenter-label",
+      "missingPid": "P371",
+      "contributionSummary": "podcasts-missing-presenter-contribution-summary",
+      "contributionDetails": "podcasts-missing-presenter-contribution-details",
+      "example": { "subject": "The Joe Rogan Experience", "property": "presenter (P371)", "value": "Joe Rogan", "qid": "Q30323986" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-producer",
+      "name": "podcasts-missing-producer-label",
+      "missingPid": "P162",
+      "contributionSummary": "podcasts-missing-producer-contribution-summary",
+      "contributionDetails": "podcasts-missing-producer-contribution-details",
+      "example": { "subject": "Radiolab", "property": "producer (P162)", "value": "Jad Abumrad", "qid": "Q2856080" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-production-company",
+      "name": "podcasts-missing-production-company-label",
+      "missingPid": "P272",
+      "contributionSummary": "podcasts-missing-production-company-contribution-summary",
+      "contributionDetails": "podcasts-missing-production-company-contribution-details",
+      "example": { "subject": "This American Life", "property": "production company (P272)", "value": "WBEZ", "qid": "Q2421465" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-official-website",
+      "name": "podcasts-missing-official-website-label",
+      "missingPid": "P856",
+      "contributionSummary": "podcasts-missing-official-website-contribution-summary",
+      "contributionDetails": "podcasts-missing-official-website-contribution-details",
+      "example": { "subject": "Reply All", "property": "official website (P856)", "value": "gimletmedia.com/reply-all", "qid": "Q20022710" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    },
+    {
+      "id": "podcasts-missing-feed-url",
+      "name": "podcasts-missing-feed-url-label",
+      "missingPid": "P1019",
+      "contributionSummary": "podcasts-missing-feed-url-contribution-summary",
+      "contributionDetails": "podcasts-missing-feed-url-contribution-details",
+      "example": { "subject": "Stuff You Should Know", "property": "web feed URL (P1019)", "value": "feeds.megaphone.fm/stuffyoushouldknow", "qid": "Q7628529" },
+      "scope": { "scopeId": "geographicScope", "path": { "scopePid": "P495" } }
+    }
+  ]
+}
