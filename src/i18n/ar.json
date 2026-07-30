@@ -18,7 +18,7 @@
   "search-show-panel-aria-with-filters": "إظهار البحث والتصفية ($1 {{PLURAL:$1|مرشح نشط|مرشحات نشطة}})",
   "search-show-panel-aria": "إظهار البحث والتصفية (لا توجد مرشحات نشطة)",
   "search-hide-panel-aria": "إخفاء البحث والتصفية",
-  "search-form-filter-clear-notice": "سيؤدي بدء بحث جديد إلى مسح جميع المرشحات.",
+  "search-panel-filter-clear-notice": "سيؤدي بدء بحث جديد إلى مسح جميع المرشحات.",
   "search-geographic-label": "النطاق الجغرافي",
   "search-geographic-placeholder": "الكل",
   "results-querying": "جارٍ الاستعلام من ويكي بيانات...",

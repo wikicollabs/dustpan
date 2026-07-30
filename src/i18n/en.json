@@ -19,7 +19,7 @@
   "search-show-panel-aria-with-filters": "Show search and filter ($1 {{PLURAL:$1|filter|filters}} active)",
   "search-show-panel-aria": "Show search and filter (no filter active)",
   "search-hide-panel-aria": "Hide search and filter",
-  "search-form-filter-clear-notice": "Starting a new search will clear all filters.",
+  "search-panel-filter-clear-notice": "Starting a new search will clear all filters.",
   "search-geographic-label": "Geographic scope",
   "search-geographic-placeholder": "All",
   "results-querying": "Querying Wikidata...",

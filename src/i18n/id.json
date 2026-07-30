@@ -18,7 +18,7 @@
   "search-show-panel-aria-with-filters": "Tampilkan pencarian dan filter ($1 {{PLURAL:$1|filter aktif|filter aktif}})",
   "search-show-panel-aria": "Tampilkan pencarian dan filter (tidak ada filter aktif)",
   "search-hide-panel-aria": "Sembunyikan pencarian dan filter",
-  "search-form-filter-clear-notice": "Memulai pencarian baru akan menghapus semua filter.",
+  "search-panel-filter-clear-notice": "Memulai pencarian baru akan menghapus semua filter.",
   "search-geographic-label": "Cakupan geografis",
   "search-geographic-placeholder": "Semua",
   "results-querying": "Mengambil data dari Wikidata...",
