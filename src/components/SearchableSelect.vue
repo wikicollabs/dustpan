@@ -290,7 +290,7 @@ onBeforeUnmount(() => {
 }
 
 .cdx-select-with-search__label--placeholder {
-  color: var(--color-subtle);
+  color: var(--color-placeholder);
 }
 
 .cdx-select-with-search--disabled .cdx-select-with-search__label {
