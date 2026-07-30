@@ -11,7 +11,7 @@
     :menu-items="menuItemsWithAll"
     :selected="selected"
     :disabled="disabled"
-    :default-label="allLabel"
+    :default-label="placeholderLabel"
     :search-placeholder="searchPlaceholder"
     :aria-label="ariaLabel"
     :no-results-text="noResultsText"
@@ -37,23 +37,45 @@ const props = withDefaults(defineProps<{
   // for the URL-driven case. null means "no URL value, fall back to
   // localStorage" same as before.
   initialValue?: string | null;
-  allLabel?: string;
+  // closed-handle text when nothing is selected. never says "All" -
+  // that word belongs only to allOptionLabel below, the actual menu item.
+  placeholderLabel?: string;
+  // text for the "All ___" menu item itself (e.g. "All geographic scope").
+  // scope-specific, passed down from SearchPanel via getScopeAllOptionLabel.
+  allOptionLabel?: string;
   searchPlaceholder?: string;
   ariaLabel?: string;
   noResultsText?: string;
 }>(), {
   disabled: false,
   initialValue: null,
-  allLabel: 'All',
+  placeholderLabel: '',
+  allOptionLabel: 'All',
   searchPlaceholder: 'Search',
   ariaLabel: '',
   noResultsText: 'No results found.',
 });
 
-// null = "all", matches SearchableSelect's own null-selected convention
+// external contract unchanged: null still means "all / nothing selected"
+// to everything outside this component (SearchPanel, App.vue, the query
+// builder). internally though, "All" needs to be a real, distinct menu
+// item value - see ALL_VALUE below for why.
 const emit = defineEmits<{
   'update:selected': [value: string | null];
 }>();
+
+// CdxMenuItem (via SearchableSelect -> CdxMenu) requires value to be a
+// String or Number, never null - using null for the "All" item's value
+// triggered a Vue prop-validation warning on every render. Worse: this
+// component's `selected` ref also legitimately starts at null before
+// the async fetchScopeOptions/resolution finishes, which meant "All"
+// and "not resolved yet" were indistinguishable, and the "All" menu
+// item's label would incorrectly flash as the closed-handle text
+// before resolution completed. ALL_VALUE gives "All" its own real
+// string identity so it can never collide with the "not yet resolved"
+// state. Never leaves this component - onSelect and the mount-resolution
+// logic below both translate it back to null before it's stored or emitted.
+const ALL_VALUE = '__scope_all__';
 
 const selected = ref<string | null>(null);
 const options = ref<ScopeOption[]>([]);
@@ -61,7 +83,7 @@ const options = ref<ScopeOption[]>([]);
 // "All" is a real, rememberable menu item (not just empty-state),
 // per: picking it overwrites memory same as picking a specific value.
 const menuItemsWithAll = computed(() => [
-  { value: null, label: props.allLabel },
+  { value: ALL_VALUE, label: props.allOptionLabel },
   ...options.value,
 ]);
 
@@ -71,9 +93,10 @@ function getDisplayLanguage(): string {
 }
 
 function onSelect(value: string | null) {
+  const externalValue = value === ALL_VALUE ? null : value;
   selected.value = value;
-  setLastScopeValue(props.scopeId, value);
-  emit('update:selected', value);
+  setLastScopeValue(props.scopeId, externalValue);
+  emit('update:selected', externalValue);
 }
 
 onMounted(async () => {
@@ -96,8 +119,9 @@ onMounted(async () => {
   // (e.g. wikidata item got merged/deleted/retyped, or a bad/old shared URL)
   const isValid = candidate !== null && options.value.some((o) => o.value === candidate);
 
-  selected.value = isValid ? candidate : null;
-  setLastScopeValue(props.scopeId, selected.value);
-  emit('update:selected', selected.value);
+  const resolvedExternal = isValid ? candidate : null;
+  selected.value = isValid ? candidate : ALL_VALUE;
+  setLastScopeValue(props.scopeId, resolvedExternal);
+  emit('update:selected', resolvedExternal);
 });
 </script>

@@ -15,11 +15,7 @@
         <!-- Broomstick Information -->
         <div class="divider"></div>
         <div class="broomstick-message">
-          <span class="broomstick-icon" aria-hidden="true">
-            <svg viewBox="0 0 20 20" width="20" height="20">
-              <path :d="broomstickIcon.path" fill="currentColor" fill-rule="evenodd" />
-            </svg>
-          </span>
+          <BroomstickIcon class="broomstick-icon" aria-hidden="true" />
           <span class="broomstick-content">
             <a
               href="https://broomstick.toolforge.org/"
@@ -52,6 +48,7 @@
 <script setup lang="ts">
 import { getCurrentInstance } from "vue";
 import SearchPanel from "../components/SearchPanel.vue";
+import BroomstickIcon from "../components/icons/BroomstickIcon.vue";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -120,7 +117,7 @@ const broomstickIcon = {
   font-family: var(--font-family-serif);
   font-size: 1.625rem;
   font-weight: 400;
-  line-height: 2.25rem;
+  line-height: var(--line-height-xxx-large);
   color: var(--color-emphasized);
   margin: 0 0 var(--spacing-50) 0;
 }
@@ -151,6 +148,10 @@ const broomstickIcon = {
   border-bottom: 1px solid var(--border-color-base);
 }
 
+.broomstick-content {
+  color: var(--color-base);
+}
+
 [dir=ltr] .broomstick-content {
   margin-left: -2px;
 }
@@ -161,17 +162,19 @@ const broomstickIcon = {
 
 .broomstick-message {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  align-self: flex-start;
   gap: var(--spacing-50);
-  align-self: stretch;
+  line-height: var(--line-height-small);
 }
 
 .broomstick-icon {
+  margin-top: calc((var(--line-height-small) - 1.125rem) / 2);
   color: var(--color-progressive--hover);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  min-width: 1.125rem;
+  line-height: var(--line-height-small);
 }
 
 .broomstick-link {

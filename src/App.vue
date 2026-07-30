@@ -90,12 +90,25 @@ const scopeInitialValue = ref<string | null>(null);
 // the watcher is guaranteed to fire exactly once, even if the resolved
 // value happens to equal what we'd have guessed anyway.
 //
-// 3s timeout safety net: if ScopeSelect never mounts/resolves for some
-// reason, don't hang the app forever, proceed with whatever's there.
+// caller must also set store.isLoading = true right before calling this
+// (see call sites below), so the results area shows a spinner for the
+// whole resolution+search window instead of a blank/0-results flash.
+//
+// 20s timeout: a genuine last-resort safety net, not a normal-latency
+// race. fetchScopeOptions always resolves on its own (it catches its
+// own network errors and falls back to []), so under any real-world
+// condition - slow WDQS response, an uncached fetch after a language
+// change invalidates the scope options cache, etc. - this will resolve
+// on its own well before 20s. this only exists to stop the UI hanging
+// forever in a genuinely broken case (e.g. ScopeSelect fails to mount
+// at all). previously this was 3s, which was short enough to regularly
+// lose the race against an uncached fetch, silently discarding the
+// resolved scope and reverting to "All" - see git history/changelog
+// for that incident before touching this value again.
 // NOTE: within-search-view popstate (two searches, same view, ScopeSelect
 // never remounts, see KNOWN LIMITATION above) will always hit this
 // timeout rather than the real resolution, since nothing re-emits on a
-// prop change alone. Bounded 3s stall in that case, not a true fix.
+// prop change alone. Bounded 20s stall in that case, not a true fix.
 function waitForScopeResolution(): Promise<void> {
   return new Promise((resolve) => {
     const stop = watch(scopeValue, () => {
@@ -105,7 +118,7 @@ function waitForScopeResolution(): Promise<void> {
     setTimeout(() => {
       stop();
       resolve();
-    }, 3000);
+    }, 20000);
   });
 }
 
@@ -120,6 +133,7 @@ async function onPopState() {
     if (queryHasScope(urlState.queryId)) {
       scopeValue.value = undefined;
       scopeInitialValue.value = urlState.scope;
+      store.isLoading = true;
       await waitForScopeResolution();
       await store.executeSearch(scopeValue.value ?? null);
     } else {
@@ -162,6 +176,7 @@ onMounted(async () => {
       scopeValue.value = undefined;
       scopeInitialValue.value = urlState.scope;
       store.setView("search");
+      store.isLoading = true;
       await waitForScopeResolution();
       await store.executeSearch(scopeValue.value ?? null);
     } else {

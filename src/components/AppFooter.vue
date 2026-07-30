@@ -158,7 +158,7 @@ const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string
 .footer-logo {
   width: 2rem;
   height: 2rem;
-  color: #3056a9;
+  color: #196551;
 }
 
 .footer-text {

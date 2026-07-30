@@ -13,7 +13,7 @@
       tabindex="-1"
       :columns="
         results.length === 0 ||
-        (hideVisited && filteredResults.length === 0) ||
+        (hideVisited.value && filteredResults.length === 0) ||
           props.connectionError
           ? []
           : columns
@@ -21,7 +21,7 @@
       :data="tableData"
       :paginate="
         results.length > 0 &&
-        !(hideVisited && filteredResults.length === 0) &&
+        !(hideVisited.value && filteredResults.length === 0) &&
         !props.connectionError
       "
       :pagination-size-options="paginationOptions"
@@ -169,12 +169,6 @@ const columns = computed<TableColumn[]>(() => [
     allowSort: true,
     minWidth: "12.5rem",
   },
-  // {
-  //   id: "geographic",
-  //   label: $i18n('table-geographic-header'),
-  //   allowSort: true,
-  //   minWidth: "10rem",
-  // },
 ]);
 
 onMounted(() => {
@@ -293,7 +287,7 @@ const visibilityStatusMessage = computed(() => {
 
 const allVisitedAndHidden = computed(() => {
   return (
-    hideVisited && filteredResults.value.length === 0
+    hideVisited.value && filteredResults.value.length === 0
   );
 });
 
@@ -321,18 +315,6 @@ const labelSortAriaLabel = computed(() => {
     : $i18n('table-header-label-descending');
 });
 
-const geographicSortAriaLabel = computed(() => {
-  const sortColumn = Object.keys(sortState.value)[0];
-  const sortOrder = sortColumn ? sortState.value[sortColumn] : null;
-  
-  if (sortColumn !== 'geographic') {
-    return $i18n('table-header-geographic-default');
-  }
-  return sortOrder === 'asc' 
-    ? $i18n('table-header-geographic-ascending')
-    : $i18n('table-header-geographic-descending');
-});
-
 
 function markVisited(itemId: string) {
   setTimeout(() => {
@@ -353,7 +335,6 @@ function updateHeaderAriaLabels() {
     const buttons = document.querySelectorAll(".cdx-table th button");
     if (buttons[0]) buttons[0].setAttribute("aria-label", qidSortAriaLabel.value);
     if (buttons[1]) buttons[1].setAttribute("aria-label", labelSortAriaLabel.value);
-    if (buttons[2]) buttons[2].setAttribute("aria-label", geographicSortAriaLabel.value);
   });
 }
 
