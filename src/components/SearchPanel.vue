@@ -74,7 +74,8 @@
         :scope-id="scopeId ?? ''"
         :disabled="isScopeDisabled"
         :initial-value="scopeInitialValue"
-        :all-label="scopePlaceholderLabel"
+        :placeholder-label="scopePlaceholderLabel"
+        :all-option-label="scopeAllOptionLabel"
         :search-placeholder="$i18n('search-scope-search-placeholder')"
         :aria-label="scopeLabel"
         :no-results-text="$i18n('search-scope-no-results')"
@@ -120,6 +121,7 @@ import {
   queryHasScope,
   getQueryScopeId,
   getScopeLabel,
+  getScopeAllOptionLabel,
 } from "../query/queries";
 
 const instance = getCurrentInstance();
@@ -155,13 +157,15 @@ const emit = defineEmits<{
 
 const hasChangedSelection = ref(false);
 
-watch([() => props.wikiproject, () => props.queryId], () => {
+watch([() => props.wikiproject, () => props.queryId, () => props.scope], () => {
   if (props.resultsExist) {
     hasChangedSelection.value = true;
   }
 });
 
-const wikiprojectOptions = getWikiprojectOptions();
+const wikiprojectOptions = [...getWikiprojectOptions()].sort((a, b) =>
+  a.label.localeCompare(b.label)
+);
 
 const isQueryIdDisabled = computed(() => !props.wikiproject);
 const hasScope = computed(() => queryHasScope(props.queryId));
@@ -171,24 +175,37 @@ const scopeLabelKey = computed(() => (scopeId.value ? getScopeLabel(scopeId.valu
 const scopeLabel = computed(() => (scopeLabelKey.value ? $i18n(scopeLabelKey.value) : ""));
 
 // scope field is always visible, so its placeholder has to communicate
-// 3 distinct states instead of just existing-or-not:
-//   1. no queryId yet          -> generic "pick something" placeholder
-//   2. queryId chosen, no scope -> explicit "doesn't apply here" placeholder
-//   3. queryId chosen, has scope -> normal "All" (real selectable default)
+// 2 distinct states:
+//   1. no queryId yet, OR queryId chosen with a scope -> generic
+//      "pick something" placeholder (never states "All" here, that
+//      text belongs only to the actual "All ___" menu item, see
+//      scopeAllOptionLabel below)
+//   2. queryId chosen, no scope applies -> explicit "doesn't apply here" placeholder
 const scopePlaceholderLabel = computed(() => {
-  if (!props.queryId) return $i18n('search-scope-select-placeholder');
-  if (!hasScope.value) return $i18n('search-scope-no-scope-placeholder');
-  return $i18n('search-scope-all-option');
+  if (props.queryId && !hasScope.value) return $i18n('search-scope-no-scope-placeholder');
+  return $i18n('search-scope-select-placeholder');
+});
+
+// label for the actual "All ___" menu item inside the scope dropdown
+// (distinct from scopePlaceholderLabel above, which is the closed-handle
+// text and never says "All"). scope-specific per scopeId, e.g.
+// "All geographic scope" for geographicScope.
+const scopeAllOptionLabel = computed(() => {
+  if (!scopeId.value) return "";
+  const key = getScopeAllOptionLabel(scopeId.value);
+  return key ? $i18n(key) : "";
 });
 
 // flat list, no "group" field (unused in current data, always empty)
 const queryIdOptions = computed(() => {
   if (!props.wikiproject) return [];
   const raw = getQueryOptionsForProject(props.wikiproject);
-  return raw.map((item) => ({
-    value: item.value,
-    label: $i18n(item.label),
-  }));
+  return raw
+    .map((item) => ({
+      value: item.value,
+      label: $i18n(item.label),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 });
 
 const wikiprojectBlurred = ref(false);
@@ -298,14 +315,9 @@ function handleSearch() {
 </script>
 
 <style scoped>
-.wikiproject-type-field,
-.query-id-field,
-.scope-type-field {
-  margin-bottom: var(--spacing-75) !important;
-}
 
-.field-disabled :deep(.cdx-field__label) {
-  color: var(--color-disabled, #a2a9b1);
+.field-disabled :deep(.cdx-label__label__text) {
+  color: var(--color-disabled);
 }
 
 .scope-type-field {
@@ -331,6 +343,7 @@ function handleSearch() {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  gap: var(--spacing-75);
 }
 
 .search-panel :deep(.cdx-field) {
@@ -361,15 +374,14 @@ function handleSearch() {
   color: var(--color-base);
   font-size: var(--font-size-medium);
   font-weight: 400 !important;
-  margin-top: 0.75rem !important;
 }
 
 .selection-change-notice :deep(.cdx-icon) {
-  margin-top: 2px;
-  color: var(--color-notice);
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
+  margin-top: calc((var(--line-height-small) - 1.125rem) / 2);
+  color: var(--color-icon-notice);
+  width: 1.125rem;
+  height: 1.125rem;
+  min-width: 1.125rem;
 }
 
 .selection-change-notice :deep(.cdx-message__content) {

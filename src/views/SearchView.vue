@@ -314,9 +314,10 @@ function getWikiprojectLabel(projectValue: string | null): string {
 .search-content h1 {
   color: var(--color-emphasized);
   font-family: var(--font-family-serif);
-  font-size: 2rem;
+  font-size: var(--font-size-xxx-large);
   font-weight: 400;
-  line-height: 1.25;
+  line-height: var(--line-height-xxx-large);
+  font-style: normal;
   margin: 0;
   width: 100%; /* full width on mobile */
 }
@@ -332,9 +333,9 @@ function getWikiprojectLabel(projectValue: string | null): string {
   color: var(--color-progressive);
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--spacing-25);
   text-decoration: none;
-  font-family: var(--font-family-system-sans);
+  font-family: var(--font-family-base);
   font-size: var(--font-size-medium);
   font-style: normal;
   font-weight: 700;
@@ -571,11 +572,11 @@ function getWikiprojectLabel(projectValue: string | null): string {
   gap: var(--spacing-75);
   cursor: pointer;
   width: 100%;
+  line-height: var(--line-height-small) !important;
 }
 
 .contribution-info-text {
   color: var(--color-base);
-  line-height: var(--line-height-small);
   white-space: pre-line;
 }
 
@@ -591,14 +592,10 @@ function getWikiprojectLabel(projectValue: string | null): string {
 .contribution-info-example-label {
   font-weight: 700;
 }
-.contribution-info-example-text em {
-  font-style: italic;
-}
 
 .contribution-info-icon {
   flex-shrink: 0;
-  color: var(--color-subtle);
-  margin-top: 2px;
+  color: var(--color-notice);
 }
 
 .contribution-info-message :deep(.cdx-message__icon--vue) {
@@ -607,6 +604,7 @@ function getWikiprojectLabel(projectValue: string | null): string {
   flex-shrink: 0;
   aspect-ratio: 1/1;
   margin-inline-end: var(--spacing-50);
+  margin-top: calc((var(--line-height-small) - 1.125rem) / 2);
 }
 
 .contribution-info-example-subject-link {

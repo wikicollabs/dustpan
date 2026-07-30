@@ -44,6 +44,7 @@ export interface AppUrlState {
 
 export interface ScopeDef {
   label: string;
+  allOptionLabel: string;
   source: string;
   sparqlTemplate: string;
 }

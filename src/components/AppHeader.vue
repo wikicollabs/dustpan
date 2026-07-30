@@ -98,6 +98,6 @@ defineExpose({
   width: auto;
   height: 2.25rem;
   cursor: pointer;
-  color: #3056a9;
+  color: #196551;
 }
 </style>

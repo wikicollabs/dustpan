@@ -82,6 +82,12 @@ export function getScopeLabel(scopeId: string): string | null {
   return scopes[scopeId]?.label ?? null;
 }
 
+// get the i18n label key for a scope's "All" menu-item option
+// (e.g. "search-scope-all-geographic"), or null
+export function getScopeAllOptionLabel(scopeId: string): string | null {
+  return scopes[scopeId]?.allOptionLabel ?? null;
+}
+
 // get wikiproject name (not translatable) by id
 export function getWikiprojectName(projectId: string | null): string {
   return findWikiproject(projectId)?.name ?? projectId ?? '';
