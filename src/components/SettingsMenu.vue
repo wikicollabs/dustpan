@@ -225,6 +225,7 @@ import {
   cdxIconSearchCaseSensitive,
 } from "@wikimedia/codex-icons";
 import { DISPLAY_LANGUAGES } from '../i18n/displayLanguages';
+import { getBrowserLanguage } from '../i18n/displayLanguages'; 
 
 type Theme = 'auto' | 'light' | 'dark';
 type TextSize = 'small' | 'medium' | 'large' | 'extra-large';
@@ -250,7 +251,7 @@ const getLanguageName = (locale: string): string => {
 
 const selectedItem = ref<MenuSelection>(null);
 const currentTheme = ref<Theme>("auto");
-const currentLanguage = ref(localStorage.getItem('locale') || 'en');
+const currentLanguage = ref(localStorage.getItem('locale') || getBrowserLanguage());
 const currentTextSize = ref<TextSize>(parseTextSize(localStorage.getItem('dustpan_text_size')));
 
 const tempTheme = ref<Theme>("auto");

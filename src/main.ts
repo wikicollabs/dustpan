@@ -13,6 +13,7 @@ import App from './App.vue'
 import i18n from './i18n/i18n'
 import '@wikimedia/codex-design-tokens/theme-wikimedia-ui.css'
 import '@wikimedia/codex/dist/codex.style-bidi.css';
+import { DISPLAY_LANGUAGES, getBrowserLanguage } from './i18n/displayLanguages';
 
 const app = createApp(App);
 
@@ -70,7 +71,7 @@ if (theme === 'dark') {
 }
 
 const RTL_LANGUAGES = ['ar', 'he', 'fa', 'ps', 'ur', 'yi'];
-const savedLocale = localStorage.getItem('locale') || 'en';
+const savedLocale = localStorage.getItem('locale') || getBrowserLanguage();
 const langCode = savedLocale.split('-')[0];
 const isRTL = RTL_LANGUAGES.includes(langCode);
 
