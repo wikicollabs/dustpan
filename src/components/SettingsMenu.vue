@@ -389,8 +389,7 @@ const hasThemeChanged = computed(() => {
 });
 
 const hasLanguageChanged = computed(() => {
-  const currentLocale = localStorage.getItem('locale') || 'en';
-  return tempLanguage.value !== currentLocale;
+  return tempLanguage.value !== currentLanguage.value;
 });
 
 onMounted(() => {
