@@ -20,15 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import SearchableSelect from './SearchableSelect.vue';
-import { fetchScopeOptions } from '../query/fetchScopeOptions';
 import { getLastScopeValue, setLastScopeValue } from '../state/scopeStorage';
 import type { ScopeOption } from '../types/types';
 import { getBrowserLanguage } from '../i18n/displayLanguages';
 
 const props = withDefaults(defineProps<{
   scopeId: string;
+  options?: ScopeOption[] | null;
   disabled?: boolean;
   // set when App.vue resolved a scope value from the URL on mount
   // (browser back/forward or a shared link). when present, this wins
@@ -47,6 +47,7 @@ const props = withDefaults(defineProps<{
   ariaLabel?: string;
   noResultsText?: string;
 }>(), {
+  options: null,
   disabled: false,
   initialValue: null,
   placeholderLabel: '',
@@ -78,13 +79,12 @@ const emit = defineEmits<{
 const ALL_VALUE = '__scope_all__';
 
 const selected = ref<string | null>(null);
-const options = ref<ScopeOption[]>([]);
 
 // "All" is a real, rememberable menu item (not just empty-state),
 // per: picking it overwrites memory same as picking a specific value.
 const menuItemsWithAll = computed(() => [
   { value: ALL_VALUE, label: props.allOptionLabel },
-  ...options.value,
+  ...(props.options ?? []),
 ]);
 
 function getDisplayLanguage(): string {
@@ -98,29 +98,24 @@ function onSelect(value: string | null) {
   emit('update:selected', externalValue);
 }
 
-onMounted(async () => {
-  // component is always mounted by the parent (SearchForm), even
-  // before a queryId/scope exists. bail out instead of hitting
-  // fetchScopeOptions with an empty scopeId (would just log a console
-  // error and return [] anyway, no point doing it every fresh page load)
-  if (!props.scopeId) return;
+let hasResolved = false;
+watch(
+  () => props.options,
+  (opts) => {
+    if (hasResolved || !props.scopeId || opts === null) return;
+    hasResolved = true;
 
-  options.value = await fetchScopeOptions(props.scopeId, getDisplayLanguage());
+    const candidate = props.initialValue !== null
+      ? props.initialValue
+      : getLastScopeValue(props.scopeId);
 
-  // URL wins over localStorage when present. this is the initialValue
-  // path, no getLastScopeValue() call at all, so there's nothing async
-  // for App.vue's mount-time logic to race against.
-  const candidate = props.initialValue !== null
-    ? props.initialValue
-    : getLastScopeValue(props.scopeId);
+    const isValid = candidate !== null && opts.some((o) => o.value === candidate);
 
-  // guard against a stale qid that's no longer in the fetched list
-  // (e.g. wikidata item got merged/deleted/retyped, or a bad/old shared URL)
-  const isValid = candidate !== null && options.value.some((o) => o.value === candidate);
-
-  const resolvedExternal = isValid ? candidate : null;
-  selected.value = isValid ? candidate : ALL_VALUE;
-  setLastScopeValue(props.scopeId, resolvedExternal);
-  emit('update:selected', resolvedExternal);
-});
+    const resolvedExternal = isValid ? candidate : null;
+    selected.value = isValid ? candidate : ALL_VALUE;
+    setLastScopeValue(props.scopeId, resolvedExternal);
+    emit('update:selected', resolvedExternal);
+  },
+  { immediate: true }
+);
 </script>

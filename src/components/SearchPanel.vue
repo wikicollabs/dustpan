@@ -72,12 +72,14 @@
       <ScopeSelect
         :key="scopeId"
         :scope-id="scopeId ?? ''"
+        :options="scopeOptions"
         :disabled="isScopeDisabled"
+        :aria-disabled="isScopeDisabled"
         :initial-value="scopeInitialValue"
         :placeholder-label="scopePlaceholderLabel"
         :all-option-label="scopeAllOptionLabel"
         :search-placeholder="$i18n('search-scope-search-placeholder')"
-        :aria-label="scopeLabel"
+        :aria-label="scopeAriaLabel"
         :no-results-text="$i18n('search-scope-no-results')"
         @update:selected="onScopeSelected"
       />
@@ -123,6 +125,7 @@ import {
   getScopeLabel,
   getScopeAllOptionLabel,
 } from "../query/queries";
+import type { ScopeOption } from "../types/types";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -135,6 +138,7 @@ const props = withDefaults(defineProps<{
   // just passthrough to ScopeSelect's initial-value. see that file for
   // why this exists (kills the mount race for URL-driven scope).
   scopeInitialValue?: string | null;
+  scopeOptionsMap?: Record<string, ScopeOption[] | null>;
   disabled?: boolean;
   activeFilterCount?: number;
   resultsExist?: boolean;
@@ -143,6 +147,7 @@ const props = withDefaults(defineProps<{
   queryId: null,
   scope: null,
   scopeInitialValue: null,
+  scopeOptionsMap: () => ({}),
   disabled: false,
   activeFilterCount: 0,
   resultsExist: false,
@@ -171,6 +176,11 @@ const isQueryIdDisabled = computed(() => !props.wikiproject);
 const hasScope = computed(() => queryHasScope(props.queryId));
 const isScopeDisabled = computed(() => !props.queryId || !hasScope.value);
 const scopeId = computed(() => getQueryScopeId(props.queryId));
+
+const scopeOptions = computed<ScopeOption[] | null>(() => {
+  if (!scopeId.value) return null;
+  return props.scopeOptionsMap[scopeId.value] ?? null;
+});
 const scopeLabelKey = computed(() => (scopeId.value ? getScopeLabel(scopeId.value) : null));
 const scopeLabel = computed(() => (scopeLabelKey.value ? $i18n(scopeLabelKey.value) : ""));
 
@@ -184,6 +194,11 @@ const scopeLabel = computed(() => (scopeLabelKey.value ? $i18n(scopeLabelKey.val
 const scopePlaceholderLabel = computed(() => {
   if (props.queryId && !hasScope.value) return $i18n('search-scope-no-scope-placeholder');
   return $i18n('search-scope-select-placeholder');
+});
+
+const scopeAriaLabel = computed(() => {
+  if (isScopeDisabled.value) return $i18n('search-scope-no-scope-placeholder');
+  return $i18n('search-scope-label');
 });
 
 // label for the actual "All ___" menu item inside the scope dropdown
@@ -336,6 +351,13 @@ function handleSearch() {
 
 .query-id-field {
   margin-top: 0 !important;
+}
+
+.query-id-field :deep(.cdx-select-vue__handle),
+.query-id-field :deep(.cdx-select-vue__handle span) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .search-panel {
