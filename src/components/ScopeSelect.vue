@@ -88,7 +88,6 @@ const menuItemsWithAll = computed(() => [
 ]);
 
 function getDisplayLanguage(): string {
-  const browserLang = navigator.language || navigator.languages?.[0];
   return localStorage.getItem('locale') || getBrowserLanguage();
 }
 
