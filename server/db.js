@@ -23,7 +23,7 @@ const pool = mysql.createPool({
   host: 'tools.db.svc.wikimedia.cloud',
   user,
   password,
-  database: 's57833__search_log',
+  database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 5,
 });
