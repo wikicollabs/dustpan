@@ -50,6 +50,14 @@ function getDisplayLanguage(): string {
   return localStorage.getItem('locale') || getAutoLanguage();
 }
 
+function logSearch(querystring: string): void {
+  fetch('/api/log', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ querystring }),
+  }).catch((err) => console.error('Failed to log search:', err));
+}
+
 export const useSearchStore = defineStore('search', {
   state: () => ({
     currentView: 'landing' as AppUrlState['view'],
@@ -110,6 +118,7 @@ export const useSearchStore = defineStore('search', {
         },
         { replace: this.currentView === 'search' }
       );
+      logSearch(window.location.pathname + window.location.search);
       this.currentView = 'search';
       this.results = [];
       try {
