@@ -13,7 +13,7 @@
       tabindex="-1"
       :columns="
         results.length === 0 ||
-        (hideVisited.value && filteredResults.length === 0) ||
+        (hideVisited && filteredResults.length === 0) ||
           props.connectionError
           ? []
           : columns
@@ -21,7 +21,7 @@
       :data="tableData"
       :paginate="
         results.length > 0 &&
-        !(hideVisited.value && filteredResults.length === 0) &&
+        !(hideVisited && filteredResults.length === 0) &&
         !props.connectionError
       "
       :pagination-size-options="paginationOptions"

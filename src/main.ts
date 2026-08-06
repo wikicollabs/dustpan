@@ -70,10 +70,9 @@ if (theme === 'dark') {
   }
 }
 
-const RTL_LANGUAGES = ['ar', 'he', 'fa', 'ps', 'ur', 'yi'];
 const savedLocale = localStorage.getItem('locale') || getBrowserLanguage();
 const langCode = savedLocale.split('-')[0];
-const isRTL = RTL_LANGUAGES.includes(langCode);
+const isRTL = DISPLAY_LANGUAGES.find(l => l.code === langCode)?.rtl ?? false;
 
 document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
 

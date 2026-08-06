@@ -9,13 +9,14 @@
 export interface DisplayLanguage {
   code: string;
   nativeName: string;
+  rtl: boolean;
 }
 
 export const DISPLAY_LANGUAGES: DisplayLanguage[] = [
-  { code: 'id', nativeName: 'Bahasa Indonesia' },
-  { code: 'en', nativeName: 'English' },
-  { code: 'ar', nativeName: 'العربية' },
-  { code: 'ko', nativeName: '한국어' },
+  { code: 'id', nativeName: 'Bahasa Indonesia', rtl: false },
+  { code: 'en', nativeName: 'English', rtl: false },
+  { code: 'ar', nativeName: 'العربية', rtl: true },
+  { code: 'ko', nativeName: '한국어', rtl: false }
 ];
 
 export const getBrowserLanguage = (): string => {
