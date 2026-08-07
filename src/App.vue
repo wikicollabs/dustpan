@@ -59,6 +59,7 @@ import { queryHasScope } from "./query/queries";
 import { fetchScopeOptions } from "./query/fetchScopeOptions";
 import scopesJson from "./catalog/scopes.json";
 import type { ScopeDef, ScopeOption } from "./types/types";
+import { getBrowserLanguage } from "./i18n/displayLanguages";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -73,8 +74,7 @@ const scopeOptionsMap = ref<Record<string, ScopeOption[] | null>>(
 );
 
 function getDisplayLanguage(): string {
-  const browserLang = navigator.language || navigator.languages?.[0];
-  return localStorage.getItem("locale") || browserLang.split("-")[0].toLowerCase();
+  return localStorage.getItem("locale") || getBrowserLanguage();
 }
 
 function prefetchScopeOptions() {
