@@ -13,7 +13,7 @@
       tabindex="-1"
       :columns="
         results.length === 0 ||
-        (hideVisited && filteredResults.length === 0) ||
+        (hideVisited.value && filteredResults.length === 0) ||
           props.connectionError
           ? []
           : columns
@@ -21,7 +21,7 @@
       :data="tableData"
       :paginate="
         results.length > 0 &&
-        !(hideVisited && filteredResults.length === 0) &&
+        !(hideVisited.value && filteredResults.length === 0) &&
         !props.connectionError
       "
       :pagination-size-options="paginationOptions"
@@ -82,6 +82,7 @@
     target="_blank"
     rel="noopener"
     class="external-link"
+    :aria-label="rowAriaLabel(row)"
     @click.stop="markVisited(row.itemId)"
   >
     {{ row.itemId }}
@@ -192,13 +193,23 @@ if (savedHideVisited) {
   updateHeaderAriaLabels();
   updateRowsPerPageAriaLabel();
 
-  // watch for dropdown state changes to update aria-label
-  const selectWrapper = document.querySelector('.cdx-select-vue');
-  if (selectWrapper) {
-    const observer = new MutationObserver(() => {
+  const root = instance?.proxy?.$el as Element | undefined;
+  if (root) {
+    const rootObserver = new MutationObserver(() => {
+      updateHeaderAriaLabels();
       updateRowsPerPageAriaLabel();
+
+      const header = document.querySelector(".cdx-table th:first-child");
+      if (header && !header.hasAttribute("aria-label")) {
+        header.setAttribute("aria-label", $i18n('table-visited-header'));
+      }
     });
-    observer.observe(selectWrapper, { attributes: true, attributeFilter: ['class'] });
+    rootObserver.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class', 'style', 'aria-expanded'],
+    });
   }
 });
 
@@ -325,6 +336,15 @@ function markVisited(itemId: string) {
 function isVisited(itemId: string) {
   return visitedItems.value.has(itemId);
 }
+
+// format: "[[Visited status]] - [[Item label]], [[QID]]"
+// e.g. "Visited - The Inn, Q1234567"
+function rowAriaLabel(row: { itemId: string; label: string }) {
+  const visitedStatus = isVisited(row.itemId)
+    ? $i18n('table-row-visited-status')
+    : $i18n('table-row-not-visited-status');
+  return `${visitedStatus} - ${row.label}, ${row.itemId}`;
+}
 function toggleHideVisited() {
   hideVisited.value = !hideVisited.value;
 }
@@ -347,6 +367,18 @@ function updateRowsPerPageAriaLabel() {
         combobox.setAttribute('aria-label', displayedText);
       }
     }
+  });
+}
+
+function updateRowsPerPageOptionAriaLabels() {
+  nextTick(() => {
+    const options = document.querySelectorAll('.cdx-menu-item[role="option"], [role="listbox"] [role="option"], [role="option"]');
+    options.forEach((option) => {
+      const value = option.textContent?.trim();
+      if (value) {
+        option.setAttribute('aria-label', value);
+      }
+    });
   });
 }
 
