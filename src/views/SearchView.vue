@@ -29,7 +29,8 @@
             :href="getWikiprojectUrl(searchedWikiproject)"
             target="_blank"
             rel="noopener noreferrer"
-            class="wikiproject-link">
+            class="wikiproject-link"
+            :aria-label="$i18n('wikiproject-link-aria-label', getWikiprojectLabel(searchedWikiproject))">
             <span class="wikiproject-text" dir="ltr">WikiProject <bdi>{{ getWikiprojectLabel(searchedWikiproject) }}</bdi></span>
             <CdxIcon :icon="cdxIconLinkExternal" /></a>
         </div>
@@ -53,6 +54,7 @@
             :query-id="queryId"
             :scope="scope"
             :scope-initial-value="scopeInitialValue"
+            :scope-options-map="scopeOptionsMap"
             :disabled="disabled"
             :results-exist="results.length > 0"
             :search-has-run="!!searchedQueryId"
@@ -72,6 +74,7 @@
                 weight="quiet"
                 :disabled="!hasActiveFilters"
                 :aria-disabled="!hasActiveFilters"
+                :aria-label="$i18n('filters-clear-all')"
                 @click="clearFilters"
                 class="clear-filters-button"
               >
@@ -138,6 +141,7 @@
                           target="_blank"
                           rel="noopener noreferrer"
                           class="contribution-info-example-subject-link"
+                          :aria-label="$i18n('contribution-info-example-link-aria', contributionInfo.example.subject, contributionInfo.example.qid)"
                         >{{ contributionInfo.example.subject }} ({{ contributionInfo.example.qid }})</a>
                         <template v-else>{{ contributionInfo.example.subject }}</template>
                       </div>
@@ -175,6 +179,7 @@ import SearchPanel from "../components/SearchPanel.vue";
 import ResultsTable from "../components/ResultsTable.vue";
 import { getQueryOptionsForProject, getQueryContributionInfo, getWikiprojectName, getWikiprojectUrl } from "../query/queries";
 import type { SearchResultItem } from "../state/searchStore";
+import type { ScopeOption } from "../types/types";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -186,6 +191,7 @@ const props = withDefaults(defineProps<{
   // one-shot value resolved from the URL by App.vue on mount/popstate.
   // passthrough down to SearchPanel -> ScopeSelect's initial-value.
   scopeInitialValue?: string | null;
+  scopeOptionsMap?: Record<string, ScopeOption[] | null>;
   disabled?: boolean;
   searchedWikiproject?: string | null;
   searchedQueryId?: string | null;
@@ -198,6 +204,7 @@ const props = withDefaults(defineProps<{
   queryId: null,
   scope: null,
   scopeInitialValue: null,
+  scopeOptionsMap: () => ({}),
   disabled: false,
   searchedWikiproject: null,
   searchedQueryId: null,

@@ -22,6 +22,7 @@
               target="_blank"
               rel="noopener noreferrer"
               class="broomstick-link"
+              :aria-label="$i18n('landing-improve-lexemes-link')"
             >{{ $i18n('landing-improve-lexemes-link') }}</a>{{ $i18n('landing-improve-lexemes-help') }}
           </span>
         </div>
@@ -33,6 +34,7 @@
             :query-id="queryId"
             :scope="scope"
             :scope-initial-value="scopeInitialValue"
+            :scope-options-map="scopeOptionsMap"
             :disabled="disabled"
             @update:wikiproject="$emit('update:wikiproject', $event)"
             @update:query-id="$emit('update:query-id', $event)"
@@ -49,6 +51,7 @@
 import { getCurrentInstance } from "vue";
 import SearchPanel from "../components/SearchPanel.vue";
 import BroomstickIcon from "../components/icons/BroomstickIcon.vue";
+import type { ScopeOption } from "../types/types";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -60,12 +63,14 @@ withDefaults(defineProps<{
   // one-shot value resolved from the URL by App.vue on mount/popstate.
   // passthrough down to SearchPanel -> ScopeSelect's initial-value.
   scopeInitialValue?: string | null;
+  scopeOptionsMap?: Record<string, ScopeOption[] | null>;
   disabled?: boolean;
 }>(), {
   wikiproject: null,
   queryId: null,
   scope: null,
   scopeInitialValue: null,
+  scopeOptionsMap: () => ({}),
   disabled: false,
 });
 

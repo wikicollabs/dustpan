@@ -30,6 +30,7 @@
       v-model:open="showThemeDialog"
       :title="$i18n('settings-theme-label')"
       :use-close-button="true"
+      :close-button-label="$i18n('cdx-dialog-close-button-label')"
       :primary-action="{
         label: $i18n('settings-apply'),
         actionType: 'progressive',
@@ -66,7 +67,8 @@
     <!-- display language dialog -->
     <cdx-dialog
       v-model:open="showLanguageDialog"
-      :title="''"
+      :title="$i18n('settings-language-label')"
+      :fixed-height="true"
       :primary-action="{
         label: $i18n('settings-apply'),
         actionType: 'progressive',
@@ -87,6 +89,7 @@
             :start-icon="cdxIconSearch"
             :clearable="true"
             :placeholder="$i18n('settings-language-search-placeholder')"
+            :aria-label="languageSearchQuery || $i18n('settings-language-search-placeholder')"
             />
 
           <cdx-button
@@ -123,11 +126,11 @@
             v-show="filteredLanguages.length === 0"
             class="no-results"
           >
-            <span>
+            <p>
               {{ $i18n('settings-language-no-results') }}
               <br>
               {{ $i18n('settings-language-no-results-suggestion') }}
-            </span>
+            </p>
           </div>
         </div>
       </div>
@@ -136,6 +139,17 @@
       <template #footer-text>
         <span class="translate-help"> 
           {{ $i18n('settings-language-reload') }}
+          <br>
+          {{ $i18n('settings-translate-help') }}
+          <a 
+            href="https://translatewiki.net/wiki/Translating:Dustpan" 
+            target="_blank" 
+            rel="noopener"
+            class="translate-link"
+            :aria-label="$i18n('settings-translate-link')"
+          >
+            {{ $i18n('settings-translate-link') }}
+          </a>
         </span>
       </template>
     </cdx-dialog>
@@ -145,6 +159,7 @@
       v-model:open="showTextSizeDialog"
       :title="$i18n('settings-text-size-label')"
       :use-close-button="true"
+      :close-button-label="$i18n('cdx-dialog-close-button-label')"
       :primary-action="{
         label: $i18n('settings-apply'),
         actionType: 'progressive',

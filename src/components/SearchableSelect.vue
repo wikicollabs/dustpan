@@ -37,9 +37,8 @@
         ref="handleRef"
         type="button"
         class="cdx-select-with-search__overlay-handle"
-        role="combobox"
+        role="select"
         :disabled="disabled"
-        :aria-label="ariaLabel"
         aria-haspopup="listbox"
         :aria-expanded="isExpanded"
         :aria-controls="menuId"
@@ -58,7 +57,7 @@
           :start-icon="cdxIconSearch"
           :clearable="true"
           :placeholder="searchPlaceholder"
-          :aria-label="searchPlaceholder"
+          :aria-label="$i18n('search-scope-search-placeholder')"
           :aria-expanded="isExpanded"
           :aria-controls="menuId"
           :aria-activedescendant="activeDescendantId"
@@ -84,9 +83,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId } from "vue";
+import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId, getCurrentInstance } from "vue";
 import { CdxTextInput, CdxMenu, CdxSelect } from "@wikimedia/codex";
 import { cdxIconSearch } from "@wikimedia/codex-icons";
+
+const instance = getCurrentInstance();
+const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
 
 interface SelectMenuItem {
   value: string | number | null;
