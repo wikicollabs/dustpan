@@ -19,6 +19,7 @@
         v-model:query-id="store.selectedQueryId"
         v-model:scope="scopeValue"
         :scope-initial-value="scopeInitialValue"
+        :scope-options-map="scopeOptionsMap"
         :disabled="store.isLoading"
         @search="executeSearch"
       />
@@ -29,6 +30,7 @@
         v-model:query-id="store.selectedQueryId"
         v-model:scope="scopeValue"
         :scope-initial-value="scopeInitialValue"
+        :scope-options-map="scopeOptionsMap"
         :disabled="store.isLoading"
         :searched-wikiproject="store.searchedWikiproject"
         :searched-query-id="store.searchedQueryId"
@@ -54,12 +56,35 @@ import SearchView from "./views/SearchView.vue";
 import { useSearchStore } from "./state/searchStore";
 import { readStateFromUrl } from "./state/urlState";
 import { queryHasScope } from "./query/queries";
+import { fetchScopeOptions } from "./query/fetchScopeOptions";
+import scopesJson from "./catalog/scopes.json";
+import type { ScopeDef, ScopeOption } from "./types/types";
+import { getBrowserLanguage } from "./i18n/displayLanguages";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
 
 const toast = useToast();
 const store = useSearchStore();
+
+const scopeIds = Object.keys(scopesJson as Record<string, ScopeDef>);
+
+const scopeOptionsMap = ref<Record<string, ScopeOption[] | null>>(
+  Object.fromEntries(scopeIds.map((id) => [id, null]))
+);
+
+function getDisplayLanguage(): string {
+  return localStorage.getItem("locale") || getBrowserLanguage();
+}
+
+function prefetchScopeOptions() {
+  const lang = getDisplayLanguage();
+  for (const scopeId of scopeIds) {
+    fetchScopeOptions(scopeId, lang).then((options) => {
+      scopeOptionsMap.value[scopeId] = options;
+    });
+  }
+}
 
 // App.vue doesn't own scopeValue's source of truth. ScopeSelect.vue
 // (mounted deep inside SearchPanel.vue) resolves the value and emits it
@@ -156,6 +181,8 @@ async function executeSearch() {
 }
 
 onMounted(async () => {
+  prefetchScopeOptions();
+
   window.addEventListener("popstate", onPopState);
 
   const urlState = readStateFromUrl();
