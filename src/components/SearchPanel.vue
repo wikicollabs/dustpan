@@ -349,8 +349,13 @@ function handleSearch() {
   margin-bottom: var(--spacing-75);
 }
 
+.query-id-field :deep(.cdx-field__control) {
+  display: flex;
+}
+
 .query-id-field {
   margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .query-id-field :deep(.cdx-select-vue__handle),
