@@ -138,7 +138,7 @@
       <!-- footer for language dialog -->
       <template #footer-text>
         <span class="translate-help"> 
-          {{ $i18n('settings-language-reload') }}
+          {{ $i18n('settings-language-reload', 'Dustpan') }}
           <br>
           {{ $i18n('settings-translate-help') }}
           <a 
@@ -148,7 +148,7 @@
             class="translate-link"
             :aria-label="$i18n('settings-translate-link')"
           >
-            {{ $i18n('settings-translate-link') }}
+            {{ $i18n('settings-translate-link', 'Dustpan') }}
           </a>
         </span>
       </template>

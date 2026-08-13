@@ -1,7 +1,7 @@
 {
   "geographicScope": {
     "label": "search-geographic-label",
-    "allOptionLabel": "search-scope-all-geographic",
+    "allOptionLabel": "search-geographic-scope-all",
     "source": "wikidata-query",
     "sparqlTemplate": "?value wdt:P31 wd:Q6256 ."
   }
