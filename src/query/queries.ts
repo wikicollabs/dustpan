@@ -28,6 +28,7 @@ interface SelectOption {
 interface ContributionInfo {
   summaryLabel: string;
   detailsLabel: string;
+  property: string | null;
   example: QueryType['example'];
 }
 
@@ -107,6 +108,7 @@ export function getQueryContributionInfo(queryId: string | null): ContributionIn
   return {
     summaryLabel: query.contributionSummary,
     detailsLabel: query.contributionDetails,
+    property: query.property ?? null,
     example: query.example ?? null,
   };
 }
