@@ -78,7 +78,7 @@
         :initial-value="scopeInitialValue"
         :placeholder-label="scopePlaceholderLabel"
         :all-option-label="scopeAllOptionLabel"
-        :search-placeholder="$i18n('search-scope-search-placeholder')"
+        :search-placeholder="$i18n('search-geographic-scope-placeholder')"
         :aria-label="scopeAriaLabel"
         :no-results-text="$i18n('search-scope-no-results')"
         @update:selected="onScopeSelected"
@@ -192,12 +192,12 @@ const scopeLabel = computed(() => (scopeLabelKey.value ? $i18n(scopeLabelKey.val
 //      scopeAllOptionLabel below)
 //   2. queryId chosen, no scope applies -> explicit "doesn't apply here" placeholder
 const scopePlaceholderLabel = computed(() => {
-  if (props.queryId && !hasScope.value) return $i18n('search-scope-no-scope-placeholder');
-  return $i18n('search-scope-select-placeholder');
+  if (props.queryId && !hasScope.value) return $i18n('search-no-scope-placeholder');
+  return $i18n('search-scope-placeholder');
 });
 
 const scopeAriaLabel = computed(() => {
-  if (isScopeDisabled.value) return $i18n('search-scope-no-scope-placeholder');
+  if (isScopeDisabled.value) return $i18n('search-no-scope-placeholder');
   return $i18n('search-scope-label');
 });
 

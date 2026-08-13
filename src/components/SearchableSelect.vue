@@ -57,7 +57,7 @@
           :start-icon="cdxIconSearch"
           :clearable="true"
           :placeholder="searchPlaceholder"
-          :aria-label="$i18n('search-scope-search-placeholder')"
+          :aria-label="$i18n('search-geographic-scope-placeholder')"
           :aria-expanded="isExpanded"
           :aria-controls="menuId"
           :aria-activedescendant="activeDescendantId"

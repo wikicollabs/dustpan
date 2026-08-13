@@ -8,45 +8,99 @@
       "id": "paintings-missing-creator",
       "name": "paintings-missing-creator-label",
       "missingPid": "P170",
+      "property": "creator (P170)",
       "contributionSummary": "paintings-missing-creator-contribution-summary",
       "contributionDetails": "paintings-missing-creator-contribution-details",
-      "example": { "subject": "Girl with a Pearl Earring", "property": "creator (P170)", "value": "Johannes Vermeer", "qid": "Q185372" },
-      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P195", "scopePid": "P17" } }
+      "example": {
+        "subject": "The Starry Night",
+        "property": "creator (P170)",
+        "value": "Vincent van Gogh (Q5582)",
+        "qid": "Q45585"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
     },
     {
       "id": "paintings-missing-material",
       "name": "paintings-missing-material-label",
       "missingPid": "P186",
+      "property": "material (P186)",
       "contributionSummary": "paintings-missing-material-contribution-summary",
       "contributionDetails": "paintings-missing-material-contribution-details",
-      "example": { "subject": "The Starry Night", "property": "material used (P186)", "value": "oil paint", "qid": "Q45585" },
-      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P195", "scopePid": "P17" } }
+      "example": {
+        "subject": "Mona Lisa",
+        "property": "material (P186)",
+        "value": "oil paint (Q296955)",
+        "qid": "Q12418"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
     },
     {
       "id": "paintings-missing-inception",
       "name": "paintings-missing-inception-label",
       "missingPid": "P571",
+      "property": "inception (P571)",
       "contributionSummary": "paintings-missing-inception-contribution-summary",
       "contributionDetails": "paintings-missing-inception-contribution-details",
-      "example": { "subject": "The Persistence of Memory", "property": "inception (P571)", "value": "1931", "qid": "Q25729" },
-      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P195", "scopePid": "P17" } }
+      "example": {
+        "subject": "The Night Watch",
+        "property": "inception (P571)",
+        "value": "1642",
+        "qid": "Q219831"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
     },
     {
       "id": "paintings-missing-genre",
       "name": "paintings-missing-genre-label",
       "missingPid": "P136",
+      "property": "genre (P136)",
       "contributionSummary": "paintings-missing-genre-contribution-summary",
       "contributionDetails": "paintings-missing-genre-contribution-details",
-      "example": { "subject": "American Gothic", "property": "genre (P136)", "value": "portrait", "qid": "Q464782" },
-      "scope": { "scopeId": "geographicScope", "path": { "sourcePid": "P195", "scopePid": "P17" } }
+      "example": {
+        "subject": "The Birth of Venus",
+        "property": "genre (P136)",
+        "value": "mythological painting (Q3374376)",
+        "qid": "Q151047"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
     },
     {
       "id": "paintings-missing-collection",
       "name": "paintings-missing-collection-label",
       "missingPid": "P195",
+      "property": "collection (P195)",
       "contributionSummary": "paintings-missing-collection-contribution-summary",
       "contributionDetails": "paintings-missing-collection-contribution-details",
-      "example": { "subject": "The Night Watch", "property": "collection (P195)", "value": "Rijksmuseum", "qid": "Q219831" }
+      "example": {
+        "subject": "Las Meninas",
+        "property": "collection (P195)",
+        "value": "Museo del Prado (Q160112)",
+        "qid": "Q208758"
+      }
     }
   ]
 }

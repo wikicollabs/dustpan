@@ -22,7 +22,7 @@
                 target="_blank"
                 rel="noopener"
                 class="wikicollabs-link"
-                :aria-label="$i18n('footer-wikicollabs-aria')"
+                :aria-label="$i18n('footer-wikicollabs-aria', 'Wikicollabs')"
                 >Wikicollabs</a
               >
             </p>
