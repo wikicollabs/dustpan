@@ -1,0 +1,32 @@
+name: Update property labels
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-properties:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm exec tsx src/scripts/updateProperties.ts
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: Update property label cache
+          title: Update property label cache
+          body: Refreshes src/catalog/properties.json from current Wikidata labels.
+          branch: update-property-labels
+          delete-branch: true
