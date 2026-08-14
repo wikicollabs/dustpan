@@ -8,7 +8,6 @@
       "id": "paintings-missing-creator",
       "name": "paintings-missing-creator-label",
       "missingPid": "P170",
-      "property": "creator (P170)",
       "contributionSummary": "paintings-missing-creator-contribution-summary",
       "contributionDetails": "paintings-missing-creator-contribution-details",
       "example": {
@@ -29,7 +28,6 @@
       "id": "paintings-missing-material",
       "name": "paintings-missing-material-label",
       "missingPid": "P186",
-      "property": "material (P186)",
       "contributionSummary": "paintings-missing-material-contribution-summary",
       "contributionDetails": "paintings-missing-material-contribution-details",
       "example": {
@@ -50,7 +48,6 @@
       "id": "paintings-missing-inception",
       "name": "paintings-missing-inception-label",
       "missingPid": "P571",
-      "property": "inception (P571)",
       "contributionSummary": "paintings-missing-inception-contribution-summary",
       "contributionDetails": "paintings-missing-inception-contribution-details",
       "example": {
@@ -71,7 +68,6 @@
       "id": "paintings-missing-genre",
       "name": "paintings-missing-genre-label",
       "missingPid": "P136",
-      "property": "genre (P136)",
       "contributionSummary": "paintings-missing-genre-contribution-summary",
       "contributionDetails": "paintings-missing-genre-contribution-details",
       "example": {
@@ -92,7 +88,6 @@
       "id": "paintings-missing-collection",
       "name": "paintings-missing-collection-label",
       "missingPid": "P195",
-      "property": "collection (P195)",
       "contributionSummary": "paintings-missing-collection-contribution-summary",
       "contributionDetails": "paintings-missing-collection-contribution-details",
       "example": {
