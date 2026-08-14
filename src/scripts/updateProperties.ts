@@ -34,6 +34,9 @@ const BATCH_SIZE = 50; // wbgetentities max ids per request
 type PropertyLabels = Record<string, string>; // lang code -> label
 type PropertiesCache = Record<string, PropertyLabels>; // PID -> PropertyLabels
 
+// TODO: if future query archetypes introduce PID-bearing fields beyond missingPid
+// (e.g. multi-property checks or value constraint queries), collect from those
+// fields here too, the label cache below is schema agnostic and needs no changes.
 // collect every distinct missingPid used across all catalog query types
 function collectPropertyIds(): string[] {
   const ids = new Set<string>();

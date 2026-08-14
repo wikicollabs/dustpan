@@ -21,7 +21,6 @@ export interface QueryType {
   id: string;
   name: string;
   missingPid: string;
-  property?: string;
   contributionSummary: string;
   contributionDetails: string;
   example?: { subject: string; property: string; value: string; qid: string } | null;

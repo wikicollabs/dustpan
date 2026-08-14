@@ -8,7 +8,6 @@
       "id": "podcasts-missing-language",
       "name": "podcasts-missing-language-label",
       "missingPid": "P407",
-      "property": "language of work or name (P407)",
       "contributionSummary": "podcasts-missing-language-contribution-summary",
       "contributionDetails": "podcasts-missing-language-contribution-details",
       "example": {
@@ -28,7 +27,6 @@
       "id": "podcasts-missing-genre",
       "name": "podcasts-missing-genre-label",
       "missingPid": "P136",
-      "property": "genre (P136)",
       "contributionSummary": "podcasts-missing-genre-contribution-summary",
       "contributionDetails": "podcasts-missing-genre-contribution-details",
       "example": {
@@ -48,7 +46,6 @@
       "id": "podcasts-missing-presenter",
       "name": "podcasts-missing-presenter-label",
       "missingPid": "P371",
-      "property": "presenter (P371)",
       "contributionSummary": "podcasts-missing-presenter-contribution-summary",
       "contributionDetails": "podcasts-missing-presenter-contribution-details",
       "example": {
@@ -68,7 +65,6 @@
       "id": "podcasts-missing-producer",
       "name": "podcasts-missing-producer-label",
       "missingPid": "P162",
-      "property": "producer (P162)",
       "contributionSummary": "podcasts-missing-producer-contribution-summary",
       "contributionDetails": "podcasts-missing-producer-contribution-details",
       "example": {
@@ -88,7 +84,6 @@
       "id": "podcasts-missing-production-company",
       "name": "podcasts-missing-production-company-label",
       "missingPid": "P272",
-      "property": "production company (P272)",
       "contributionSummary": "podcasts-missing-production-company-contribution-summary",
       "contributionDetails": "podcasts-missing-production-company-contribution-details",
       "example": {
@@ -108,7 +103,6 @@
       "id": "podcasts-missing-official-website",
       "name": "podcasts-missing-official-website-label",
       "missingPid": "P856",
-      "property": "official website (P856)",
       "contributionSummary": "podcasts-missing-official-website-contribution-summary",
       "contributionDetails": "podcasts-missing-official-website-contribution-details",
       "example": {
@@ -128,7 +122,6 @@
       "id": "podcasts-missing-feed-url",
       "name": "podcasts-missing-feed-url-label",
       "missingPid": "P1019",
-      "property": "web feed URL (P1019)",
       "contributionSummary": "podcasts-missing-feed-url-contribution-summary",
       "contributionDetails": "podcasts-missing-feed-url-contribution-details",
       "example": {

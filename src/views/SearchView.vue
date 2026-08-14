@@ -126,8 +126,8 @@
                 <div class="contribution-info-text-column">
                   <span class="contribution-info-text">
                     {{ isContributionInfoCollapsed
-                      ? $i18n(contributionInfo.summaryLabel, contributionInfo.property ?? '')
-                      : $i18n(contributionInfo.detailsLabel, contributionInfo.property ?? '') }}
+                      ? $i18n(contributionInfo.summaryLabel, contributionInfo.property)
+                      : $i18n(contributionInfo.detailsLabel, contributionInfo.property) }}
                   </span>
 
                   <div
