@@ -24,6 +24,7 @@
         class="cdx-select-with-search__visual"
         aria-hidden="true"
         tabindex="-1"
+        inert
       >
         <template #label>
           <span
@@ -47,7 +48,7 @@
       />
     </div>
 
-    <div v-if="isExpanded" class="cdx-select-with-search__menu">
+    <div v-show="isExpanded" class="cdx-select-with-search__menu">
       <div class="cdx-select-with-search__search-wrapper">
         <cdx-text-input
           ref="searchInputRef"
@@ -72,6 +73,7 @@
         :selected="selected"
         :menu-items="filteredMenuItems"
         :expanded="isExpanded"
+        :visible-item-limit="5"
         @update:selected="onSelect"
       >
         <template #no-results>
@@ -191,7 +193,17 @@ function onHandleKeydown(event: KeyboardEvent) {
   }
 }
 
+function clearSearch() {
+  searchQuery.value = "";
+  searchInputRef.value?.focus?.();
+}
+
 function onSearchKeydown(event: KeyboardEvent) {
+  if (event.key === "Tab" && !event.shiftKey && searchQuery.value) {
+    event.preventDefault();
+    clearSearch();
+    return;
+  }
   if (event.key === "Escape") {
     event.preventDefault();
     closeMenu({ refocusHandle: true });
@@ -329,8 +341,6 @@ onBeforeUnmount(() => {
   position: static;
   width: 100%;
   max-width: none;
-  max-height: 14rem;
-  overflow-y: auto;
   border: none;
   box-shadow: none;
   background: none;
