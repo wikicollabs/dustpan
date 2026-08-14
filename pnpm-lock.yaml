@@ -29,13 +29,16 @@ importers:
         version: 26.1.2
       '@vitejs/plugin-vue':
         specifier: ^6.0.1
-        version: 6.0.8(vite@7.3.6(@types/node@26.1.2))(vue@3.5.40(typescript@5.9.3))
+        version: 6.0.8(vite@7.3.6(@types/node@26.1.2)(tsx@4.23.12))(vue@3.5.40(typescript@5.9.3))
+      tsx:
+        specifier: ^4.23.12
+        version: 4.23.12
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
       vite:
         specifier: ^7.1.7
-        version: 7.3.6(@types/node@26.1.2)
+        version: 7.3.6(@types/node@26.1.2)(tsx@4.23.12)
       vue:
         specifier: ^3.5.21
         version: 3.5.40(typescript@5.9.3)
@@ -532,6 +535,11 @@ packages:
     resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
     engines: {node: '>=12.0.0'}
 
+  tsx@4.23.12:
+    resolution: {integrity: sha512-FDf4L4sYzKtzWYhU/Xm0AQFdTjdIxNo9ElTf2mxXM6k8YMHXzYUe4yODVaXP4V9uMFbVg8c0qyBccK2OOxb45Q==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
@@ -809,10 +817,10 @@ snapshots:
     dependencies:
       undici-types: 8.3.0
 
-  '@vitejs/plugin-vue@6.0.8(vite@7.3.6(@types/node@26.1.2))(vue@3.5.40(typescript@5.9.3))':
+  '@vitejs/plugin-vue@6.0.8(vite@7.3.6(@types/node@26.1.2)(tsx@4.23.12))(vue@3.5.40(typescript@5.9.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 7.3.6(@types/node@26.1.2)
+      vite: 7.3.6(@types/node@26.1.2)(tsx@4.23.12)
       vue: 3.5.40(typescript@5.9.3)
 
   '@volar/language-core@2.4.28':
@@ -1036,11 +1044,17 @@ snapshots:
       fdir: 6.5.0(picomatch@4.0.5)
       picomatch: 4.0.5
 
+  tsx@4.23.12:
+    dependencies:
+      esbuild: 0.28.1
+    optionalDependencies:
+      fsevents: 2.3.3
+
   typescript@5.9.3: {}
 
   undici-types@8.3.0: {}
 
-  vite@7.3.6(@types/node@26.1.2):
+  vite@7.3.6(@types/node@26.1.2)(tsx@4.23.12):
     dependencies:
       esbuild: 0.28.1
       fdir: 6.5.0(picomatch@4.0.5)
@@ -1051,6 +1065,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 26.1.2
       fsevents: 2.3.3
+      tsx: 4.23.12
 
   vscode-uri@3.1.0: {}
 
