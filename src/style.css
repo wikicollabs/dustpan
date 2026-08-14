@@ -205,3 +205,11 @@ html.dark .cdx-field--status-error .cdx-text-input__input,
 html.dark .combobox-error .cdx-text-input__input {
     color: var(--color-error) !important;
 }
+
+/* fix no results text color in dark mode */
+html.dark .cdx-menu__no-results,
+html.dark .cdx-menu__no-results *,
+html.dark .cdx-select-with-search__menu .cdx-menu__no-results,
+html.dark .cdx-select-with-search__menu .cdx-menu__no-results * {
+  color: var(--color-base) !important;
+}
