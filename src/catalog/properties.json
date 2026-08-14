@@ -1,0 +1,92 @@
+{
+  "P1019": {
+    "ar": "مسار التلقيم",
+    "en": "web feed URL",
+    "id": "web feed URL",
+    "ko": "피드 URL"
+  },
+  "P136": {
+    "ar": "النوع الفني",
+    "en": "genre",
+    "id": "genre",
+    "ko": "장르"
+  },
+  "P1476": {
+    "ar": "العنوان",
+    "en": "title",
+    "id": "judul",
+    "ko": "제목"
+  },
+  "P162": {
+    "ar": "المنتج",
+    "en": "producer",
+    "id": "produser",
+    "ko": "제작자"
+  },
+  "P170": {
+    "ar": "الصانع",
+    "en": "creator",
+    "id": "pencipta",
+    "ko": "창작자"
+  },
+  "P175": {
+    "ar": "المؤدي",
+    "en": "performer",
+    "id": "penampil",
+    "ko": "연주자·가수"
+  },
+  "P186": {
+    "ar": "مصنوع من مادة",
+    "en": "made from material",
+    "id": "bahan yang digunakan",
+    "ko": "사용된 재료"
+  },
+  "P195": {
+    "ar": "مجموعة",
+    "en": "collection",
+    "id": "koleksi",
+    "ko": "소장처"
+  },
+  "P264": {
+    "ar": "علامة التسجيلات",
+    "en": "record label",
+    "id": "label rekaman",
+    "ko": "음반 레이블"
+  },
+  "P272": {
+    "ar": "شركة الإنتاج",
+    "en": "production company",
+    "id": "produksi",
+    "ko": "제작사"
+  },
+  "P371": {
+    "ar": "المقدم",
+    "en": "presenter",
+    "id": "pembawa acara",
+    "ko": "사회자"
+  },
+  "P407": {
+    "ar": "لغة العمل أو لغة الاسم",
+    "en": "language of work or name",
+    "id": "bahasa yang digunakan",
+    "ko": "저작물·명칭의 언어"
+  },
+  "P571": {
+    "ar": "البداية",
+    "en": "inception",
+    "id": "sejak",
+    "ko": "만들어진 날"
+  },
+  "P577": {
+    "ar": "تاريخ النشر",
+    "en": "publication date",
+    "id": "tanggal terbit",
+    "ko": "출판 날짜"
+  },
+  "P856": {
+    "ar": "الموقع الرسمي",
+    "en": "official website",
+    "id": "laman resmi",
+    "ko": "공식 웹사이트"
+  }
+}

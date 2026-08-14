@@ -10,6 +10,10 @@ import { WIKIPROJECTS } from '../catalog/index';
 import { buildQuerySparql } from '../query/sparqlBuilder';
 import scopesJson from '../catalog/scopes.json';
 import type { WikiProject, QueryType, ScopeDef } from '../types/types';
+import propertiesJson from '../catalog/properties.json';
+import { getDisplayLanguage } from '../i18n/displayLanguages';
+
+const properties = propertiesJson as Record<string, Record<string, string>>;
 
 // same pattern as fetchScopeOptions.ts: cast the json import to the
 // generic string-indexed map rather than its narrow inferred literal shape
@@ -28,7 +32,7 @@ interface SelectOption {
 interface ContributionInfo {
   summaryLabel: string;
   detailsLabel: string;
-  property: string | null;
+  property: string;
   example: QueryType['example'];
 }
 
@@ -105,10 +109,13 @@ export function getQueryContributionInfo(queryId: string | null): ContributionIn
   const found = findQueryType(queryId);
   if (!found) return null;
   const { query } = found;
+  const lang = getDisplayLanguage();
+  const propertyLabels = properties[query.missingPid];
+  const property = propertyLabels?.[lang] ?? propertyLabels?.en ?? query.missingPid;
   return {
     summaryLabel: query.contributionSummary,
     detailsLabel: query.contributionDetails,
-    property: query.property ?? null,
+    property,
     example: query.example ?? null,
   };
 }

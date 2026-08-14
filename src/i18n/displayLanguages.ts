@@ -43,3 +43,16 @@ export const getBrowserLanguage = (): string => {
   // fallback to English
   return 'en';
 };
+
+
+// current display language: explicit user choice (localStorage) if set,
+// otherwise best-guess from the browser. shared by anything that needs
+// current locale as a plain string (SPARQL lang param, property label
+// lookups, etc). NOTE: getBrowserLanguage() here and searchStore.ts's
+// getAutoLanguage() are two different browser-language-guessing
+// implementations (this one does exact+base match against
+// DISPLAY_LANGUAGES with an 'en' fallback, that one just splits on '-').
+// pre-existing divergence.
+export const getDisplayLanguage = (): string => {
+  return localStorage.getItem('locale') || getBrowserLanguage();
+};

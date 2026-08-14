@@ -22,6 +22,7 @@ import { getQuerySparql } from '../query/queries';
 import { runSparqlQuery } from '../query/sparqlClient';
 import { writeStateToUrl } from './urlState';
 import type { AppUrlState, SparqlBindingValue } from '../types/types';
+import { getDisplayLanguage } from '../i18n/displayLanguages';
 
 // this query's SELECT ?item ?itemLabel: item is always bound (main
 // query var), itemLabel comes from SERVICE wikibase:label and is
@@ -39,15 +40,6 @@ interface ResultSparqlResponse {
 export interface SearchResultItem {
   itemId: string;
   label: string;
-}
-
-function getAutoLanguage(): string {
-  const browserLang = navigator.language || navigator.languages?.[0];
-  return browserLang.split('-')[0].toLowerCase();
-}
-
-function getDisplayLanguage(): string {
-  return localStorage.getItem('locale') || getAutoLanguage();
 }
 
 function logSearch(querystring: string): void {
