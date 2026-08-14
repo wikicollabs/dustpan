@@ -19,6 +19,15 @@ const properties = propertiesJson as Record<string, Record<string, string>>;
 // generic string-indexed map rather than its narrow inferred literal shape
 const scopes = scopesJson as Record<string, ScopeDef>;
 
+// resolve a property's display label for the current locale, falling back
+// to english then the raw PID if no translated label is cached
+function resolvePropertyLabel(pid: string): string {
+  const lang = getDisplayLanguage();
+  const propertyLabels = properties[pid];
+  const label = propertyLabels?.[lang] ?? propertyLabels?.en;
+  return label ? `${label} (${pid})` : pid;
+}
+
 interface FoundQuery {
   project: WikiProject;
   query: QueryType;
@@ -27,6 +36,7 @@ interface FoundQuery {
 interface SelectOption {
   value: string;
   label: string;
+  property?: string;
 }
 
 interface ContributionInfo {
@@ -62,7 +72,11 @@ export function getWikiprojectOptions(): SelectOption[] {
 export function getQueryOptionsForProject(projectId: string | null): SelectOption[] {
   const project = findWikiproject(projectId);
   if (!project) return [];
-  return project.queryTypes.map((q) => ({ value: q.id, label: q.name }));
+  return project.queryTypes.map((q) => ({
+      value: q.id,
+      label: q.name,
+      property: resolvePropertyLabel(q.missingPid),
+    }));
 }
 
 // get all query type ids as flat array (for validation)
@@ -109,9 +123,7 @@ export function getQueryContributionInfo(queryId: string | null): ContributionIn
   const found = findQueryType(queryId);
   if (!found) return null;
   const { query } = found;
-  const lang = getDisplayLanguage();
-  const propertyLabels = properties[query.missingPid];
-  const property = propertyLabels?.[lang] ?? propertyLabels?.en ?? query.missingPid;
+  const property = resolvePropertyLabel(query.missingPid);
   return {
     summaryLabel: query.contributionSummary,
     detailsLabel: query.contributionDetails,

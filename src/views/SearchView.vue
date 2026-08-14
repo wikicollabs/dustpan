@@ -279,7 +279,7 @@ function getQueryLabel(queryValue: string | null): string {
   if (!queryValue) return "";
   const options = getQueryOptionsForProject(searchedWikiproject.value);
   const found = options.find((q) => q.value === queryValue);
-  return found ? $i18n(found.label) : queryValue;
+  return found ? $i18n(found.label, found.property ?? "") : queryValue;
 }
 
 function getWikiprojectLabel(projectValue: string | null): string {
