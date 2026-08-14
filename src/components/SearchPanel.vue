@@ -218,7 +218,7 @@ const queryIdOptions = computed(() => {
   return raw
     .map((item) => ({
       value: item.value,
-      label: $i18n(item.label),
+      label: $i18n(item.label, item.property ?? ''),
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
 });
