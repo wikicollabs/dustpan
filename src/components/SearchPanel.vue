@@ -242,6 +242,9 @@ const selectedQueryIdValue = computed({
   },
   set(value: string | null) {
     emit("update:query-id", value);
+    if (!queryHasScope(value)) {
+      emit("update:scope", null);
+    }
   },
 });
 
