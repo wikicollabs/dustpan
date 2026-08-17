@@ -161,6 +161,7 @@ async function onPopState() {
       store.isLoading = true;
       await waitForScopeResolution();
       await store.executeSearch(scopeValue.value ?? null);
+      scopeInitialValue.value = null;
     } else {
       scopeValue.value = null;
       scopeInitialValue.value = null;
@@ -206,6 +207,7 @@ onMounted(async () => {
       store.isLoading = true;
       await waitForScopeResolution();
       await store.executeSearch(scopeValue.value ?? null);
+      scopeInitialValue.value = null;
     } else {
       // this query type has no scope. Nothing will ever mount to
       // resolve one, don't wait, just fire.
