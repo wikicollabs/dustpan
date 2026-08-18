@@ -42,12 +42,12 @@ export interface SearchResultItem {
   label: string;
 }
 
-function logSearch(querystring: string): void {
+function logSelection(selection: string): void {
   fetch('/api/log', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ querystring }),
-  }).catch((err) => console.error('Failed to log search:', err));
+    body: JSON.stringify({ selection }),
+  }).catch((err) => console.error('Failed to log selection:', err));
 }
 
 export const useSearchStore = defineStore('search', {
@@ -110,7 +110,7 @@ export const useSearchStore = defineStore('search', {
         },
         { replace: this.currentView === 'search' }
       );
-      logSearch(window.location.pathname + window.location.search);
+      logSelection(window.location.pathname + window.location.search);
       this.currentView = 'search';
       this.results = [];
       try {
