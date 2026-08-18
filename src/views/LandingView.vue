@@ -15,9 +15,7 @@
         <!-- Broomstick Information -->
         <div class="divider"></div>
         <div class="broomstick-message">
-          <span class="broomstick-icon-frame">
-            <BroomstickIcon class="broomstick-icon" aria-hidden="true" />
-          </span>
+          <BroomstickIcon aria-hidden="true" />
           <span class="broomstick-content">
             <a
               href="https://broomstick.toolforge.org/"
@@ -159,36 +157,19 @@ const broomstickIcon = {
   color: var(--color-base);
 }
 
-[dir=ltr] .broomstick-content {
-  margin-left: -2px;
-}
-
-[dir=rtl] .broomstick-content {
-  margin-right: -2px;
-}
-
 .broomstick-message {
   display: flex;
   align-items: flex-start;
   align-self: flex-start;
   gap: var(--spacing-50);
-  line-height: var(--line-height-small);
+  line-height: var(--line-height-medium);
 }
 
-.broomstick-icon-frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.broomstick-message :deep(svg) {
+  width: calc(var(--font-size-medium, 1rem) + 4px);
+  height: var(--line-height-medium, 1.625rem);
   flex-shrink: 0;
-  width: 1.25rem;
-  height: var(--line-height-small);
-}
-
-.broomstick-icon {
   color: var(--color-progressive--hover);
-  width: 1.25rem;
-  height: 1.25rem; 
-  min-width: 1.25rem;
 }
 
 .broomstick-link {
