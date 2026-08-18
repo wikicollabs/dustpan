@@ -15,7 +15,7 @@
         <!-- Broomstick Information -->
         <div class="divider"></div>
         <div class="broomstick-message">
-          <BroomstickIcon aria-hidden="true" />
+          <BroomstickIcon class="broomstick-icon" aria-hidden="true" />
           <span class="broomstick-content">
             <a
               href="https://broomstick.toolforge.org/"
@@ -162,7 +162,7 @@ defineEmits<{
   line-height: var(--line-height-medium);
 }
 
-.broomstick-message :deep(svg) {
+.broomstick-icon {
   width: calc(var(--font-size-medium, 1rem) + 4px);
   height: var(--line-height-medium, 1.625rem);
   flex-shrink: 0;
