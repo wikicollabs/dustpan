@@ -81,10 +81,7 @@ defineEmits<{
   search: [];
 }>();
 
-const broomstickIcon = {
-  path: "M15.6667 8L17 9.33333V17H5C2.79086 17 1 15.2091 1 13V1H15.6667V8ZM4 10V13C4 14.1046 4.89546 15 6 15H10V11H11L12 15H14V14L13 10H4ZM6 3V8H4V9H12.75L12.5 8H8L7 3H6Z",
-  shouldFlip: false,
-};
+
 
 </script>
 
@@ -169,7 +166,7 @@ const broomstickIcon = {
   width: calc(var(--font-size-medium, 1rem) + 4px);
   height: var(--line-height-medium, 1.625rem);
   flex-shrink: 0;
-  color: var(--color-progressive--hover);
+  color: #3056A9;
 }
 
 .broomstick-link {
