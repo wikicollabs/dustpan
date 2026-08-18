@@ -143,6 +143,10 @@ html.dark .header-logo {
   color: #EAECF0;
 }
 
+html.dark .broomstick-icon {
+  color: #EAECF0;
+}
+
 /* fix cdx-field label text in dark mode */
 html.dark .subtitle{
   color: var(--color-base);
