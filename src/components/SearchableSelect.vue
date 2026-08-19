@@ -193,17 +193,7 @@ function onHandleKeydown(event: KeyboardEvent) {
   }
 }
 
-function clearSearch() {
-  searchQuery.value = "";
-  searchInputRef.value?.focus?.();
-}
-
 function onSearchKeydown(event: KeyboardEvent) {
-  if (event.key === "Tab" && !event.shiftKey && searchQuery.value) {
-    event.preventDefault();
-    clearSearch();
-    return;
-  }
   if (event.key === "Escape") {
     event.preventDefault();
     closeMenu({ refocusHandle: true });
