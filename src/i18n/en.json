@@ -144,7 +144,7 @@
   "settings-language-changed": "Display language changed to $1",
   "settings-language-reload": "$1 will reload to change display language.",
   "settings-translate-help": "Want to add or improve translation in your language?",
-  "settings-translate-link": "Help translate $1",
+  "settings-translate-link": "Help translate $1.",
   "settings-text-size-label": "Text size",
   "settings-text-size-small": "Small",
   "settings-text-size-medium": "Medium",
