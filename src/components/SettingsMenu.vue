@@ -146,7 +146,7 @@
             target="_blank" 
             rel="noopener"
             class="translate-link"
-            :aria-label="$i18n('settings-translate-link')"
+            :aria-label="$i18n('settings-translate-link', 'Dustpan')"
           >
             {{ $i18n('settings-translate-link', 'Dustpan') }}
           </a>
@@ -569,7 +569,12 @@ function saveLanguage() {
   line-height: var(--line-height-small);
 }
 
+.translate-link {
+  color: var(--color-progressive);
+  text-decoration: none;
+}
+
 .settings-dialog__header-content .cdx-button {
-    margin-inline-end: -8px;
+    margin-inline-end: calc(var(--spacing-50) * -1);
 }
 </style>
