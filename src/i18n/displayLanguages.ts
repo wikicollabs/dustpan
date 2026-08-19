@@ -13,10 +13,7 @@ export interface DisplayLanguage {
 }
 
 export const DISPLAY_LANGUAGES: DisplayLanguage[] = [
-  { code: 'id', nativeName: 'Bahasa Indonesia', rtl: false },
-  { code: 'en', nativeName: 'English', rtl: false },
-  { code: 'ar', nativeName: 'العربية', rtl: true },
-  { code: 'ko', nativeName: '한국어', rtl: false }
+  { code: 'en', nativeName: 'English', rtl: false }
 ];
 
 export const getBrowserLanguage = (): string => {
@@ -44,15 +41,25 @@ export const getBrowserLanguage = (): string => {
   return 'en';
 };
 
-
 // current display language: explicit user choice (localStorage) if set,
 // otherwise best-guess from the browser. shared by anything that needs
 // current locale as a plain string (SPARQL lang param, property label
-// lookups, etc). NOTE: getBrowserLanguage() here and searchStore.ts's
+// lookups, etc). if the stored choice no longer matches a supported
+// language (e.g. it was removed from DISPLAY_LANGUAGES since the user
+// last visited), the stale value is cleared and a fresh browser guess
+// is used instead. NOTE: getBrowserLanguage() here and searchStore.ts's
 // getAutoLanguage() are two different browser-language-guessing
 // implementations (this one does exact+base match against
 // DISPLAY_LANGUAGES with an 'en' fallback, that one just splits on '-').
 // pre-existing divergence.
 export const getDisplayLanguage = (): string => {
-  return localStorage.getItem('locale') || getBrowserLanguage();
+  const stored = localStorage.getItem('locale');
+  const supportedCodes = DISPLAY_LANGUAGES.map((lang) => lang.code);
+
+  if (stored && !supportedCodes.includes(stored)) {
+    localStorage.removeItem('locale');
+    return getBrowserLanguage();
+  }
+
+  return stored || getBrowserLanguage();
 };
