@@ -24,7 +24,7 @@ import { ref, computed, watch } from 'vue';
 import SearchableSelect from './SearchableSelect.vue';
 import { getLastScopeValue, setLastScopeValue } from '../state/scopeStorage';
 import type { ScopeOption } from '../types/types';
-import { getBrowserLanguage } from '../i18n/displayLanguages';
+import { getDisplayLanguage } from '../i18n/displayLanguages';
 
 const props = withDefaults(defineProps<{
   scopeId: string;
@@ -86,10 +86,6 @@ const menuItemsWithAll = computed(() => [
   { value: ALL_VALUE, label: props.allOptionLabel },
   ...(props.options ?? []),
 ]);
-
-function getDisplayLanguage(): string {
-  return localStorage.getItem('locale') || getBrowserLanguage();
-}
 
 function onSelect(value: string | null) {
   const externalValue = value === ALL_VALUE ? null : value;

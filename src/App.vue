@@ -59,7 +59,7 @@ import { queryHasScope } from "./query/queries";
 import { fetchScopeOptions } from "./query/fetchScopeOptions";
 import scopesJson from "./catalog/scopes.json";
 import type { ScopeDef, ScopeOption } from "./types/types";
-import { getBrowserLanguage } from "./i18n/displayLanguages";
+import { getDisplayLanguage } from "./i18n/displayLanguages";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -72,10 +72,6 @@ const scopeIds = Object.keys(scopesJson as Record<string, ScopeDef>);
 const scopeOptionsMap = ref<Record<string, ScopeOption[] | null>>(
   Object.fromEntries(scopeIds.map((id) => [id, null]))
 );
-
-function getDisplayLanguage(): string {
-  return localStorage.getItem("locale") || getBrowserLanguage();
-}
 
 function prefetchScopeOptions() {
   const lang = getDisplayLanguage();
