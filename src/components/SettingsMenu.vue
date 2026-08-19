@@ -240,7 +240,8 @@ import {
   cdxIconSearchCaseSensitive,
 } from "@wikimedia/codex-icons";
 import { DISPLAY_LANGUAGES } from '../i18n/displayLanguages';
-import { getBrowserLanguage } from '../i18n/displayLanguages'; 
+import { getBrowserLanguage } from '../i18n/displayLanguages';
+import { useSearchStore } from '../state/searchStore';
 
 type Theme = 'auto' | 'light' | 'dark';
 type TextSize = 'small' | 'medium' | 'large' | 'extra-large';
@@ -258,6 +259,7 @@ function parseTextSize(raw: string | null): TextSize {
 }
 
 const instance = getCurrentInstance();
+const store = useSearchStore();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
 
 const getLanguageName = (locale: string): string => {
@@ -500,7 +502,9 @@ function saveLanguage() {
   
   localStorage.setItem('locale', currentLanguage.value);
   localStorage.setItem('language_change_toast', newLangName);
-  localStorage.setItem('dustpan_skip_requery', 'true');
+  if (store.currentView === 'search') {
+    localStorage.setItem('dustpan_skip_requery', 'true');
+  }
   window.location.reload();
 }
 </script>
