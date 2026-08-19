@@ -32,7 +32,7 @@
       </div>
       <div class="links">
         <a
-          href="https://www.wikidata.org/wiki/Wikidata:Tools"
+          href="https://www.wikidata.org/wiki/Wikidata:Dustpan"
           target="_blank"
           rel="noopener"
           class="external-link"
@@ -43,7 +43,7 @@
         </a>
         <span class="link-separator">·</span>
         <a
-          href="https://www.wikidata.org/wiki/Wikidata:Broomstick/Privacy_policy"
+          href="https://www.wikidata.org/wiki/Wikidata:Dustpan/Privacy_policy"
           target="_blank"
           rel="noopener"
           class="external-link"
@@ -54,7 +54,7 @@
         </a>
         <span class="link-separator">·</span>
         <a
-          href="https://www.wikidata.org/wiki/Wikidata:Broomstick/License"
+          href="https://www.wikidata.org/wiki/Wikidata:Dustpan/License"
           target="_blank"
           rel="noopener"
           class="external-link"
@@ -65,7 +65,7 @@
         </a>
         <span class="link-separator">·</span>
         <a
-          href="https://github.com/wikicollabs"
+          href="https://github.com/wikicollabs/dustpan"
           target="_blank"
           rel="noopener"
           class="external-link"
