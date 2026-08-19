@@ -22,8 +22,8 @@
               target="_blank"
               rel="noopener noreferrer"
               class="broomstick-link"
-              :aria-label="$i18n('landing-improve-lexemes-link')"
-            >{{ $i18n('landing-improve-lexemes-link') }}</a>{{ $i18n('landing-improve-lexemes-help') }}
+              :aria-label="$i18n('landing-improve-lexemes-link', 'Broomstick')"
+            >{{$i18n('landing-improve-lexemes-link', 'Broomstick')}}</a>{{ $i18n('landing-improve-lexemes-help') }}
           </span>
         </div>
       </section>
