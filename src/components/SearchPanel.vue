@@ -424,6 +424,14 @@ function handleSearch() {
   min-width: 0;
 }
 
+.wikiproject-type-field :deep(.cdx-select-vue__handle),
+.query-id-field :deep(.cdx-select-vue__handle) {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 :deep(.cdx-select-vue) {
   width: 100%;
   min-width: 0;

@@ -244,6 +244,13 @@ onBeforeUnmount(() => {
   pointer-events: none;
 }
 
+.cdx-select-with-search__visual :deep(.cdx-select-vue__handle) {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .cdx-select-with-search__visual :deep(> *) {
   width: 100%;
 }
