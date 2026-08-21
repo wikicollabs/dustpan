@@ -49,7 +49,19 @@
         :status="queryIdError ? 'error' : 'default'"
         @blur="onQueryIdBlur"
         @focus="onQueryIdFocus"
-      />
+      >
+        <template #label="{ selectedMenuItem, defaultLabel }">
+          <span v-if="selectedMenuItem" class="query-id-select-label">
+            <span class="query-id-select-label__text">{{
+              splitQueryIdLabel(selectedMenuItem.label ?? String(selectedMenuItem.value)).textPart
+            }}</span>
+            <span class="query-id-select-label__pid">{{
+              splitQueryIdLabel(selectedMenuItem.label ?? String(selectedMenuItem.value)).pidPart
+            }}</span>
+          </span>
+          <span v-else>{{ defaultLabel }}</span>
+        </template>
+      </cdx-select>
     </cdx-field>
 
     <cdx-message
@@ -223,6 +235,16 @@ const queryIdOptions = computed(() => {
     .sort((a, b) => a.label.localeCompare(b.label));
 });
 
+const QUERY_ID_LABEL_PID_PATTERN = /^(.*)(\s\(P\d+\))$/;
+
+function splitQueryIdLabel(label: string): { textPart: string; pidPart: string } {
+  const match = label.match(QUERY_ID_LABEL_PID_PATTERN);
+  if (!match) {
+    return { textPart: label, pidPart: '' };
+  }
+  return { textPart: match[1], pidPart: match[2] };
+}
+
 const wikiprojectBlurred = ref(false);
 const queryIdBlurred = ref(false);
 
@@ -361,11 +383,26 @@ function handleSearch() {
   margin-bottom: 0 !important;
 }
 
-.query-id-field :deep(.cdx-select-vue__handle),
-.query-id-field :deep(.cdx-select-vue__handle span) {
-  white-space: nowrap;
+.query-id-select-label {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.query-id-select-label__text {
+  flex: 0 1 auto;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: normal;
+}
+
+.query-id-select-label__pid {
+  flex-shrink: 0;
+  white-space: pre;
+  line-height: normal;
 }
 
 .search-panel {
@@ -424,12 +461,15 @@ function handleSearch() {
   min-width: 0;
 }
 
-.wikiproject-type-field :deep(.cdx-select-vue__handle),
-.query-id-field :deep(.cdx-select-vue__handle) {
+.wikiproject-type-field :deep(.cdx-select-vue__handle) {
   min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.query-id-field :deep(.cdx-select-vue__handle) {
+  min-width: 0;
 }
 
 :deep(.cdx-select-vue) {
