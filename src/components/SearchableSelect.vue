@@ -14,6 +14,7 @@
       'cdx-select-with-search--disabled': disabled,
       'cdx-select-with-search--expanded': isExpanded,
     }"
+    @focusout="onWrapperFocusOut"
   >
     <div class="cdx-select-with-search__trigger-stack">
       <cdx-select
@@ -200,6 +201,19 @@ function onSearchKeydown(event: KeyboardEvent) {
     return;
   }
   menuRef.value?.delegateKeyNavigation?.(event);
+}
+
+function onWrapperFocusOut(event: FocusEvent) {
+  if (!isExpanded.value) return;
+
+  const nextFocused = event.relatedTarget as Node | null;
+  if (nextFocused && wrapperRef.value?.contains(nextFocused)) return;
+  
+  nextTick(() => {
+    if (wrapperRef.value && !wrapperRef.value.contains(document.activeElement)) {
+      closeMenu();
+    }
+  });
 }
 
 function onDocumentMousedown(event: MouseEvent) {
