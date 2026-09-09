@@ -342,9 +342,10 @@ function getWikiprojectLabel(projectValue: string | null): string {
   color: var(--color-progressive);
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: var(--spacing-25);
   text-decoration: none;
-  font-family: var(--font-family-base);
+  font-family: var(--font-family-system-sans);
   font-size: var(--font-size-medium);
   font-style: normal;
   font-weight: 700;
