@@ -1,0 +1,57 @@
+<!--
+  SPDX-License-Identifier: GPL-2.0-or-later
+
+  Dustpan
+  A tool to uncover WikiProjects that can be improved on Wikidata
+  @see https://github.com/wikicollabs/dustpan
+
+  Selection log viewer. Reads from the existing /api/logs endpoint,
+  the key is entered here and kept in memory only for the current
+  page load.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dustpan Selection Log</title>
+</head>
+<body>
+  <h1>Dustpan Selection Log</h1>
+
+  <form id="key-form">
+    <input type="password" id="key-input" placeholder="log read key" autocomplete="off" />
+    <button type="submit">Load</button>
+  </form>
+
+  <pre id="output"></pre>
+
+  <script>
+    const form = document.getElementById('key-form');
+    const input = document.getElementById('key-input');
+    const output = document.getElementById('output');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const key = input.value;
+      output.textContent = 'Loading...';
+
+      try {
+        const response = await fetch('/api/logs', {
+          headers: { 'x-log-key': key },
+        });
+
+        if (!response.ok) {
+          output.textContent = `Request failed with status ${response.status}.`;
+          return;
+        }
+
+        const rows = await response.json();
+        output.textContent = JSON.stringify(rows, null, 2);
+      } catch (err) {
+        output.textContent = 'Request failed. Check the console for details.';
+        console.error('Failed to load log entries:', err);
+      }
+    });
+  </script>
+</body>
+</html>
