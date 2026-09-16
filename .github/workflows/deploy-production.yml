@@ -106,6 +106,20 @@ jobs:
           tar czf "dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz" \
             -C server .
 
+      - name: Verify release package
+        run: |
+          ARCHIVE="dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz"
+
+          echo "Verifying archive: $ARCHIVE"
+
+          tar tzf "$ARCHIVE" | grep -q '^\./server.js$'
+          tar tzf "$ARCHIVE" | grep -q '^\./package.json$'
+          tar tzf "$ARCHIVE" | grep -q '^\./package-lock.json$'
+          tar tzf "$ARCHIVE" | grep -q '^\./node_modules/'
+          tar tzf "$ARCHIVE" | grep -q '^\./dist/'
+
+          echo "Release archive verified."
+
       - name: Set up Toolforge SSH
         env:
           TF_SSH_KEY: ${{ secrets.TF_SSH_KEY }}
