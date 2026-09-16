@@ -1,92 +1,92 @@
 {
   "P1019": {
-    "ar": "مسار التلقيم",
     "en": "web feed URL",
-    "id": "web feed URL",
-    "ko": "피드 URL"
+    "lb": "web feed URL",
+    "nl": "link naar feed",
+    "qqq": "web feed URL"
   },
   "P136": {
-    "ar": "النوع الفني",
     "en": "genre",
-    "id": "genre",
-    "ko": "장르"
+    "lb": "Genre",
+    "nl": "genre",
+    "qqq": "genre"
   },
   "P1476": {
-    "ar": "العنوان",
     "en": "title",
-    "id": "judul",
-    "ko": "제목"
+    "lb": "Titel",
+    "nl": "titel",
+    "qqq": "title"
   },
   "P162": {
-    "ar": "المنتج",
     "en": "producer",
-    "id": "produser",
-    "ko": "제작자"
+    "lb": "Produzent",
+    "nl": "producer",
+    "qqq": "producer"
   },
   "P170": {
-    "ar": "الصانع",
     "en": "creator",
-    "id": "pencipta",
-    "ko": "창작자"
+    "lb": "Createur",
+    "nl": "maker",
+    "qqq": "creator"
   },
   "P175": {
-    "ar": "المؤدي",
     "en": "performer",
-    "id": "penampil",
-    "ko": "연주자·가수"
+    "lb": "Interpret",
+    "nl": "uitvoerend artiest",
+    "qqq": "performer"
   },
   "P186": {
-    "ar": "مصنوع من مادة",
     "en": "made from material",
-    "id": "bahan yang digunakan",
-    "ko": "사용된 재료"
+    "lb": "benotzt Material",
+    "nl": "materiaal",
+    "qqq": "made from material"
   },
   "P195": {
-    "ar": "مجموعة",
     "en": "collection",
-    "id": "koleksi",
-    "ko": "소장처"
+    "lb": "Sammlung",
+    "nl": "collectie",
+    "qqq": "collection"
   },
   "P264": {
-    "ar": "علامة التسجيلات",
     "en": "record label",
-    "id": "label rekaman",
-    "ko": "음반 레이블"
+    "lb": "Musekslabel",
+    "nl": "platenlabel",
+    "qqq": "record label"
   },
   "P272": {
-    "ar": "شركة الإنتاج",
     "en": "production company",
-    "id": "produksi",
-    "ko": "제작사"
+    "lb": "Produktiounsgesellschaft",
+    "nl": "productiemaatschappij",
+    "qqq": "production company"
   },
   "P371": {
-    "ar": "المقدم",
     "en": "presenter",
-    "id": "pembawa acara",
-    "ko": "사회자"
+    "lb": "presenter",
+    "nl": "presentator",
+    "qqq": "presenter"
   },
   "P407": {
-    "ar": "لغة العمل أو لغة الاسم",
     "en": "language of work or name",
-    "id": "bahasa yang digunakan",
-    "ko": "저작물·명칭의 언어"
+    "lb": "Sprooch vum Wierk oder Numm",
+    "nl": "taal van werk of naam",
+    "qqq": "language of work or name"
   },
   "P571": {
-    "ar": "البداية",
     "en": "inception",
-    "id": "sejak",
-    "ko": "만들어진 날"
+    "lb": "Grënnungsdatum / Baudatum",
+    "nl": "datum van oprichting of creatie",
+    "qqq": "inception"
   },
   "P577": {
-    "ar": "تاريخ النشر",
     "en": "publication date",
-    "id": "tanggal terbit",
-    "ko": "출판 날짜"
+    "lb": "Verëffentlechungsdatum",
+    "nl": "datum van uitgave",
+    "qqq": "publication date"
   },
   "P856": {
-    "ar": "الموقع الرسمي",
     "en": "official website",
-    "id": "laman resmi",
-    "ko": "공식 웹사이트"
+    "lb": "Websäit",
+    "nl": "officiële website",
+    "qqq": "official website"
   }
 }
