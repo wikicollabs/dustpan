@@ -13,7 +13,9 @@ export interface DisplayLanguage {
 }
 
 export const DISPLAY_LANGUAGES: DisplayLanguage[] = [
-  { code: 'en', nativeName: 'English', rtl: false }
+  { code: 'en', nativeName: 'English', rtl: false },
+  { code: 'lb', nativeName: 'Lëtzebuergesch', rtl: false },
+  { code: 'nl', nativeName: 'Nederlands', rtl: false }
 ];
 
 export const getBrowserLanguage = (): string => {
