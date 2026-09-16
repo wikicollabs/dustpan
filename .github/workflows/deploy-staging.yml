@@ -66,10 +66,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 20
           cache: pnpm
 
-      - name: Install dependencies
+      - name: Install application dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run type check
@@ -95,10 +95,15 @@ jobs:
           rm -rf server/dist
           cp -r dist server/dist
 
+      - name: Install production server dependencies
+        working-directory: server
+        run: |
+          rm -rf node_modules
+          npm ci --omit=dev
+
       - name: Package server folder
         run: |
           tar czf "dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-stg.tgz" \
-            --exclude=node_modules \
             -C server .
 
       - name: Set up Toolforge SSH
@@ -136,26 +141,14 @@ jobs:
             exit 1
           fi
 
-          echo "Clearing existing build..."
-          rm -rf "$HOME/www/js/dist"
+          echo "Clearing existing application files..."
+          rm -rf "$HOME/www/js"
+
+          echo "Creating application directory..."
+          mkdir -p "$HOME/www/js"
 
           echo "Extracting new release..."
           tar xzf "$ARCHIVE" -C "$HOME/www/js/"
-
-          echo "Reinstalling server dependencies..."
-
-          set +e
-          webservice --backend=kubernetes node20 shell -- \
-            bash -c "cd \$HOME/www/js && npm install --production" \
-            </dev/null
-          INSTALL_EXIT=$?
-          set -e
-
-          if [ "$INSTALL_EXIT" -ne 0 ]; then
-            echo "WARNING: dependency install failed or Toolforge attach flaked (exit $INSTALL_EXIT)."
-          fi
-
-          echo "Returned from dependency installation."
 
           echo "Restarting webservice..."
           webservice --backend=kubernetes node20 restart
