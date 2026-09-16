@@ -35,7 +35,7 @@ jobs:
           GITHUB_REF_VALUE: ${{ github.ref }}
         run: |
           if [ "$GITHUB_REF_VALUE" != "refs/heads/main" ]; then
-            echo "This workflow must be run from main."
+            echo "This workflow must be run from the main branch."
             exit 1
           fi
 
@@ -66,10 +66,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 24
+          node-version: 20
           cache: pnpm
 
-      - name: Install dependencies
+      - name: Install application dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run type check
@@ -95,10 +95,15 @@ jobs:
           rm -rf server/dist
           cp -r dist server/dist
 
+      - name: Install production server dependencies
+        working-directory: server
+        run: |
+          rm -rf node_modules
+          npm ci --omit=dev
+
       - name: Package server folder
         run: |
           tar czf "dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz" \
-            --exclude=node_modules \
             -C server .
 
       - name: Set up Toolforge SSH
@@ -124,6 +129,7 @@ jobs:
             -i ~/.ssh/id_ed25519 \
             ${{ vars.TOOLFORGE_USER }}@login.toolforge.org \
             "become dustpan bash -s" <<'EOF'
+
           set -e
 
           ARCHIVE="/home/${{ vars.TOOLFORGE_USER }}/dustpan-release/dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz"
@@ -135,22 +141,23 @@ jobs:
             exit 1
           fi
 
-          echo "Clearing existing build..."
-          rm -rf "$HOME/www/js/dist"
+          echo "Clearing existing application files..."
+          rm -rf "$HOME/www/js"
+
+          echo "Creating application directory..."
+          mkdir -p "$HOME/www/js"
 
           echo "Extracting new release..."
           tar xzf "$ARCHIVE" -C "$HOME/www/js/"
 
-          echo "Reinstalling server dependencies..."
-          # non-interactive form of the shell command, per current manual runbook.
-          # first automated run of this step should be watched, not assumed working.
-          webservice --backend=kubernetes node20 shell -- bash -c "cd \$HOME/www/js && npm install --production"
-
           echo "Restarting webservice..."
           webservice --backend=kubernetes node20 restart
+
+          echo "Checking webservice status..."
           webservice status
 
           echo "Deployment complete."
+
           EOF
 
       - name: Deployment summary
