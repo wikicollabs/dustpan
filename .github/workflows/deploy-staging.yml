@@ -124,6 +124,7 @@ jobs:
             -i ~/.ssh/id_ed25519 \
             ${{ vars.TOOLFORGE_USER }}@login.toolforge.org \
             "become dustpan-staging bash -s" <<'EOF'
+
           set -e
 
           ARCHIVE="/home/${{ vars.TOOLFORGE_USER }}/dustpan-release/dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-stg.tgz"
@@ -141,18 +142,29 @@ jobs:
           echo "Extracting new release..."
           tar xzf "$ARCHIVE" -C "$HOME/www/js/"
 
-                    echo "Reinstalling server dependencies..."
-          # non-interactive form of the shell command, per current manual runbook.
-          # webservice shell's attach can flake on this step; a failure here is
-          # logged but does not block the restart below.
-          webservice --backend=kubernetes node20 shell -- bash -c "cd \$HOME/www/js && npm install --production" \
-            || echo "WARNING: dependency install step failed or attach flaked, check manually if new deps were added this release."
-          
+          echo "Reinstalling server dependencies..."
+
+          set +e
+          webservice --backend=kubernetes node20 shell -- \
+            bash -c "cd \$HOME/www/js && npm install --production" \
+            </dev/null
+          INSTALL_EXIT=$?
+          set -e
+
+          if [ "$INSTALL_EXIT" -ne 0 ]; then
+            echo "WARNING: dependency install failed or Toolforge attach flaked (exit $INSTALL_EXIT)."
+          fi
+
+          echo "Returned from dependency installation."
+
           echo "Restarting webservice..."
           webservice --backend=kubernetes node20 restart
+
+          echo "Checking webservice status..."
           webservice status
 
           echo "Deployment complete."
+
           EOF
 
       - name: Deployment summary
