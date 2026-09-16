@@ -4,10 +4,11 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && tsc -p tsconfig.node.json --noEmit && vite build",
-    "preview": "vite preview"
-  },
+      "dev": "vite",
+      "type-check": "vue-tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
+      "build": "vite build",
+      "preview": "vite preview"
+    },
   "dependencies": {
     "@wikimedia/codex": "^2.6.2",
     "@wikimedia/codex-design-tokens": "^2.6.2",

@@ -1,0 +1,165 @@
+name: Deploy to Toolforge (Production)
+
+on:
+  workflow_dispatch:
+    inputs:
+      passphrase:
+        description: "Enter deploy passphrase to confirm"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dustpan-deploy
+  cancel-in-progress: true
+
+jobs:
+  check-passphrase:
+    name: Check deployment authorization
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verify passphrase
+        env:
+          ENTERED_PASSPHRASE: ${{ github.event.inputs.passphrase }}
+          EXPECTED_PASSPHRASE: ${{ secrets.DEPLOY_PASSPHRASE_PRODUCTION }}
+        run: |
+          if [ "$ENTERED_PASSPHRASE" != "$EXPECTED_PASSPHRASE" ]; then
+            echo "Wrong passphrase. Aborting."
+            exit 1
+          fi
+
+      - name: Verify branch
+        env:
+          GITHUB_REF_VALUE: ${{ github.ref }}
+        run: |
+          if [ "$GITHUB_REF_VALUE" != "refs/heads/main" ]; then
+            echo "This workflow must be run from main."
+            exit 1
+          fi
+
+  deploy:
+    name: Deploy
+    needs: check-passphrase
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out production
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Show deployed commit
+        run: |
+          echo "Deploying commit:"
+          git log -1 --oneline
+          echo
+          echo "Full SHA:"
+          git rev-parse HEAD
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run type check
+        run: pnpm run type-check
+
+      - name: Build application
+        run: pnpm run build
+
+      - name: Get build metadata
+        id: build
+        run: |
+          echo "VERSION=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          echo "SHA=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Show build metadata
+        run: |
+          echo "Version: ${{ steps.build.outputs.VERSION }}"
+          echo "SHA: ${{ steps.build.outputs.SHA }}"
+          echo "Archive: dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz"
+
+      - name: Copy built frontend into server folder
+        run: |
+          rm -rf server/dist
+          cp -r dist server/dist
+
+      - name: Package server folder
+        run: |
+          tar czf "dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz" \
+            --exclude=node_modules \
+            -C server .
+
+      - name: Set up Toolforge SSH
+        env:
+          TF_SSH_KEY: ${{ secrets.TF_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$TF_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan login.toolforge.org >> ~/.ssh/known_hosts
+
+      - name: Upload package to Toolforge
+        run: |
+          scp \
+            -i ~/.ssh/id_ed25519 \
+            "dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz" \
+            ${{ vars.TOOLFORGE_USER }}@login.toolforge.org:~/dustpan-release/
+
+      - name: Deploy to production
+        run: |
+          ssh \
+            -T \
+            -i ~/.ssh/id_ed25519 \
+            ${{ vars.TOOLFORGE_USER }}@login.toolforge.org \
+            "become dustpan bash -s" <<'EOF'
+          set -e
+
+          ARCHIVE="/home/${{ vars.TOOLFORGE_USER }}/dustpan-release/dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz"
+
+          echo "Deploying archive: $ARCHIVE"
+
+          if [ ! -f "$ARCHIVE" ]; then
+            echo "Archive not found: $ARCHIVE"
+            exit 1
+          fi
+
+          echo "Clearing existing build..."
+          rm -rf "$HOME/www/js/dist"
+
+          echo "Extracting new release..."
+          tar xzf "$ARCHIVE" -C "$HOME/www/js/"
+
+          echo "Reinstalling server dependencies..."
+          # non-interactive form of the shell command, per current manual runbook.
+          # first automated run of this step should be watched, not assumed working.
+          webservice --backend=kubernetes node20 shell -- bash -c "cd \$HOME/www/js && npm install --production"
+
+          echo "Restarting webservice..."
+          webservice --backend=kubernetes node20 restart
+          webservice status
+
+          echo "Deployment complete."
+          EOF
+
+      - name: Deployment summary
+        run: |
+          echo "Deployment completed successfully."
+          echo
+          echo "Version: ${{ steps.build.outputs.VERSION }}"
+          echo "SHA: ${{ steps.build.outputs.SHA }}"
+          echo "Archive: dustpan-${{ steps.build.outputs.VERSION }}-${{ steps.build.outputs.SHA }}-prod.tgz"
+          echo
+          echo "Commit:"
+          git log -1 --oneline

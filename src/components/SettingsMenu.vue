@@ -116,9 +116,9 @@
               v-model="tempLanguage"
               name="language"
               :input-value="lang.code"
-              :aria-label="lang.nativeName"
+              :aria-label="lang.autonym"
             >
-              {{ lang.nativeName }}
+              {{ lang.autonym }}
             </cdx-radio>
           </cdx-field>
 
@@ -263,7 +263,7 @@ const store = useSearchStore();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
 
 const getLanguageName = (locale: string): string => {
-  return DISPLAY_LANGUAGES.find(l => l.code === locale)?.nativeName || locale;
+  return DISPLAY_LANGUAGES.find(l => l.code === locale)?.autonym || locale;
 }
 
 const selectedItem = ref<MenuSelection>(null);
@@ -286,7 +286,7 @@ const filteredLanguages = computed(() => {
   if (!query) return DISPLAY_LANGUAGES;
   
   return DISPLAY_LANGUAGES.filter(lang => 
-    lang.nativeName.toLowerCase().includes(query) || 
+    lang.autonym.toLowerCase().includes(query) || 
     lang.code.toLowerCase().includes(query)
   );
 });
@@ -302,7 +302,7 @@ const themeLabel = computed(() => {
 
 const languageLabel = computed(() => {
   const lang = DISPLAY_LANGUAGES.find(l => l.code === currentLanguage.value);
-  return lang ? lang.nativeName : 'English';
+  return lang ? lang.autonym : 'English';
 });
 
 const textSizeLabel = computed(() => {

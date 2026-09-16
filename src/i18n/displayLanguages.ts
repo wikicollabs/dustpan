@@ -8,12 +8,14 @@
 
 export interface DisplayLanguage {
   code: string;
-  nativeName: string;
+  autonym: string;
   rtl: boolean;
 }
 
 export const DISPLAY_LANGUAGES: DisplayLanguage[] = [
-  { code: 'en', nativeName: 'English', rtl: false }
+  { code: 'en', autonym: 'English', rtl: false },
+  { code: 'lb', autonym: 'Lëtzebuergesch', rtl: false },
+  { code: 'nl', autonym: 'Nederlands', rtl: false }
 ];
 
 export const getBrowserLanguage = (): string => {
