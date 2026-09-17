@@ -12,6 +12,7 @@
 	"search-button": "Sichen",
 	"contribution-info-example-label": "Beispill:",
 	"results-querying-aria": "Wikidata gëtt ofgefrot...",
+	"filters-text-placeholder": "QID oder Etikett",
 	"table-result-count": "$1 {{PLURAL:$1|Resultat|Resultater}}",
 	"table-item-id-header": "QID",
 	"table-no-results": "Elementer net fonnt.",
