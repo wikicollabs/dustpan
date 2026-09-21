@@ -16,7 +16,7 @@
  */
 
 import scopesJson from '../catalog/scopes.json';
-import { runSparqlQuery } from '../query/sparqlClient';
+import { runSparqlForScope } from '../query/sparqlClient';
 import type { ScopeDef, ScopeOption, SparqlBindingValue } from '../types/types';
 
 // scopes.json today only has "geographicScope", but is looked up by
@@ -73,7 +73,7 @@ export async function fetchScopeOptions(scopeId: string, lang = 'en'): Promise<S
   } ORDER BY ?valueLabel`;
 
   try {
-    const response = await runSparqlQuery(sparql);
+    const response = await runSparqlForScope(sparql);
     if (!response.ok) {
       console.error(`[Dustpan] scope fetch for "${scopeId}" failed: server returned`, response.status);
       return [];
