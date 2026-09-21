@@ -13,6 +13,7 @@
     :class="{
       'cdx-select-with-search--disabled': disabled,
       'cdx-select-with-search--expanded': isExpanded,
+      'cdx-select-with-search--flipped': isFlippedAbove,
     }"
     @focusout="onWrapperFocusOut"
   >
@@ -39,17 +40,25 @@
         ref="handleRef"
         type="button"
         class="cdx-select-with-search__overlay-handle"
-        role="select"
+        role="combobox"
         :disabled="disabled"
         aria-haspopup="listbox"
         :aria-expanded="isExpanded"
         :aria-controls="menuId"
+        :aria-label="ariaLabel"
         @click="toggleExpanded"
         @keydown="onHandleKeydown"
       />
     </div>
 
-    <div v-show="isExpanded" class="cdx-select-with-search__menu">
+    <div
+      ref="menuEl"
+      popover="auto"
+      class="cdx-select-with-search__menu"
+      :class="{ 'cdx-select-with-search__menu--flipped': isFlippedAbove }"
+      :style="floatingStyles"
+      @toggle="onMenuToggle"
+    >
       <div class="cdx-select-with-search__search-wrapper">
         <cdx-text-input
           ref="searchInputRef"
@@ -75,6 +84,7 @@
         :menu-items="filteredMenuItems"
         :expanded="isExpanded"
         :visible-item-limit="5"
+        :render-in-place="true"
         @update:selected="onSelect"
       >
         <template #no-results>
@@ -86,9 +96,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId, getCurrentInstance } from "vue";
+import { ref, computed, watch, nextTick, onBeforeUnmount, useId, getCurrentInstance } from "vue";
 import { CdxTextInput, CdxMenu, CdxSelect } from "@wikimedia/codex";
 import { cdxIconSearch } from "@wikimedia/codex-icons";
+import { useFloating, flip, size, hide, autoUpdate } from "@floating-ui/vue";
 
 const instance = getCurrentInstance();
 const $i18n = instance?.appContext.config.globalProperties.$i18n as (key: string, ...params: unknown[]) => string;
@@ -124,6 +135,7 @@ const emit = defineEmits<{
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const handleRef = ref<HTMLButtonElement | null>(null);
+const menuEl = ref<HTMLElement | null>(null);
 const searchInputRef = ref<InstanceType<typeof CdxTextInput> | null>(null);
 const menuRef = ref<InstanceType<typeof CdxMenu> | null>(null);
 
@@ -149,9 +161,48 @@ const activeDescendantId = computed(() => {
   return highlighted ? highlighted.id : null;
 });
 
+const { floatingStyles, placement, middlewareData, update: updateMenuPosition } = useFloating(handleRef, menuEl, {
+  placement: "bottom",
+  middleware: [
+    size({
+      padding: 8,
+      apply({ availableHeight, elements, rects }) {
+        elements.floating.style.width = `${rects.reference.width}px`;
+        elements.floating.style.maxHeight = `${availableHeight}px`;
+      },
+    }),
+    flip({ padding: 7 }),
+    hide({ strategy: "escaped" }),
+    hide({ padding: 8 }),
+  ],
+});
+
+const isFlippedAbove = computed(() => placement.value.startsWith("top"));
+
+watch(
+  () => middlewareData.value.hide?.referenceHidden,
+  (referenceHidden) => {
+    if (referenceHidden) closeMenu();
+  }
+);
+
+let stopAutoUpdate: (() => void) | null = null;
+
+function onMenuToggle(event: ToggleEvent) {
+  isExpanded.value = event.newState === "open";
+  if (!isExpanded.value) {
+    stopAutoUpdate?.();
+    stopAutoUpdate = null;
+  }
+}
+
 function openMenu() {
   if (props.disabled || isExpanded.value) return;
-  isExpanded.value = true;
+  menuEl.value?.showPopover();
+  if (handleRef.value && menuEl.value) {
+    updateMenuPosition();
+    stopAutoUpdate = autoUpdate(handleRef.value, menuEl.value, updateMenuPosition);
+  }
   searchQuery.value = "";
   emit("focus");
   nextTick(() => {
@@ -161,7 +212,7 @@ function openMenu() {
 
 function closeMenu({ refocusHandle = false }: { refocusHandle?: boolean } = {}) {
   if (!isExpanded.value) return;
-  isExpanded.value = false;
+  menuEl.value?.hidePopover();
   searchQuery.value = "";
   emit("blur");
   if (refocusHandle) {
@@ -208,7 +259,7 @@ function onWrapperFocusOut(event: FocusEvent) {
 
   const nextFocused = event.relatedTarget as Node | null;
   if (nextFocused && wrapperRef.value?.contains(nextFocused)) return;
-  
+
   nextTick(() => {
     if (wrapperRef.value && !wrapperRef.value.contains(document.activeElement)) {
       closeMenu();
@@ -216,19 +267,8 @@ function onWrapperFocusOut(event: FocusEvent) {
   });
 }
 
-function onDocumentMousedown(event: MouseEvent) {
-  if (!isExpanded.value) return;
-  if (wrapperRef.value && !wrapperRef.value.contains(event.target as Node)) {
-    closeMenu();
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("mousedown", onDocumentMousedown);
-});
-
 onBeforeUnmount(() => {
-  document.removeEventListener("mousedown", onDocumentMousedown);
+  stopAutoUpdate?.();
 });
 </script>
 
@@ -241,7 +281,6 @@ onBeforeUnmount(() => {
 
 .cdx-select-with-search__trigger-stack {
   position: relative;
-  z-index: 2;
   width: 100%;
 }
 
@@ -273,10 +312,16 @@ onBeforeUnmount(() => {
   display: none !important;
 }
 
-.cdx-select-with-search--expanded .cdx-select-with-search__visual :deep(.cdx-select-vue__handle),
-.cdx-select-with-search--expanded .cdx-select-with-search__visual :deep(button) {
+.cdx-select-with-search--expanded:not(.cdx-select-with-search--flipped) .cdx-select-with-search__visual :deep(.cdx-select-vue__handle),
+.cdx-select-with-search--expanded:not(.cdx-select-with-search--flipped) .cdx-select-with-search__visual :deep(button) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.cdx-select-with-search--expanded.cdx-select-with-search--flipped .cdx-select-with-search__visual :deep(.cdx-select-vue__handle),
+.cdx-select-with-search--expanded.cdx-select-with-search--flipped .cdx-select-with-search__visual :deep(button) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 /* This element is the one that actually handles clicks, keyboard, and focus. */
@@ -306,6 +351,14 @@ onBeforeUnmount(() => {
   border-radius: var(--border-radius-base);
 }
 
+.cdx-select-with-search--expanded:not(.cdx-select-with-search--flipped) .cdx-select-with-search__overlay-handle {
+  border-bottom: none;
+}
+
+.cdx-select-with-search--expanded.cdx-select-with-search--flipped .cdx-select-with-search__overlay-handle {
+  border-top: none;
+}
+
 .cdx-select-with-search__label {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -323,12 +376,8 @@ onBeforeUnmount(() => {
 }
 
 .cdx-select-with-search__menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  margin-top: -1px;
+  margin: 0;
+  padding: 0;
   background-color: var(--background-color-base);
   border: var(--border-width-base) var(--border-style-base) var(--border-color-interactive);
   border-top-left-radius: 0;
@@ -337,6 +386,22 @@ onBeforeUnmount(() => {
   border-bottom-right-radius: var(--border-radius-base);
   box-shadow: var(--box-shadow-drop-medium, 0 2px 6px rgba(0, 0, 0, 0.15));
   overflow: hidden;
+}
+
+.cdx-select-with-search__menu:popover-open {
+  display: flex;
+  flex-direction: column;
+}
+
+.cdx-select-with-search__menu--flipped {
+  border-top-left-radius: var(--border-radius-base);
+  border-top-right-radius: var(--border-radius-base);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.cdx-select-with-search__menu::backdrop {
+  background: transparent;
 }
 
 .cdx-select-with-search__search-wrapper {
@@ -356,5 +421,8 @@ onBeforeUnmount(() => {
   box-shadow: none;
   background: none;
   border-radius: 0;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 </style>
