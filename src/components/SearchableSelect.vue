@@ -15,7 +15,6 @@
       'cdx-select-with-search--expanded': isExpanded,
       'cdx-select-with-search--flipped': isFlippedAbove,
     }"
-    @focusout="onWrapperFocusOut"
   >
     <div class="cdx-select-with-search__trigger-stack">
       <cdx-select
@@ -233,7 +232,7 @@ function toggleExpanded() {
 
 function onSelect(value: string | number | null) {
   emit("update:selected", value);
-  closeMenu({ refocusHandle: true });
+  closeMenu();
 }
 
 function onHandleKeydown(event: KeyboardEvent) {
@@ -252,19 +251,6 @@ function onSearchKeydown(event: KeyboardEvent) {
     return;
   }
   menuRef.value?.delegateKeyNavigation?.(event);
-}
-
-function onWrapperFocusOut(event: FocusEvent) {
-  if (!isExpanded.value) return;
-
-  const nextFocused = event.relatedTarget as Node | null;
-  if (nextFocused && wrapperRef.value?.contains(nextFocused)) return;
-
-  nextTick(() => {
-    if (wrapperRef.value && !wrapperRef.value.contains(document.activeElement)) {
-      closeMenu();
-    }
-  });
 }
 
 onBeforeUnmount(() => {
