@@ -46,7 +46,7 @@ app.provide('CdxI18nFunction', (key: string, ...params: unknown[]): string => {
 
 
 // version-based localStorage invalidation
-const APP_VERSION = '0.0.1';
+const APP_VERSION = '0.1.0';
 const storedVersion = localStorage.getItem('dustpan_version');
 
 if (storedVersion !== APP_VERSION) {
