@@ -55,7 +55,7 @@
       popover="auto"
       class="cdx-select-with-search__menu"
       :class="{ 'cdx-select-with-search__menu--flipped': isFlippedAbove }"
-      :style="floatingStyles"
+      :style="{...floatingStyles,visibility: menuVisibility,}"
       @toggle="onMenuToggle"
     >
       <div class="cdx-select-with-search__search-wrapper">
@@ -95,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onBeforeUnmount, useId, getCurrentInstance } from "vue";
+import { ref, computed, nextTick, onBeforeUnmount, useId, getCurrentInstance } from "vue";
 import { CdxTextInput, CdxMenu, CdxSelect } from "@wikimedia/codex";
 import { cdxIconSearch } from "@wikimedia/codex-icons";
 import { useFloating, flip, size, hide, autoUpdate } from "@floating-ui/vue";
@@ -178,12 +178,13 @@ const { floatingStyles, placement, middlewareData, update: updateMenuPosition } 
 
 const isFlippedAbove = computed(() => placement.value.startsWith("top"));
 
-watch(
-  () => middlewareData.value.hide?.referenceHidden,
-  (referenceHidden) => {
-    if (referenceHidden) closeMenu();
-  }
-);
+const menuVisibility = computed(() => {
+  const hidden =
+    !!middlewareData.value.hide?.escaped ||
+    !!middlewareData.value.hide?.referenceHidden;
+
+  return hidden ? "hidden" : "visible";
+});
 
 let stopAutoUpdate: (() => void) | null = null;
 
