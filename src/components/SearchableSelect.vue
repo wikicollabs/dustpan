@@ -171,8 +171,8 @@ const { floatingStyles, placement, middlewareData, update: updateMenuPosition } 
       },
     }),
     flip({ padding: 7 }),
-    hide({ strategy: "escaped" }),
-    hide({ padding: 8 }),
+    hide({ strategy: "escaped", rootBoundary: "layoutViewport" }),
+    hide({ padding: 8, rootBoundary: "layoutViewport" }),
   ],
 });
 
