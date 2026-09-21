@@ -13,8 +13,10 @@ export interface DisplayLanguage {
 }
 
 export const DISPLAY_LANGUAGES: DisplayLanguage[] = [
+  { code: 'id', autonym: 'Bahasa Indonesia', rtl: false },
   { code: 'en', autonym: 'English', rtl: false },
   { code: 'lb', autonym: 'Lëtzebuergesch', rtl: false },
+  { code: 'min', autonym: 'Minangkabau', rtl: false },
   { code: 'nl', autonym: 'Nederlands', rtl: false }
 ];
 
