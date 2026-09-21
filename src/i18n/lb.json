@@ -24,6 +24,8 @@
 	"cdx-table-pager-button-next-page": "Nächst Säit",
 	"cdx-table-pager-button-prev-page": "Vireg Säit",
 	"cdx-dialog-close-button-label": "Dialog zoumaachen",
+	"state-on": "Un",
+	"state-off": "Aus",
 	"errors-query-failed": "Beim Offroe vu Wikidata ass e Feeler geschitt.",
 	"footer-about": "Iwwer",
 	"footer-privacy": "Dateschutzrichtlinnen",
