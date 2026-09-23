@@ -408,7 +408,7 @@ onBeforeUnmount(() => {
   box-shadow: none;
   background: none;
   border-radius: 0;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
 }

@@ -34,6 +34,7 @@
         :disabled="store.isLoading"
         :searched-wikiproject="store.searchedWikiproject"
         :searched-query-id="store.searchedQueryId"
+        :searched-scope="store.searchedScope"
         :results="store.results"
         :is-loading="store.isLoading"
         :error="store.error"

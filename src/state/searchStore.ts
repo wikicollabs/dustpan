@@ -57,6 +57,7 @@ export const useSearchStore = defineStore('search', {
     selectedQueryId: null as string | null,
     searchedWikiproject: null as string | null,
     searchedQueryId: null as string | null,
+    searchedScope: null as string | null,
     isLoading: false,
     error: null as string | null,
     connectionError: false,
@@ -97,6 +98,7 @@ export const useSearchStore = defineStore('search', {
       }
       this.searchedWikiproject = this.selectedWikiproject;
       this.searchedQueryId = this.selectedQueryId;
+      this.searchedScope = scopeValue;
       this.saveLastSearch();
       this.error = null;
       this.connectionError = false;
