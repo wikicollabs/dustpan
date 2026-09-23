@@ -1,92 +1,137 @@
 {
   "P1019": {
     "en": "web feed URL",
+    "id": "web feed URL",
     "lb": "web feed URL",
+    "min": "web feed URL",
     "nl": "link naar feed",
+    "ps": "web feed URL",
     "qqq": "web feed URL"
   },
   "P136": {
     "en": "genre",
+    "id": "genre",
     "lb": "Genre",
+    "min": "genre",
     "nl": "genre",
+    "ps": "ژانر",
     "qqq": "genre"
   },
   "P1476": {
     "en": "title",
+    "id": "judul",
     "lb": "Titel",
+    "min": "title",
     "nl": "titel",
+    "ps": "سرليک",
     "qqq": "title"
   },
   "P162": {
     "en": "producer",
+    "id": "produser",
     "lb": "Produzent",
+    "min": "producer",
     "nl": "producer",
+    "ps": "تولیدونکی",
     "qqq": "producer"
   },
   "P170": {
     "en": "creator",
+    "id": "pencipta",
     "lb": "Createur",
+    "min": "creator",
     "nl": "maker",
+    "ps": "پنځوونکی",
     "qqq": "creator"
   },
   "P175": {
     "en": "performer",
+    "id": "penampil",
     "lb": "Interpret",
+    "min": "performer",
     "nl": "uitvoerend artiest",
+    "ps": "performer",
     "qqq": "performer"
   },
   "P186": {
     "en": "made from material",
+    "id": "bahan yang digunakan",
     "lb": "benotzt Material",
+    "min": "made from material",
     "nl": "materiaal",
+    "ps": "made from material",
     "qqq": "made from material"
   },
   "P195": {
     "en": "collection",
+    "id": "koleksi",
     "lb": "Sammlung",
+    "min": "collection",
     "nl": "collectie",
+    "ps": "ټولگه",
     "qqq": "collection"
   },
   "P264": {
     "en": "record label",
+    "id": "label rekaman",
     "lb": "Musekslabel",
+    "min": "record label",
     "nl": "platenlabel",
+    "ps": "record label",
     "qqq": "record label"
   },
   "P272": {
     "en": "production company",
+    "id": "produksi",
     "lb": "Produktiounsgesellschaft",
+    "min": "produksi",
     "nl": "productiemaatschappij",
+    "ps": "تولیدونکی کمپنۍ",
     "qqq": "production company"
   },
   "P371": {
     "en": "presenter",
+    "id": "pembawa acara",
     "lb": "presenter",
+    "min": "presenter",
     "nl": "presentator",
+    "ps": "presenter",
     "qqq": "presenter"
   },
   "P407": {
     "en": "language of work or name",
+    "id": "bahasa yang digunakan",
     "lb": "Sprooch vum Wierk oder Numm",
+    "min": "language of work or name",
     "nl": "taal van werk of naam",
+    "ps": "اثر ژبه",
     "qqq": "language of work or name"
   },
   "P571": {
     "en": "inception",
+    "id": "sejak",
     "lb": "Grënnungsdatum / Baudatum",
+    "min": "tanggal pandirian",
     "nl": "datum van oprichting of creatie",
+    "ps": "بنسټ اېښودنه",
     "qqq": "inception"
   },
   "P577": {
     "en": "publication date",
+    "id": "tanggal terbit",
     "lb": "Verëffentlechungsdatum",
+    "min": "publication date",
     "nl": "datum van uitgave",
+    "ps": "خپرېدو نېټه",
     "qqq": "publication date"
   },
   "P856": {
     "en": "official website",
+    "id": "laman resmi",
     "lb": "Websäit",
+    "min": "official website",
     "nl": "officiële website",
+    "ps": "رسمي وېبځی",
     "qqq": "official website"
   }
 }
