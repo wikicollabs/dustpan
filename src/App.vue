@@ -74,14 +74,41 @@ const scopeOptionsMap = ref<Record<string, ScopeOption[] | null>>(
   Object.fromEntries(scopeIds.map((id) => [id, null]))
 );
 
+function getAnyCachedScopeOptions(scopeId: string): ScopeOption[] | null {
+  const prefix = `dustpan_scope_${scopeId}_`;
+
+  for (let i = 0; i < sessionStorage.length; i++) {
+    const key = sessionStorage.key(i);
+
+    if (key?.startsWith(prefix)) {
+      const cached = sessionStorage.getItem(key);
+
+      if (cached) {
+        return JSON.parse(cached);
+      }
+    }
+  }
+
+  return null;
+}
+
 function prefetchScopeOptions() {
   const lang = getDisplayLanguage();
+
   for (const scopeId of scopeIds) {
+    const cached = getAnyCachedScopeOptions(scopeId);
+
+    if (cached) {
+      scopeOptionsMap.value[scopeId] = cached;
+    }
+
     fetchScopeOptions(scopeId, lang).then((options) => {
       scopeOptionsMap.value[scopeId] = options;
     });
   }
 }
+
+
 
 // App.vue doesn't own scopeValue's source of truth. ScopeSelect.vue
 // (mounted deep inside SearchPanel.vue) resolves the value and emits it
