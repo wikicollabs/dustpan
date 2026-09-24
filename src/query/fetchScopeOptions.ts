@@ -16,7 +16,7 @@
  */
 
 import scopesJson from '../catalog/scopes.json';
-import { runSparqlQuery } from '../query/sparqlClient';
+import { runSparqlForScope } from '../query/sparqlClient';
 import type { ScopeDef, ScopeOption, SparqlBindingValue } from '../types/types';
 
 // scopes.json today only has "geographicScope", but is looked up by
@@ -27,15 +27,12 @@ const scopes = scopesJson as Record<string, ScopeDef>;
 // manual label clause, bypasses [AUTO_LANGUAGE] / SERVICE wikibase:label
 // (both are broken for in-app language switching, see file header)
 function labelClause(lang: string): string {
-  if (lang && lang !== 'en') {
-    return `
-    OPTIONAL { ?value rdfs:label ?valueLabel_pref . FILTER(LANG(?valueLabel_pref) = "${lang}") }
-    OPTIONAL { ?value rdfs:label ?valueLabel_en . FILTER(LANG(?valueLabel_en) = "en") }
-    BIND(COALESCE(?valueLabel_pref, ?valueLabel_en, STR(?value)) AS ?valueLabel)`;
-  }
+  const languages = lang && lang !== 'en' ? `${lang},en` : 'en';
+
   return `
-    OPTIONAL { ?value rdfs:label ?valueLabel_en . FILTER(LANG(?valueLabel_en) = "en") }
-    BIND(COALESCE(?valueLabel_en, STR(?value)) AS ?valueLabel)`;
+    SERVICE wikibase:label {
+      bd:serviceParam wikibase:language "${languages}" .
+    }`;
 }
 
 // this query's SELECT ?value ?valueLabel: both always bound (valueLabel
@@ -54,8 +51,11 @@ interface ScopeSparqlResponse {
 // callers shouldn't have to try/catch just to render an empty dropdown)
 export async function fetchScopeOptions(scopeId: string, lang = 'en'): Promise<ScopeOption[]> {
   const cacheKey = `dustpan_scope_${scopeId}_${lang}`;
+  
   const cached = sessionStorage.getItem(cacheKey);
   if (cached) return JSON.parse(cached);
+  
+ 
 
   const scopeDef = scopes[scopeId];
   if (!scopeDef) {
@@ -68,12 +68,12 @@ export async function fetchScopeOptions(scopeId: string, lang = 'en'): Promise<S
   }
 
   const sparql = `
-  SELECT ?value ?valueLabel WHERE {
-    ${scopeDef.sparqlTemplate}${labelClause(lang)}
-  } ORDER BY ?valueLabel`;
+    SELECT ?value ?valueLabel WHERE {
+      ${scopeDef.sparqlTemplate}${labelClause(lang)}
+    }`;
 
   try {
-    const response = await runSparqlQuery(sparql);
+    const response = await runSparqlForScope(sparql);
     if (!response.ok) {
       console.error(`[Dustpan] scope fetch for "${scopeId}" failed: server returned`, response.status);
       return [];
@@ -84,6 +84,9 @@ export async function fetchScopeOptions(scopeId: string, lang = 'en'): Promise<S
       value: b.value.value.split('/').pop() ?? b.value.value,
       label: b.valueLabel.value,
     }));
+    options.sort((a, b) =>
+      a.label.localeCompare(b.label, lang)
+    );
     sessionStorage.setItem(cacheKey, JSON.stringify(options));
     return options;
   } catch (err) {

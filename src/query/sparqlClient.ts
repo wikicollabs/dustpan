@@ -8,6 +8,26 @@
 
 const WDQS_ENDPOINT = 'https://query.wikidata.org/sparql';
 
+export async function runSparqlForScope(
+  sparql: string,
+  timeoutMs = 60000
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const url = new URL(WDQS_ENDPOINT);
+    url.searchParams.set('query', sparql);
+    url.searchParams.set('format', 'json');
+
+    return await fetch(url, {
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 export async function runSparqlQuery(sparql: string, timeoutMs = 60000): Promise<Response> {
   const startTime = performance.now();
   const controller = new AbortController();

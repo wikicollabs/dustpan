@@ -15,7 +15,6 @@
       'cdx-select-with-search--expanded': isExpanded,
       'cdx-select-with-search--flipped': isFlippedAbove,
     }"
-    @focusout="onWrapperFocusOut"
   >
     <div class="cdx-select-with-search__trigger-stack">
       <cdx-select
@@ -56,7 +55,7 @@
       popover="auto"
       class="cdx-select-with-search__menu"
       :class="{ 'cdx-select-with-search__menu--flipped': isFlippedAbove }"
-      :style="floatingStyles"
+      :style="{...floatingStyles,visibility: menuVisibility,}"
       @toggle="onMenuToggle"
     >
       <div class="cdx-select-with-search__search-wrapper">
@@ -96,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, nextTick, onBeforeUnmount, useId, getCurrentInstance } from "vue";
+import { ref, computed, nextTick, onBeforeUnmount, useId, getCurrentInstance } from "vue";
 import { CdxTextInput, CdxMenu, CdxSelect } from "@wikimedia/codex";
 import { cdxIconSearch } from "@wikimedia/codex-icons";
 import { useFloating, flip, size, hide, autoUpdate } from "@floating-ui/vue";
@@ -172,19 +171,20 @@ const { floatingStyles, placement, middlewareData, update: updateMenuPosition } 
       },
     }),
     flip({ padding: 7 }),
-    hide({ strategy: "escaped" }),
-    hide({ padding: 8 }),
+    hide({ strategy: "escaped", rootBoundary: "layoutViewport" }),
+    hide({ padding: 8, rootBoundary: "layoutViewport" }),
   ],
 });
 
 const isFlippedAbove = computed(() => placement.value.startsWith("top"));
 
-watch(
-  () => middlewareData.value.hide?.referenceHidden,
-  (referenceHidden) => {
-    if (referenceHidden) closeMenu();
-  }
-);
+const menuVisibility = computed(() => {
+  const hidden =
+    !!middlewareData.value.hide?.escaped ||
+    !!middlewareData.value.hide?.referenceHidden;
+
+  return hidden ? "hidden" : "visible";
+});
 
 let stopAutoUpdate: (() => void) | null = null;
 
@@ -233,7 +233,7 @@ function toggleExpanded() {
 
 function onSelect(value: string | number | null) {
   emit("update:selected", value);
-  closeMenu({ refocusHandle: true });
+  closeMenu();
 }
 
 function onHandleKeydown(event: KeyboardEvent) {
@@ -252,19 +252,6 @@ function onSearchKeydown(event: KeyboardEvent) {
     return;
   }
   menuRef.value?.delegateKeyNavigation?.(event);
-}
-
-function onWrapperFocusOut(event: FocusEvent) {
-  if (!isExpanded.value) return;
-
-  const nextFocused = event.relatedTarget as Node | null;
-  if (nextFocused && wrapperRef.value?.contains(nextFocused)) return;
-
-  nextTick(() => {
-    if (wrapperRef.value && !wrapperRef.value.contains(document.activeElement)) {
-      closeMenu();
-    }
-  });
 }
 
 onBeforeUnmount(() => {
@@ -376,6 +363,7 @@ onBeforeUnmount(() => {
 }
 
 .cdx-select-with-search__menu {
+  inset: unset;
   margin: 0;
   padding: 0;
   background-color: var(--background-color-base);
@@ -421,7 +409,7 @@ onBeforeUnmount(() => {
   box-shadow: none;
   background: none;
   border-radius: 0;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
 }

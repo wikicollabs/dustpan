@@ -96,77 +96,16 @@
         </div>
 
         <div class="results-area">
-          <div v-if="isLoading" class="loading-state" role="status" aria-live="assertive">
-            <h3>{{ $i18n('results-querying') }}</h3>
-            <CdxProgressBar :aria-label="$i18n('results-querying-aria')" aria-hidden="true" />
-          </div>
-
-          <CdxMessage v-else-if="error" type="error">
-            {{ error }}
-          </CdxMessage>
-
-          <div v-else>
-            <CdxMessage
-              v-if="contributionInfo"
-              type="notice"
-              :icon="cdxIconLightbulb"
-              :allow-user-dismiss="false"
-              class="contribution-info-message"
-            >
-              <div
-                class="contribution-info-content"
-                role="button"
-                tabindex="0"
-                :aria-expanded="!isContributionInfoCollapsed"
-                :aria-label="isContributionInfoCollapsed ? $i18n('contribution-info-expand-aria') : $i18n('contribution-info-collapse-aria')"
-                @click="toggleContributionInfo"
-                @keydown.enter="toggleContributionInfo"
-                @keydown.space.prevent="toggleContributionInfo"
-              >
-                <div class="contribution-info-text-column">
-                  <span class="contribution-info-text">
-                    {{ isContributionInfoCollapsed
-                      ? $i18n(contributionInfo.summaryLabel, contributionInfo.property)
-                      : $i18n(contributionInfo.detailsLabel, contributionInfo.property) }}
-                  </span>
-
-                  <div
-                    v-if="!isContributionInfoCollapsed && contributionInfo.example"
-                    class="contribution-info-example"
-                  >
-                    <div class="contribution-info-example-label">{{ $i18n('contribution-info-example-label') }}</div>
-                    <div class="contribution-info-example-text">
-                      <div class="contribution-info-example-subject-line">
-                        <a
-                          v-if="contributionInfo.example.qid"
-                          :href="`https://www.wikidata.org/wiki/${contributionInfo.example.qid}`"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="contribution-info-example-subject-link"
-                          :aria-label="$i18n('contribution-info-example-link-aria', contributionInfo.example.subject, contributionInfo.example.qid)"
-                        >{{ contributionInfo.example.subject }} ({{ contributionInfo.example.qid }})</a>
-                        <template v-else>{{ contributionInfo.example.subject }}</template>
-                      </div>
-                      <div class="contribution-info-example-property-line">
-                        {{ contributionInfo.example.property }} = {{ contributionInfo.example.value }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <CdxIcon
-                  :icon="isContributionInfoCollapsed ? cdxIconExpand : cdxIconCollapse"
-                  class="contribution-info-icon"
-                />
-              </div>
-            </CdxMessage>
-
-            <ResultsTable
-              :results="filteredResults"
-              :total-count="results.length"
-              :connection-error="connectionError"
-            />
-          </div>
+          <ResultsPanel
+            :is-loading="isLoading"
+            :error="error"
+            :connection-error="connectionError"
+            :results="results"
+            :text-filter="textFilter"
+            :searched-wikiproject="searchedWikiproject"
+            :searched-query-id="searchedQueryId"
+            :searched-scope="searchedScope"
+          />
         </div>
       </div>
     </div>
@@ -175,11 +114,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, getCurrentInstance } from "vue";
-import { CdxButton, CdxIcon, CdxProgressBar, CdxMessage, CdxTextInput } from "@wikimedia/codex";
+import { CdxButton, CdxIcon, CdxTextInput } from "@wikimedia/codex";
 import { cdxIconCollapse, cdxIconExpand, cdxIconFunnel, cdxIconLinkExternal, cdxIconLightbulb } from "@wikimedia/codex-icons";
 import SearchPanel from "../components/SearchPanel.vue";
-import ResultsTable from "../components/ResultsTable.vue";
-import { getQueryOptionsForProject, getQueryContributionInfo, getWikiprojectName, getWikiprojectUrl } from "../query/queries";
+import ResultsPanel from "../components/results/ResultsPanel.vue";
+import { getQueryOptionsForProject, getWikiprojectName, getWikiprojectUrl } from "../query/queries";
 import type { SearchResultItem } from "../state/searchStore";
 import type { ScopeOption } from "../types/types";
 
@@ -197,6 +136,7 @@ const props = withDefaults(defineProps<{
   disabled?: boolean;
   searchedWikiproject?: string | null;
   searchedQueryId?: string | null;
+  searchedScope?: string | null;
   results?: SearchResultItem[];
   isLoading?: boolean;
   error?: string | null;
@@ -210,6 +150,7 @@ const props = withDefaults(defineProps<{
   disabled: false,
   searchedWikiproject: null,
   searchedQueryId: null,
+  searchedScope: null,
   results: () => [],
   isLoading: false,
   error: null,
@@ -232,6 +173,7 @@ const error = computed(() => props.error);
 const connectionError = computed(() => props.connectionError);
 const searchedWikiproject = computed(() => props.searchedWikiproject);
 const searchedQueryId = computed(() => props.searchedQueryId);
+const searchedScope = computed(() => props.searchedScope);
 onMounted(() => {
   isPanelCollapsed.value = window.innerWidth < 640;
 });
@@ -250,29 +192,12 @@ function collapsePanel() {
   isPanelCollapsed.value = true;
 }
 
-const filteredResults = computed(() => {
-  if (!textFilter.value) return results.value;
-  const search = textFilter.value.toLowerCase();
-  return results.value.filter(
-    (r) =>
-      r.label.toLowerCase().includes(search) ||
-      r.itemId.toLowerCase().includes(search)
-  );
-});
-
 const activeFilterCount = computed(() => (textFilter.value ? 1 : 0));
 
 const hasActiveFilters = computed(() => textFilter.value.trim() !== "");
 
 function clearFilters() {
   textFilter.value = "";
-}
-
-const isContributionInfoCollapsed = ref(true);
-const contributionInfo = computed(() => searchedQueryId.value ? getQueryContributionInfo(searchedQueryId.value) : null);
-
-function toggleContributionInfo() {
-  isContributionInfoCollapsed.value = !isContributionInfoCollapsed.value;
 }
 
 function getQueryLabel(queryValue: string | null): string {
@@ -407,30 +332,6 @@ function getWikiprojectLabel(projectValue: string | null): string {
   width: 100%;
 }
 
-.loading-state {
-  padding: var(--spacing-100);
-  border: 0.0625rem solid var(--border-color-base);
-  border-radius: var(--border-radius-base);
-  width: 100%;
-}
-
-.loading-state h3 {
-  margin: 0 0 var(--spacing-100) 0;
-  color: var(--color-emphasized);
-  text-align: center;
-}
-
-.loading-state :deep(.cdx-progress-bar__bar) {
-  background-color: var(--background-color-progressive) !important;
-}
-
-@media (min-width: 1024px) {
-  .loading-state :deep(.cdx-progress-bar) {
-    max-width: 32rem;
-    margin: 0 auto;
-  }
-}
-
 .collapse-button {
   width: var(--size-200);
   height: var(--size-200);
@@ -541,90 +442,6 @@ function getWikiprojectLabel(projectValue: string | null): string {
 .filters-controls :deep(.cdx-label__label__text) {
   overflow: visible;
   text-overflow: ellipsis;
-}
-
-.category-filter-error {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-50);
-  color: var(--color-error);
-  font-size: var(--font-size-medium);
-  font-weight: 400 !important;
-  margin-top: var(--spacing-25);
-}
-
-.category-filter-error :deep(.cdx-icon) {
-  margin-top: 2px;
-  color: var(--color-error);
-  width: 20px;
-  height: 20px;
-  min-width: 20px;
-}
-
-.category-filter-error :deep(.cdx-message__content) {
-  margin-left: 0;
-  line-height: var(--line-height-small);
-}
-
-.contribution-info-message {
-  margin-bottom: var(--spacing-100);
-}
-
-.contribution-info-message :deep(.cdx-message__content) {
-  margin-left: 0;
-  width: 100%;
-}
-
-.contribution-info-content {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--spacing-75);
-  cursor: pointer;
-  width: 100%;
-  line-height: var(--line-height-small) !important;
-}
-
-.contribution-info-text {
-  color: var(--color-base);
-  white-space: pre-line;
-}
-
-.contribution-info-text-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.contribution-info-example {
-  margin-top: var(--spacing-100);
-}
-.contribution-info-example-label {
-  font-weight: 700;
-}
-
-.contribution-info-icon {
-  flex-shrink: 0;
-  color: var(--color-notice);
-}
-
-.contribution-info-message :deep(.cdx-message__icon--vue) {
-  width: var(--Components-Icon-medium, 1.25rem);
-  height: var(--Components-Icon-medium, 1.25rem);
-  flex-shrink: 0;
-  aspect-ratio: 1/1;
-  margin-inline-end: var(--spacing-50);
-  margin-top: calc((var(--line-height-small) - 1.125rem) / 2);
-}
-
-.contribution-info-example-subject-link {
-  color: var(--color-progressive);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.contribution-info-example-subject-link:hover {
-  text-decoration: underline;
 }
 
 </style>
