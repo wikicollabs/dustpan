@@ -363,6 +363,7 @@ onBeforeUnmount(() => {
 }
 
 .cdx-select-with-search__menu {
+  inset: unset;
   margin: 0;
   padding: 0;
   background-color: var(--background-color-base);
