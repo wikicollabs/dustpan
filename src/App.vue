@@ -74,34 +74,10 @@ const scopeOptionsMap = ref<Record<string, ScopeOption[] | null>>(
   Object.fromEntries(scopeIds.map((id) => [id, null]))
 );
 
-function getAnyCachedScopeOptions(scopeId: string): ScopeOption[] | null {
-  const prefix = `dustpan_scope_${scopeId}_`;
-
-  for (let i = 0; i < sessionStorage.length; i++) {
-    const key = sessionStorage.key(i);
-
-    if (key?.startsWith(prefix)) {
-      const cached = sessionStorage.getItem(key);
-
-      if (cached) {
-        return JSON.parse(cached);
-      }
-    }
-  }
-
-  return null;
-}
-
-function prefetchScopeOptions() {
+function loadScopeOptions() {
   const lang = getDisplayLanguage();
 
   for (const scopeId of scopeIds) {
-    const cached = getAnyCachedScopeOptions(scopeId);
-
-    if (cached) {
-      scopeOptionsMap.value[scopeId] = cached;
-    }
-
     fetchScopeOptions(scopeId, lang).then((options) => {
       scopeOptionsMap.value[scopeId] = options;
     });
@@ -143,17 +119,10 @@ const scopeInitialValue = ref<string | null>(null);
 // (see call sites below), so the results area shows a spinner for the
 // whole resolution+search window instead of a blank/0-results flash.
 //
-// 20s timeout: a genuine last-resort safety net, not a normal-latency
-// race. fetchScopeOptions always resolves on its own (it catches its
-// own network errors and falls back to []), so under any real-world
-// condition - slow WDQS response, an uncached fetch after a language
-// change invalidates the scope options cache, etc. - this will resolve
-// on its own well before 20s. this only exists to stop the UI hanging
-// forever in a genuinely broken case (e.g. ScopeSelect fails to mount
-// at all). previously this was 3s, which was short enough to regularly
-// lose the race against an uncached fetch, silently discarding the
-// resolved scope and reverting to "All" - see git history/changelog
-// for that incident before touching this value again.
+// 20s timeout: a last-resort safety net. fetchScopeOptions reads from a
+// bundled cache and never rejects, so resolution is near instant in
+// practice. This only stops the UI hanging forever in a genuinely broken
+// case (e.g. ScopeSelect fails to mount at all).
 // NOTE: within-search-view popstate (two searches, same view, ScopeSelect
 // never remounts, see KNOWN LIMITATION above) will always hit this
 // timeout rather than the real resolution, since nothing re-emits on a
@@ -206,7 +175,7 @@ async function executeSearch() {
 }
 
 onMounted(async () => {
-  prefetchScopeOptions();
+  loadScopeOptions();
 
   window.addEventListener("popstate", onPopState);
 
