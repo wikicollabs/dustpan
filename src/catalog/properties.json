@@ -5,8 +5,7 @@
     "lb": "web feed URL",
     "min": "web feed URL",
     "nl": "link naar feed",
-    "ps": "web feed URL",
-    "qqq": "web feed URL"
+    "ps": "web feed URL"
   },
   "P136": {
     "en": "genre",
@@ -14,8 +13,7 @@
     "lb": "Genre",
     "min": "genre",
     "nl": "genre",
-    "ps": "ژانر",
-    "qqq": "genre"
+    "ps": "ژانر"
   },
   "P1476": {
     "en": "title",
@@ -23,8 +21,7 @@
     "lb": "Titel",
     "min": "title",
     "nl": "titel",
-    "ps": "سرليک",
-    "qqq": "title"
+    "ps": "سرليک"
   },
   "P162": {
     "en": "producer",
@@ -32,8 +29,7 @@
     "lb": "Produzent",
     "min": "producer",
     "nl": "producer",
-    "ps": "تولیدونکی",
-    "qqq": "producer"
+    "ps": "تولیدونکی"
   },
   "P170": {
     "en": "creator",
@@ -41,8 +37,7 @@
     "lb": "Createur",
     "min": "creator",
     "nl": "maker",
-    "ps": "پنځوونکی",
-    "qqq": "creator"
+    "ps": "پنځوونکی"
   },
   "P175": {
     "en": "performer",
@@ -50,8 +45,7 @@
     "lb": "Interpret",
     "min": "performer",
     "nl": "uitvoerend artiest",
-    "ps": "performer",
-    "qqq": "performer"
+    "ps": "performer"
   },
   "P186": {
     "en": "made from material",
@@ -59,8 +53,7 @@
     "lb": "benotzt Material",
     "min": "made from material",
     "nl": "materiaal",
-    "ps": "made from material",
-    "qqq": "made from material"
+    "ps": "made from material"
   },
   "P195": {
     "en": "collection",
@@ -68,8 +61,7 @@
     "lb": "Sammlung",
     "min": "collection",
     "nl": "collectie",
-    "ps": "ټولگه",
-    "qqq": "collection"
+    "ps": "ټولگه"
   },
   "P264": {
     "en": "record label",
@@ -77,8 +69,7 @@
     "lb": "Musekslabel",
     "min": "record label",
     "nl": "platenlabel",
-    "ps": "record label",
-    "qqq": "record label"
+    "ps": "record label"
   },
   "P272": {
     "en": "production company",
@@ -86,8 +77,7 @@
     "lb": "Produktiounsgesellschaft",
     "min": "produksi",
     "nl": "productiemaatschappij",
-    "ps": "تولیدونکی کمپنۍ",
-    "qqq": "production company"
+    "ps": "تولیدونکی کمپنۍ"
   },
   "P371": {
     "en": "presenter",
@@ -95,8 +85,7 @@
     "lb": "presenter",
     "min": "presenter",
     "nl": "presentator",
-    "ps": "presenter",
-    "qqq": "presenter"
+    "ps": "presenter"
   },
   "P407": {
     "en": "language of work or name",
@@ -104,8 +93,7 @@
     "lb": "Sprooch vum Wierk oder Numm",
     "min": "language of work or name",
     "nl": "taal van werk of naam",
-    "ps": "اثر ژبه",
-    "qqq": "language of work or name"
+    "ps": "اثر ژبه"
   },
   "P571": {
     "en": "inception",
@@ -113,8 +101,7 @@
     "lb": "Grënnungsdatum / Baudatum",
     "min": "tanggal pandirian",
     "nl": "datum van oprichting of creatie",
-    "ps": "بنسټ اېښودنه",
-    "qqq": "inception"
+    "ps": "بنسټ اېښودنه"
   },
   "P577": {
     "en": "publication date",
@@ -122,8 +109,7 @@
     "lb": "Verëffentlechungsdatum",
     "min": "publication date",
     "nl": "datum van uitgave",
-    "ps": "خپرېدو نېټه",
-    "qqq": "publication date"
+    "ps": "خپرېدو نېټه"
   },
   "P856": {
     "en": "official website",
@@ -131,7 +117,6 @@
     "lb": "Websäit",
     "min": "official website",
     "nl": "officiële website",
-    "ps": "رسمي وېبځی",
-    "qqq": "official website"
+    "ps": "رسمي وېبځی"
   }
 }

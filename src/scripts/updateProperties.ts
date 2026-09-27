@@ -48,11 +48,15 @@ function collectPropertyIds(): string[] {
   return [...ids].sort();
 }
 
+// Message documentation for translators, not a display language.
+const NON_DISPLAY_LANGS = new Set(['qqq']);
+
 // lang codes = i18n/*.json filenames, minus extension
 function collectLangCodes(): string[] {
   return readdirSync(I18N_DIR)
     .filter((f) => f.endsWith('.json'))
-    .map((f) => f.replace(/\.json$/, ''));
+    .map((f) => f.replace(/\.json$/, ''))
+    .filter((lang) => !NON_DISPLAY_LANGS.has(lang));
 }
 
 function chunk<T>(items: T[], size: number): T[][] {
