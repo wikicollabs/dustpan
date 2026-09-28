@@ -3,6 +3,6 @@
     "label": "search-geographic-label",
     "allOptionLabel": "search-geographic-scope-all",
     "source": "wikidata-query",
-    "sparqlTemplate": "{ ?value wdt:P31 wd:Q3624078 . } UNION { ?value wdt:P31 wd:Q161243 ; wdt:P297 ?isoCode . } UNION { ?value wdt:P31 ?area . ?area wdt:P279 wd:Q1763527 . } FILTER NOT EXISTS { ?value wdt:P576 ?dissolved . }"
+    "sparqlTemplate": "{ ?value wdt:P31 wd:Q3624078 . } UNION { ?value wdt:P31 wd:Q161243 ; wdt:P297 ?isoCode . } UNION { ?value wdt:P31 wd:Q6256 ; wdt:P297 ?isoCode . } UNION { ?value wdt:P31 ?area . ?area wdt:P279 wd:Q1763527 . } FILTER NOT EXISTS { ?value wdt:P576 ?dissolved . }"
   }
 }

@@ -1680,6 +1680,14 @@
       "nl": "Sint Maarten",
       "ps": "سينټ مارټين"
     },
+    "Q26988": {
+      "en": "Cook Islands",
+      "id": "Kepulauan Cook",
+      "lb": "Cook-Inselen",
+      "min": "Kapulauan Cook",
+      "nl": "Cookeilanden",
+      "ps": "کوک ټاپوګان"
+    },
     "Q29999": {
       "en": "Kingdom of the Netherlands",
       "id": "Kerajaan Belanda",
@@ -1695,6 +1703,14 @@
       "min": "Kaledonia Baru",
       "nl": "Nieuw-Caledonië",
       "ps": "New Caledonia"
+    },
+    "Q34020": {
+      "en": "Niue",
+      "id": "Niue",
+      "lb": "Niue",
+      "min": "Niue",
+      "nl": "Niue",
+      "ps": "نيووی"
     },
     "Q36823": {
       "en": "Tokelau",
