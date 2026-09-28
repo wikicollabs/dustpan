@@ -46,9 +46,13 @@ If you are not comfortable writing the SPARQL query yourself, describe what the 
 
 Display strings live under `src/i18n/`.
 
-Dustpan is in the process of being added to [translatewiki.net](https://translatewiki.net/wiki/Translating:Dustpan). Once that is complete, translations will be handled there rather than through direct pull requests.
+Dustpan translations are managed through [translatewiki.net](https://translatewiki.net/wiki/Translating:Dustpan).
 
-If you would like to help translate Dustpan, check back once the project is available on translatewiki.net.
+To contribute a translation, use translatewiki.net rather than submitting translations directly through GitHub.
+
+The source language is English. Changes that add or modify translatable source strings should still be made in the Dustpan codebase, while translations into other languages should be contributed through translatewiki.net.
+
+See [Translating:Dustpan](https://translatewiki.net/wiki/Translating:Dustpan) for project information and to get started.
 
 ## Reporting Bugs
 
