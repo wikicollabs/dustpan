@@ -24,6 +24,38 @@
       "nl": "Noorwegen",
       "ps": "ناروې"
     },
+    "Q21": {
+      "en": "England",
+      "id": "Inggris",
+      "lb": "England",
+      "min": "Inggris",
+      "nl": "Engeland",
+      "ps": "انګلېنډ"
+    },
+    "Q22": {
+      "en": "Scotland",
+      "id": "Skotlandia",
+      "lb": "Schottland",
+      "min": "Skotlandia",
+      "nl": "Schotland",
+      "ps": "سکاټلينډ"
+    },
+    "Q25": {
+      "en": "Wales",
+      "id": "Wales",
+      "lb": "Wales",
+      "min": "Wales",
+      "nl": "Wales",
+      "ps": "ويلز"
+    },
+    "Q26": {
+      "en": "Northern Ireland",
+      "id": "Irlandia Utara",
+      "lb": "Nordirland",
+      "min": "Northern Ireland",
+      "nl": "Noord-Ierland",
+      "ps": "شمالي ایرلنډ"
+    },
     "Q27": {
       "en": "Ireland",
       "id": "Republik Irlandia",
@@ -1104,6 +1136,14 @@
       "nl": "Tadzjikistan",
       "ps": "تاجيکستان"
     },
+    "Q865": {
+      "en": "Taiwan",
+      "id": "Taiwan",
+      "lb": "Taiwan",
+      "min": "Taiwan",
+      "nl": "Taiwan",
+      "ps": "تايوان"
+    },
     "Q869": {
       "en": "Thailand",
       "id": "Thailand",
@@ -1568,6 +1608,54 @@
       "nl": "Kosovo",
       "ps": "کوسووو"
     },
+    "Q4628": {
+      "en": "Faroe Islands",
+      "id": "Kepulauan Faroe",
+      "lb": "Färöer",
+      "min": "Faroe Islands",
+      "nl": "Faeröer",
+      "ps": "فارو ټاپوګان"
+    },
+    "Q8646": {
+      "en": "Hong Kong",
+      "id": "Hong Kong",
+      "lb": "Hong Kong",
+      "min": "Hong Kong",
+      "nl": "Hongkong",
+      "ps": "هانګ کانګ"
+    },
+    "Q14773": {
+      "en": "Macau",
+      "id": "Makau",
+      "lb": "Macau",
+      "min": "Macau",
+      "nl": "Macau",
+      "ps": "مکاو"
+    },
+    "Q17012": {
+      "en": "Guadeloupe",
+      "id": "Guadeloupe",
+      "lb": "Departement Guadeloupe",
+      "min": "Guadeloupe",
+      "nl": "Guadeloupe",
+      "ps": "ګوادېلوپ"
+    },
+    "Q17054": {
+      "en": "Martinique",
+      "id": "Pulau Martinik",
+      "lb": "Departement Martinique",
+      "min": "Martinique",
+      "nl": "Martinique",
+      "ps": "Martinique"
+    },
+    "Q17070": {
+      "en": "Réunion",
+      "id": "Réunion",
+      "lb": "Departement La Réunion",
+      "min": "Réunion",
+      "nl": "Réunion",
+      "ps": "رېيونين"
+    },
     "Q21203": {
       "en": "Aruba",
       "id": "Aruba",
@@ -1575,14 +1663,6 @@
       "min": "Aruba",
       "nl": "Aruba",
       "ps": "اروبا"
-    },
-    "Q23681": {
-      "en": "Northern Cyprus",
-      "id": "Siprus Utara",
-      "lb": "Tierkesch Republik Nordzypern",
-      "min": "Siprus Utara",
-      "nl": "Noord-Cyprus",
-      "ps": "شمالي قبرس"
     },
     "Q25279": {
       "en": "Curaçao",
@@ -1600,14 +1680,6 @@
       "nl": "Sint Maarten",
       "ps": "سينټ مارټين"
     },
-    "Q26988": {
-      "en": "Cook Islands",
-      "id": "Kepulauan Cook",
-      "lb": "Cook-Inselen",
-      "min": "Kapulauan Cook",
-      "nl": "Cookeilanden",
-      "ps": "کوک ټاپوګان"
-    },
     "Q29999": {
       "en": "Kingdom of the Netherlands",
       "id": "Kerajaan Belanda",
@@ -1616,45 +1688,37 @@
       "nl": "Koninkrijk der Nederlanden",
       "ps": "د هالنډ سلطنت"
     },
-    "Q34020": {
-      "en": "Niue",
-      "id": "Niue",
-      "lb": "Niue",
-      "min": "Niue",
-      "nl": "Niue",
-      "ps": "نيووی"
+    "Q33788": {
+      "en": "New Caledonia",
+      "id": "Kaledonia Baru",
+      "lb": "Neikaledonien",
+      "min": "Kaledonia Baru",
+      "nl": "Nieuw-Caledonië",
+      "ps": "New Caledonia"
     },
-    "Q34754": {
-      "en": "Somaliland",
-      "id": "Somaliland",
-      "lb": "Somaliland",
-      "min": "Somaliland",
-      "nl": "Somaliland",
-      "ps": "سومالیلانډ"
+    "Q36823": {
+      "en": "Tokelau",
+      "id": "Tokelau",
+      "lb": "Tokelau",
+      "min": "Tokelau",
+      "nl": "Tokelau",
+      "ps": "توکلاو"
     },
-    "Q157734": {
-      "en": "Muscat and Oman",
-      "id": "Muscat dan Oman",
-      "lb": "Muscat and Oman",
-      "min": "Muscat and Oman",
-      "nl": "Sultanaat Muscat en Oman",
-      "ps": "Muscat and Oman"
+    "Q129003": {
+      "en": "French Southern and Antarctic Lands",
+      "id": "Daratan Selatan dan Antarktika Perancis",
+      "lb": "Franséisch Süd- an Antarktisgebidder",
+      "min": "French Southern and Antarctic Lands",
+      "nl": "Franse Zuidelijke Gebieden",
+      "ps": "French Southern and Antarctic Lands"
     },
-    "Q165763": {
-      "en": "Principality of Waldeck",
-      "id": "Waldeck",
-      "lb": "Principality of Waldeck",
-      "min": "Principality of Waldeck",
-      "nl": "Vorstendom Waldeck-Pyrmont",
-      "ps": "Principality of Waldeck"
-    },
-    "Q188736": {
-      "en": "Bosnia",
-      "id": "Bosnia",
-      "lb": "Bosnia",
-      "min": "Bosnia",
-      "nl": "Bosnië",
-      "ps": "Bosnia"
+    "Q161258": {
+      "en": "Clipperton Island",
+      "id": "Pulau Clipperton",
+      "lb": "Clipperton Island",
+      "min": "Clipperton Island",
+      "nl": "Clipperton",
+      "ps": "Clipperton Island"
     },
     "Q219060": {
       "en": "Palestine",
@@ -1671,54 +1735,6 @@
       "min": "Kingdom of Denmark",
       "nl": "Koninkrijk Denemarken",
       "ps": "ډېنمارک"
-    },
-    "Q12191529": {
-      "en": "Emirate of Lengeh",
-      "id": "Emirate of Lengeh",
-      "lb": "Emirate of Lengeh",
-      "min": "Emirate of Lengeh",
-      "nl": "Emirate of Lengeh",
-      "ps": "Emirate of Lengeh"
-    },
-    "Q16881283": {
-      "en": "Sultanate of Muscat",
-      "id": "Sultanate of Muscat",
-      "lb": "Sultanate of Muscat",
-      "min": "Sultanate of Muscat",
-      "nl": "Sultanate of Muscat",
-      "ps": "Sultanate of Muscat"
-    },
-    "Q107258515": {
-      "en": "Pahlavi Iran",
-      "id": "Iran Pahlavi",
-      "lb": "Pahlavi Iran",
-      "min": "Pahlavi Iran",
-      "nl": "Pahlavi-Iran",
-      "ps": "Pahlavi Iran"
-    },
-    "Q123027565": {
-      "en": "Kashmir Sultanate",
-      "id": "Kashmir Sultanate",
-      "lb": "Kashmir Sultanate",
-      "min": "Kashmir Sultanate",
-      "nl": "Kashmir Sultanate",
-      "ps": "Kashmir Sultanate"
-    },
-    "Q131588685": {
-      "en": "Emirate of Al Qawasim",
-      "id": "Emirate of Al Qawasim",
-      "lb": "Emirate of Al Qawasim",
-      "min": "Emirate of Al Qawasim",
-      "nl": "Emirate of Al Qawasim",
-      "ps": "Emirate of Al Qawasim"
-    },
-    "Q140030295": {
-      "en": "Maragheh Khanate",
-      "id": "Maragheh Khanate",
-      "lb": "Maragheh Khanate",
-      "min": "Maragheh Khanate",
-      "nl": "Maragheh Khanate",
-      "ps": "Maragheh Khanate"
     }
   }
 }
