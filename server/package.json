@@ -1,14 +1,14 @@
 {
-  "name": "dustpan-search-log-server",
+  "name": "dustpan-selection-log-server",
   "version": "1.0.0",
-  "description": "Logging service for Dustpan search query usage",
+  "description": "Server for the Dustpan selection log",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-2.0-or-later",
   "type": "commonjs",
   "dependencies": {
     "express": "^5.2.1",

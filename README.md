@@ -27,7 +27,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 - Vue 3, Vite, Pinia for the frontend
 - [Codex](https://doc.wikimedia.org/codex/latest/), Wikimedia's design system, for UI components
-- vue-banana-i18n for translations
+- vue-banana-i18n for internationalization, with translations managed through [translatewiki.net](https://translatewiki.net/wiki/Translating:Dustpan)
 - Express + MySQL service (`server/`) for logging the selection
 
 
@@ -35,7 +35,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 Requirements:
 
-- Node.js 16 or later
+- Node.js 20.19 or later
 - pnpm 10.22.0
 
 Install dependencies and start the frontend:
@@ -83,8 +83,6 @@ Run it after adding a new property or language:
 pnpm exec tsx src/scripts/updateProperties.ts
 ```
 
-There is also a scheduled GitHub Action that updates it.
-
 
 ## Deployment
 
@@ -93,9 +91,9 @@ Dustpan runs on Wikimedia Toolforge. Deployment is currently manual.
 
 ## Contributing
 
-Bug reports, new WikiProjects, new query types, and other improvements are welcome.
+Bug reports, new WikiProjects, new query types, translations, and other improvements are welcome.
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development and contribution guidelines. Translations are managed through [translatewiki.net](https://translatewiki.net/wiki/Translating:Dustpan).
 
 
 ## License
