@@ -18,7 +18,8 @@ export const DISPLAY_LANGUAGES: DisplayLanguage[] = [
   { code: 'lb', autonym: 'Lëtzebuergesch', rtl: false},
   { code: 'min', autonym: 'Minangkabau', rtl: false},
   { code: 'nl', autonym: 'Nederlands', rtl: false},
-  { code: 'ps', autonym: 'پښتو', rtl: true}
+  { code: 'ps', autonym: 'پښتو', rtl: true},
+  { code: 'zh-hant', nativeName: '中文（繁體）', rtl: false }
 ];
 
 export const getBrowserLanguage = (): string => {
