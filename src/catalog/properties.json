@@ -5,7 +5,8 @@
     "lb": "web feed URL",
     "min": "web feed URL",
     "nl": "link naar feed",
-    "ps": "web feed URL"
+    "ps": "web feed URL",
+    "zh-hant": "訂閱源網址"
   },
   "P136": {
     "en": "genre",
@@ -13,7 +14,8 @@
     "lb": "Genre",
     "min": "genre",
     "nl": "genre",
-    "ps": "ژانر"
+    "ps": "ژانر",
+    "zh-hant": "類型"
   },
   "P1476": {
     "en": "title",
@@ -21,7 +23,8 @@
     "lb": "Titel",
     "min": "title",
     "nl": "titel",
-    "ps": "سرليک"
+    "ps": "سرليک",
+    "zh-hant": "標題"
   },
   "P162": {
     "en": "producer",
@@ -29,7 +32,8 @@
     "lb": "Produzent",
     "min": "producer",
     "nl": "producer",
-    "ps": "تولیدونکی"
+    "ps": "تولیدونکی",
+    "zh-hant": "製作人"
   },
   "P170": {
     "en": "creator",
@@ -37,7 +41,8 @@
     "lb": "Createur",
     "min": "creator",
     "nl": "maker",
-    "ps": "پنځوونکی"
+    "ps": "پنځوونکی",
+    "zh-hant": "創作作者"
   },
   "P175": {
     "en": "performer",
@@ -45,7 +50,8 @@
     "lb": "Interpret",
     "min": "performer",
     "nl": "uitvoerend artiest",
-    "ps": "performer"
+    "ps": "performer",
+    "zh-hant": "表演者"
   },
   "P186": {
     "en": "made from material",
@@ -53,7 +59,8 @@
     "lb": "benotzt Material",
     "min": "made from material",
     "nl": "materiaal",
-    "ps": "made from material"
+    "ps": "made from material",
+    "zh-hant": "材料"
   },
   "P195": {
     "en": "collection",
@@ -61,7 +68,8 @@
     "lb": "Sammlung",
     "min": "collection",
     "nl": "collectie",
-    "ps": "ټولگه"
+    "ps": "ټولگه",
+    "zh-hant": "藏於"
   },
   "P264": {
     "en": "record label",
@@ -69,7 +77,8 @@
     "lb": "Musekslabel",
     "min": "record label",
     "nl": "platenlabel",
-    "ps": "record label"
+    "ps": "record label",
+    "zh-hant": "唱片廠牌"
   },
   "P272": {
     "en": "production company",
@@ -77,7 +86,8 @@
     "lb": "Produktiounsgesellschaft",
     "min": "produksi",
     "nl": "productiemaatschappij",
-    "ps": "تولیدونکی کمپنۍ"
+    "ps": "تولیدونکی کمپنۍ",
+    "zh-hant": "製作商"
   },
   "P371": {
     "en": "presenter",
@@ -85,7 +95,8 @@
     "lb": "presenter",
     "min": "presenter",
     "nl": "presentator",
-    "ps": "presenter"
+    "ps": "presenter",
+    "zh-hant": "主持人"
   },
   "P407": {
     "en": "language of work or name",
@@ -93,7 +104,8 @@
     "lb": "Sprooch vum Wierk oder Numm",
     "min": "language of work or name",
     "nl": "taal van werk of naam",
-    "ps": "اثر ژبه"
+    "ps": "اثر ژبه",
+    "zh-hant": "作品或名稱使用語言"
   },
   "P571": {
     "en": "inception",
@@ -101,7 +113,8 @@
     "lb": "Grënnungsdatum / Baudatum",
     "min": "tanggal pandirian",
     "nl": "datum van oprichting of creatie",
-    "ps": "بنسټ اېښودنه"
+    "ps": "بنسټ اېښودنه",
+    "zh-hant": "成立日期"
   },
   "P577": {
     "en": "publication date",
@@ -109,7 +122,8 @@
     "lb": "Verëffentlechungsdatum",
     "min": "publication date",
     "nl": "datum van uitgave",
-    "ps": "خپرېدو نېټه"
+    "ps": "خپرېدو نېټه",
+    "zh-hant": "出版日期"
   },
   "P856": {
     "en": "official website",
@@ -117,6 +131,7 @@
     "lb": "Websäit",
     "min": "official website",
     "nl": "officiële website",
-    "ps": "رسمي وېبځی"
+    "ps": "رسمي وېبځی",
+    "zh-hant": "官方網站"
   }
 }
