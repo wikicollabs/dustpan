@@ -13,7 +13,7 @@ import App from './App.vue'
 import i18n from './i18n/i18n'
 import '@wikimedia/codex-design-tokens/theme-wikimedia-ui.css'
 import '@wikimedia/codex/dist/codex.style-bidi.css';
-import { DISPLAY_LANGUAGES, getBrowserLanguage } from './i18n/displayLanguages';
+import { DISPLAY_LANGUAGES, getDisplayLanguage } from './i18n/displayLanguages';
 
 const app = createApp(App);
 
@@ -70,10 +70,10 @@ if (theme === 'dark') {
   }
 }
 
-const savedLocale = localStorage.getItem('locale') || getBrowserLanguage();
-const langCode = savedLocale.split('-')[0];
-const isRTL = DISPLAY_LANGUAGES.find(l => l.code === langCode)?.rtl ?? false;
+const langCode = getDisplayLanguage();
+const isRTL = DISPLAY_LANGUAGES.find( l => l.code === langCode )?.rtl ?? false;
 
+document.documentElement.lang = langCode;
 document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
 
 const savedTextSize = localStorage.getItem('dustpan_text_size') || 'medium';
