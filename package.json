@@ -1,40 +1,35 @@
 {
   "name": "dustpan",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "vite build && rm -rf server/dist && cp -r dist server/dist",
+    "preview": "vite preview",
     "type-check": "vue-tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@floating-ui/vue": "^2.0.1",
-    "@wikimedia/codex": "^2.6.2",
-    "@wikimedia/codex-design-tokens": "^2.6.2",
-    "@wikimedia/codex-icons": "^2.6.2",
-    "pinia": "^4.0.2",
+    "@wikimedia/codex": "2.6.2",
+    "@wikimedia/codex-design-tokens": "2.6.2",
+    "@wikimedia/codex-icons": "2.6.2",
+    "pinia": "^4.1.0",
     "vue-banana-i18n": "^2.3.0"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
-    "@vitejs/plugin-vue": "^6.0.1",
-    "tsx": "^4.23.12",
-    "typescript": "^5.9.3",
-    "vite": "^7.1.7",
-    "vue": "^3.5.21",
-    "vue-tsc": "^3.3.8"
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "typescript": "5.9.3",
+    "vite": "^8.3.5",
+    "vue": "^3.5.44",
+    "vue-tsc": "^3.3.13"
   },
   "engines": {
-    "node": "^20.19.0 || >=22.12.0",
-    "pnpm": "10.22.0"
+    "node": ">=26.12.1 <27",
+    "pnpm": "12.15.0"
   },
-  "packageManager": "pnpm@10.22.0",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "vue-demi"
-    ]
-  }
+  "packageManager": "pnpm@12.15.0+sha512.b3951d6d6ff4a9f13dc7cf56cd28d2b8eb37dbcc9c68e52e1e1191873ea9f82a017287ab50baadc5ccc494f036c67c0e47eb13608c2fa36f47711b61ea128e61"
 }

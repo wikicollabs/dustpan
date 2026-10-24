@@ -1,6 +1,6 @@
 {
   "name": "dustpan-selection-log-server",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Server for the Dustpan selection log",
   "main": "server.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "GPL-2.0-or-later",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1",
-    "mysql2": "^3.23.2"
+    "express": "5.3.0",
+    "mysql2": "3.24.6"
   }
 }
