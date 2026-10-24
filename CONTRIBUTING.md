@@ -8,8 +8,8 @@ This document covers how to set up a local development environment, propose chan
 
 ### Requirements
 
-- Node.js 16 or later
-- pnpm 10.22.0 for the frontend
+- Node.js 26.12.1 or newer within the 26.x release line
+- pnpm 12.15.0 (check the root `packageManager` field for the pinned version)
 
 Install the dependencies and start the development server:
 

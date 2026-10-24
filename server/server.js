@@ -8,7 +8,10 @@ const PORT = parseInt(process.env.PORT, 10) || 3000;
 
 app.use('/viewer', express.static(path.join(__dirname, 'viewer')));
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.json());
+app.use(express.json({
+  inflate: false,
+  limit: '2kb'
+}));
 
 app.post('/api/log', async (req, res) => {
   const { selection } = req.body;

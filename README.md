@@ -35,8 +35,8 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 Requirements:
 
-- Node.js 20.19 or later
-- pnpm 10.22.0
+- Node.js 26.12.1 or newer within the 26.x release line
+- pnpm 12.15.0 (check the root `packageManager` field for the pinned version)
 
 Install dependencies and start the frontend:
 
@@ -75,6 +75,8 @@ server/           Logs for selection
 
 ## Maintenance scripts
 
+### Updating properties
+
 `src/scripts/updateProperties.ts` regenerates `src/catalog/properties.json`, which contains Wikidata property labels used by the catalog.
 
 Run it after adding a new property or language:
@@ -82,11 +84,23 @@ Run it after adding a new property or language:
 ```bash
 pnpm exec tsx src/scripts/updateProperties.ts
 ```
+### Updating scopes
 
+`src/scripts/updateScopes.ts` regenerates `src/catalog/scopeOptions.json`, which contains label of the scope options in the display language.
+
+Run it after adding new display language:
+
+```bash
+pnpm exec tsx src/scripts/updateScopes.ts
+```
 
 ## Deployment
 
-Dustpan runs on Wikimedia Toolforge. Deployment is currently manual.
+Dustpan runs on Wikimedia Toolforge using **Toolforge Build Service** with Node.js 26. Its staging and production environments are deployed separately through manually triggered GitHub Actions workflows.
+
+A merged pull request does not itself authorize a deployment. Deployment credentials, passphrases, and Toolforge configuration are maintained outside the source code. Maintainers should test changes on staging before production.
+
+The build service installs the pnpm workspace and builds the application from Git. Do not reintroduce the old SCP/tar deployment or the `node20` webservice commands. A successful image build should be followed by runtime and application checks.
 
 
 ## Contributing
