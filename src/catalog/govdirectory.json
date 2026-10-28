@@ -8,6 +8,7 @@
       "name": "ministry-missing-contacturl-label",
       "instanceOf": ["Q192350"],
       "missingPid": "P11266",
+      "excludeIfPresent": ["P576"],
       "contributionSummary": "ministry-missing-contacturl-contribution-summary",
       "contributionDetails": "ministry-missing-contacturl-contribution-details",
       "example": {
@@ -62,6 +63,7 @@
       "name": "ministry-missing-official-website-label",
       "instanceOf": ["Q192350"],
       "missingPid": "P856",
+      "excludeIfPresent": ["P576"],
       "contributionSummary": "ministry-missing-official-website-contribution-summary",
       "contributionDetails": "ministry-missing-official-website-contribution-details",
       "example": {

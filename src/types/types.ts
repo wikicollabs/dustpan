@@ -22,6 +22,7 @@ export interface QueryType {
   name: string;
   instanceOf: string[];
   missingPid: string;
+  excludeIfPresent?: string[];
   contributionSummary: string;
   contributionDetails: string;
   example?: { subject: string; property: string; value: string; qid: string } | null;
@@ -62,4 +63,4 @@ export interface SparqlBindingValue {
   value: string;
   'xml:lang'?: string;
   datatype?: string;
-}
+}

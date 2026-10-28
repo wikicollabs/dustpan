@@ -94,6 +94,9 @@ export function buildQuerySparql(
 
   const instTriple = instanceOfClause(queryType.instanceOf);
   const scopeTriple = scopeClause(queryType.scope, scopeQid);
+  const exclusionFilters = (queryType.excludeIfPresent ?? [])
+    .map((pid) => `FILTER NOT EXISTS { ?item wdt:${pid} ?excludedValue . }`)
+    .join('\n            ');
 
   return `
   SELECT ?item ?itemLabel ?itemLabel_lang WHERE {
@@ -103,6 +106,7 @@ export function buildQuerySparql(
           SELECT ?item WHERE {
             ${instTriple}
             ${scopeTriple}
+            ${exclusionFilters}
             MINUS { ?item wdt:${queryType.missingPid} ?exclude . }
           }
           ${limitClause(limit)}
