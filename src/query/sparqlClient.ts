@@ -19,6 +19,7 @@ export async function runSparqlQuery(sparql: string, timeoutMs = 60000): Promise
       headers: {
         Accept: 'application/sparql-results+json',
         'Content-Type': 'application/sparql-query',
+        'Api-User-Agent': 'Dustpan/1.0 (https://github.com/wikicollabs/dustpan)',
       },
       body: sparql,
       signal: controller.signal,
