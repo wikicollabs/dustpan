@@ -32,7 +32,7 @@
       "contributionDetails": "paintings-missing-material-contribution-details",
       "example": {
         "subject": "Mona Lisa",
-        "property": "material (P186)",
+        "property": "made from material (P186)",
         "value": "oil paint (Q296955)",
         "qid": "Q12418"
       },
