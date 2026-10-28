@@ -141,5 +141,5 @@ export function getQuerySparql(
 ): string | null {
   const found = findQueryType(queryId);
   if (!found) return null;
-  return buildQuerySparql(found.project, found.query, scopeQid, limit, lang);
-}
+  return buildQuerySparql(found.query, scopeQid, limit, lang);
+}

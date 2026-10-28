@@ -2,11 +2,11 @@
   "id": "music",
   "name": "Music",
   "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_Music",
-  "instanceOf": ["Q482994", "Q169930", "Q134556"],
   "queryTypes": [
     {
       "id": "music-missing-publication-date",
       "name": "music-missing-publication-date-label",
+      "instanceOf": ["Q482994", "Q169930", "Q134556"],
       "missingPid": "P577",
       "contributionSummary": "music-missing-publication-date-contribution-summary",
       "contributionDetails": "music-missing-publication-date-contribution-details",
@@ -28,6 +28,7 @@
     {
       "id": "music-missing-record-label",
       "name": "music-missing-record-label-label",
+      "instanceOf": ["Q482994", "Q169930", "Q134556"],
       "missingPid": "P264",
       "contributionSummary": "music-missing-record-label-contribution-summary",
       "contributionDetails": "music-missing-record-label-contribution-details",
@@ -49,6 +50,7 @@
     {
       "id": "music-missing-language",
       "name": "music-missing-language-label",
+      "instanceOf": ["Q482994", "Q169930", "Q134556"],
       "missingPid": "P407",
       "contributionSummary": "music-missing-language-contribution-summary",
       "contributionDetails": "music-missing-language-contribution-details",
@@ -70,6 +72,7 @@
     {
       "id": "music-missing-title",
       "name": "music-missing-title-label",
+      "instanceOf": ["Q482994", "Q169930", "Q134556"],
       "missingPid": "P1476",
       "contributionSummary": "music-missing-title-contribution-summary",
       "contributionDetails": "music-missing-title-contribution-details",
@@ -91,6 +94,7 @@
     {
       "id": "music-missing-performer",
       "name": "music-missing-performer-label",
+      "instanceOf": ["Q482994", "Q169930", "Q134556"],
       "missingPid": "P175",
       "contributionSummary": "music-missing-performer-contribution-summary",
       "contributionDetails": "music-missing-performer-contribution-details",
@@ -102,4 +106,4 @@
       }
     }
   ]
-}
+}
