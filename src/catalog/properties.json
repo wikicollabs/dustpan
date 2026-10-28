@@ -1,4 +1,15 @@
 {
+  "P101": {
+    "en": "field of work",
+    "id": "spesialisasi",
+    "lb": "Aarbechtsgebitt",
+    "min": "bidang karajo",
+    "nl": "werkveld",
+    "ps": "field of work",
+    "sk": "zameranie",
+    "skr-arab": "field of work",
+    "zh-hant": "專業領域"
+  },
   "P1019": {
     "en": "web feed URL",
     "id": "web feed URL",
@@ -9,6 +20,17 @@
     "sk": "web feed URL",
     "skr-arab": "web feed URL",
     "zh-hant": "訂閱源網址"
+  },
+  "P11266": {
+    "en": "contact page URL",
+    "id": "contact page URL",
+    "lb": "URL vun der Kontaktsäit",
+    "min": "contact page URL",
+    "nl": "contactpagina-URL",
+    "ps": "contact page URL",
+    "sk": "contact page URL",
+    "skr-arab": "contact page URL",
+    "zh-hant": "聯絡頁面URL"
   },
   "P136": {
     "en": "genre",
@@ -42,6 +64,17 @@
     "sk": "producent",
     "skr-arab": "producer",
     "zh-hant": "製作人"
+  },
+  "P17": {
+    "en": "country",
+    "id": "negara",
+    "lb": "Land",
+    "min": "nagara",
+    "nl": "land",
+    "ps": "هېواد",
+    "sk": "štát",
+    "skr-arab": "country",
+    "zh-hant": "國家"
   },
   "P170": {
     "en": "creator",
