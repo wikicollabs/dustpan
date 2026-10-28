@@ -11,10 +11,12 @@ import paintings from './paintings.json';
 import music from './music.json';
 import podcasts from './podcasts.json';
 import manuscripts from './manuscripts.json';
+import govdirectory from './govdirectory.json';
 
 export const WIKIPROJECTS: WikiProject[] = [
   paintings as WikiProject,
   music as WikiProject,
   podcasts as WikiProject,
   manuscripts as WikiProject,
+  govdirectory as WikiProject,
 ];
