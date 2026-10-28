@@ -2,11 +2,11 @@
   "id": "paintings",
   "name": "Sum of All Paintings",
   "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_sum_of_all_paintings",
-  "instanceOf": ["Q3305213"],
   "queryTypes": [
     {
       "id": "paintings-missing-creator",
       "name": "paintings-missing-creator-label",
+      "instanceOf": ["Q3305213"],
       "missingPid": "P170",
       "contributionSummary": "paintings-missing-creator-contribution-summary",
       "contributionDetails": "paintings-missing-creator-contribution-details",
@@ -27,6 +27,7 @@
     {
       "id": "paintings-missing-material",
       "name": "paintings-missing-material-label",
+      "instanceOf": ["Q3305213"],
       "missingPid": "P186",
       "contributionSummary": "paintings-missing-material-contribution-summary",
       "contributionDetails": "paintings-missing-material-contribution-details",
@@ -47,6 +48,7 @@
     {
       "id": "paintings-missing-inception",
       "name": "paintings-missing-inception-label",
+      "instanceOf": ["Q3305213"],
       "missingPid": "P571",
       "contributionSummary": "paintings-missing-inception-contribution-summary",
       "contributionDetails": "paintings-missing-inception-contribution-details",
@@ -67,6 +69,7 @@
     {
       "id": "paintings-missing-genre",
       "name": "paintings-missing-genre-label",
+      "instanceOf": ["Q3305213"],
       "missingPid": "P136",
       "contributionSummary": "paintings-missing-genre-contribution-summary",
       "contributionDetails": "paintings-missing-genre-contribution-details",
@@ -87,6 +90,7 @@
     {
       "id": "paintings-missing-collection",
       "name": "paintings-missing-collection-label",
+      "instanceOf": ["Q3305213"],
       "missingPid": "P195",
       "contributionSummary": "paintings-missing-collection-contribution-summary",
       "contributionDetails": "paintings-missing-collection-contribution-details",

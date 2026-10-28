@@ -9,7 +9,7 @@
  * and produces the SPARQL query string.
  */
 
-import type { WikiProject, QueryType, Scope } from '../types/types';
+import type { QueryType, Scope } from '../types/types';
 
 // ---- label fallback helpers ----
 
@@ -81,12 +81,10 @@ function scopeClause(scope: Scope | undefined, scopeQid: string | null | undefin
 }
 
 // ---- main entry point ----
-// wikiproject: the WikiProject JSON object (has .instanceOf)
-// queryType: the query type JSON object (has .missingPid, .scope)
+// queryType: the selected query type (has .instanceOf, .missingPid, .scope)
 // scopeQid: the selected scope value's QID, or null if none selected
 
 export function buildQuerySparql(
-  wikiproject: WikiProject,
   queryType: QueryType,
   scopeQid?: string | null,
   limit = 1000,
@@ -94,7 +92,7 @@ export function buildQuerySparql(
 ): string {
   const item = labelClause('?item', '?itemLabel', lang);
 
-  const instTriple = instanceOfClause(wikiproject.instanceOf);
+  const instTriple = instanceOfClause(queryType.instanceOf);
   const scopeTriple = scopeClause(queryType.scope, scopeQid);
 
   return `
