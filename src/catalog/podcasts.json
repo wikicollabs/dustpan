@@ -2,11 +2,11 @@
   "id": "podcasts",
   "name": "Podcasts",
   "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_Podcasts",
-  "instanceOf": ["Q24634210"],
   "queryTypes": [
     {
       "id": "podcasts-missing-language",
       "name": "podcasts-missing-language-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P407",
       "contributionSummary": "podcasts-missing-language-contribution-summary",
       "contributionDetails": "podcasts-missing-language-contribution-details",
@@ -26,6 +26,7 @@
     {
       "id": "podcasts-missing-genre",
       "name": "podcasts-missing-genre-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P136",
       "contributionSummary": "podcasts-missing-genre-contribution-summary",
       "contributionDetails": "podcasts-missing-genre-contribution-details",
@@ -45,6 +46,7 @@
     {
       "id": "podcasts-missing-presenter",
       "name": "podcasts-missing-presenter-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P371",
       "contributionSummary": "podcasts-missing-presenter-contribution-summary",
       "contributionDetails": "podcasts-missing-presenter-contribution-details",
@@ -64,6 +66,7 @@
     {
       "id": "podcasts-missing-producer",
       "name": "podcasts-missing-producer-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P162",
       "contributionSummary": "podcasts-missing-producer-contribution-summary",
       "contributionDetails": "podcasts-missing-producer-contribution-details",
@@ -83,6 +86,7 @@
     {
       "id": "podcasts-missing-production-company",
       "name": "podcasts-missing-production-company-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P272",
       "contributionSummary": "podcasts-missing-production-company-contribution-summary",
       "contributionDetails": "podcasts-missing-production-company-contribution-details",
@@ -102,6 +106,7 @@
     {
       "id": "podcasts-missing-official-website",
       "name": "podcasts-missing-official-website-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P856",
       "contributionSummary": "podcasts-missing-official-website-contribution-summary",
       "contributionDetails": "podcasts-missing-official-website-contribution-details",
@@ -121,6 +126,7 @@
     {
       "id": "podcasts-missing-feed-url",
       "name": "podcasts-missing-feed-url-label",
+      "instanceOf": ["Q24634210"],
       "missingPid": "P1019",
       "contributionSummary": "podcasts-missing-feed-url-contribution-summary",
       "contributionDetails": "podcasts-missing-feed-url-contribution-details",
@@ -138,4 +144,4 @@
       }
     }
   ]
-}
+}

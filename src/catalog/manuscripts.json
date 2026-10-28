@@ -1,0 +1,105 @@
+{
+  "id": "manuscripts",
+  "name": "Manuscripts",
+  "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_Manuscripts",
+  "queryTypes": [
+    {
+      "id": "manuscripts-missing-language",
+      "name": "manuscripts-missing-language-label",
+      "instanceOf": ["Q87167"],
+      "missingPid": "P407",
+      "contributionSummary": "manuscripts-missing-language-contribution-summary",
+      "contributionDetails": "manuscripts-missing-language-contribution-details",
+      "example": {
+        "subject": "Puławy Psalter",
+        "property": "language of work (P407)",
+        "value": "Polish (Q809)",
+        "qid": "Q4383550"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
+    },
+    {
+      "id": "manuscripts-missing-material",
+      "name": "manuscripts-missing-material-label",
+      "instanceOf": ["Q87167"],
+      "missingPid": "P186",
+      "contributionSummary": "manuscripts-missing-material-contribution-summary",
+      "contributionDetails": "manuscripts-missing-material-contribution-details",
+      "example": {
+        "subject": "Bern, Burgerbibliothek, MS 87",
+        "property": "made from material (P186)",
+        "value": "parchment (Q226697)",
+        "qid": "Q138911480"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
+    },
+    {
+      "id": "manuscripts-missing-inception",
+      "name": "manuscripts-missing-inception-label",
+      "instanceOf": ["Q87167"],
+      "missingPid": "P571",
+      "contributionSummary": "manuscripts-missing-inception-contribution-summary",
+      "contributionDetails": "manuscripts-missing-inception-contribution-details",
+      "example": {
+        "subject": "Historia Tolteca-Chichimeca",
+        "property": "inception (P571)",
+        "value": "16. century",
+        "qid": "Q2294403"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
+    },
+    {
+      "id": "manuscripts-missing-scriptstyle",
+      "name": "manuscripts-missing-scriptstyle-label",
+      "instanceOf": ["Q87167"],
+      "missingPid": "P9302",
+      "contributionSummary": "manuscripts-missing-scriptstyle-contribution-summary",
+      "contributionDetails": "manuscripts-missing-scriptstyle-contribution-details",
+      "example": {
+        "subject": "Paris, BnF, Lat. 8779",
+        "property": "script style (P9302)",
+        "value": "Carolingian minuscule (Q785729)",
+        "qid": "Q124864992"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "sourcePid": "P195",
+          "scopePid": "P17"
+        }
+      }
+    },
+    {
+      "id": "manuscripts-missing-collection",
+      "name": "manuscripts-missing-collection-label",
+      "instanceOf": ["Q87167"],
+      "missingPid": "P195",
+      "contributionSummary": "manuscripts-missing-collection-contribution-summary",
+      "contributionDetails": "manuscripts-missing-collection-contribution-details",
+      "example": {
+        "subject": "Lawrence, Kansas, University of Kansas, MS A6",
+        "property": "collection (P195)",
+        "value": "University of Kansas (Q52413)",
+        "qid": "Q131749871"
+      }
+    }
+  ]
+}

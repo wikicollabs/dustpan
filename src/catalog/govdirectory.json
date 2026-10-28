@@ -1,0 +1,83 @@
+{
+  "id": "govdirectory",
+  "name": "Govdirectory",
+  "wikidataUrl": "https://www.wikidata.org/wiki/Wikidata%3AWikiProject_Govdirectory",
+  "queryTypes": [
+    {
+      "id": "ministry-missing-contacturl",
+      "name": "ministry-missing-contacturl-label",
+      "instanceOf": ["Q192350"],
+      "missingPid": "P11266",
+      "excludeIfPresent": ["P576"],
+      "contributionSummary": "ministry-missing-contacturl-contribution-summary",
+      "contributionDetails": "ministry-missing-contacturl-contribution-details",
+      "example": {
+        "subject": "Ministry For Justice",
+        "property": "contact page URL (P11266)",
+        "value": "https://justice.gov.mt/contact",
+        "qid": "Q119992539"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "scopePid": "P17"
+        }
+      }
+    },
+    {
+      "id": "ministry-missing-field",
+      "name": "ministry-missing-field-label",
+      "instanceOf": ["Q192350"],
+      "missingPid": "P101",
+      "contributionSummary": "ministry-missing-field-contribution-summary",
+      "contributionDetails": "ministry-missing-field-contribution-details",
+      "example": {
+        "subject": "Ministry for Tourism",
+        "property": "field of work (P101)",
+        "value": "tourism (Q49389)",
+        "qid": "Q52842775"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "scopePid": "P17"
+        }
+      }
+    },
+    {
+      "id": "ministry-missing-country",
+      "name": "ministry-missing-country-label",
+      "instanceOf": ["Q192350"],
+      "missingPid": "P17",
+      "contributionSummary": "ministry-missing-country-contribution-summary",
+      "contributionDetails": "ministry-missing-country-contribution-details",
+      "example": {
+        "subject": "Federal Ministry for Transport",
+        "property": "country (P17)",
+        "value": "Germany (Q183)",
+        "qid": "Q491637"
+      }
+    },
+    {
+      "id": "ministry-missing-official-website",
+      "name": "ministry-missing-official-website-label",
+      "instanceOf": ["Q192350"],
+      "missingPid": "P856",
+      "excludeIfPresent": ["P576"],
+      "contributionSummary": "ministry-missing-official-website-contribution-summary",
+      "contributionDetails": "ministry-missing-official-website-contribution-details",
+      "example": {
+        "subject": "Ministry of International Cooperation",
+        "property": "official website (P856)",
+        "value": "https://moic.gov.eg",
+        "qid": "Q4294450"
+      },
+      "scope": {
+        "scopeId": "geographicScope",
+        "path": {
+          "scopePid": "P17"
+        }
+      }
+    }
+  ]
+}

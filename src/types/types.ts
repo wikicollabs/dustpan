@@ -20,7 +20,9 @@ export interface Scope {
 export interface QueryType {
   id: string;
   name: string;
+  instanceOf: string[];
   missingPid: string;
+  excludeIfPresent?: string[];
   contributionSummary: string;
   contributionDetails: string;
   example?: { subject: string; property: string; value: string; qid: string } | null;
@@ -31,7 +33,6 @@ export interface WikiProject {
   id: string;
   name: string;
   wikidataUrl: string;
-  instanceOf: string[];
   queryTypes: QueryType[];
 }
 
